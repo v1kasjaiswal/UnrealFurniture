@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Unreal Furniture</string>
+
+
+    <string name="default_web_client_id">REDACTED-u68ek4b908dgiuvapsb7i8rkhq85aqpu.apps.googleusercontent.com</string>
 </resources>

@@ -1,9 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
     <style name="Base.Theme.UnrealFurniture" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/darker</item>
+
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/darker</item>
+        <item name="colorPrimaryVariant">@color/light</item>
+
+        <!-- Buttons -->
+        <item name="android:buttonStyle">@style/Widget.UnrealFurniture.Button</item>
+
+        <!-- Text Views -->
+        <item name="android:textColorPrimary">@color/dark</item>
+        <item name="android:textColorSecondary">@color/light</item>
+
+        <!-- Text Boxes -->
+        <item name="android:editTextColor">@color/dark</item>
     </style>
+
+    <!-- Button Style -->
+    <style name="Widget.UnrealFurniture.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/dark</item>
+        <item name="android:textColor">@color/lightest</item>
+    </style>
+
+    <!-- Add other styles for different UI components as needed -->
 
     <style name="Theme.UnrealFurniture" parent="Base.Theme.UnrealFurniture" />
 </resources>

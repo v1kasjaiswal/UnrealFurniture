@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "REDACTED",
+    "project_id": "unreal-furniture",
+    "storage_bucket": "unreal-furniture.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:REDACTED:android:91dd5740a7443edd974ab7",
+        "android_client_info": {
+          "package_name": "com.vikasjaiswal.unrealfurniture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "REDACTED-u68ek4b908dgiuvapsb7i8rkhq85aqpu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vikasjaiswal.unrealfurniture",
+            "certificate_hash": "f04ca358eb5bf3597b2994dd320754a16c9af9fc"
+          }
+        },
+        {
+          "client_id": "REDACTED-8e5bpgjlr5pbnc5qb9njgbo29ve8295c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "REDACTED"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "REDACTED-8e5bpgjlr5pbnc5qb9njgbo29ve8295c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

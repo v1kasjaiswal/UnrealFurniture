@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.vikasjaiswal.unrealfurniture" />
+                  <option name="mobileSdkAppId" value="1:REDACTED:android:91dd5740a7443edd974ab7" />
+                  <option name="projectId" value="unreal-furniture" />
+                  <option name="projectNumber" value="REDACTED" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
