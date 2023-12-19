@@ -79,7 +79,7 @@ class SignUpActivity : AppCompatActivity() {
 
                                             if (signInMethods != null && signInMethods.contains(
                                                     EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
-                                                ) && signInMethods.contains(
+                                                ) && !signInMethods.contains(
                                                     GoogleAuthProvider.PROVIDER_ID
                                                 )
                                             ) {

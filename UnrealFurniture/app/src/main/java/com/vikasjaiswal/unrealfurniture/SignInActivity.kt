@@ -17,11 +17,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textview.MaterialTextView
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import java.util.regex.Pattern
+import kotlin.math.sign
 
-private const val RC_SIGN_IN = 7777
+private const val RC_SIGN_IN = 9330
 
 class SignInActivity : AppCompatActivity() {
 
@@ -63,8 +65,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun SignIn(view: View) {
-        var  emailtxt = signinemail.text.toString()
-        var  passtxt = signinpass.text.toString()
+        val  emailtxt = signinemail.text.toString()
+        val passtxt = signinpass.text.toString()
 
         if (emailtxt.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(emailtxt).matches()){
             if (passtxt.isNotBlank() && Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,}\$", passtxt)) {
@@ -98,6 +100,7 @@ class SignInActivity : AppCompatActivity() {
                                     signinemail.error = "Account not found"
                                     signinemail.requestFocus()
                                 }
+
                         } else {
                             signinemail.error = "Email is not registered"
                             signinemail.requestFocus()
@@ -134,6 +137,7 @@ class SignInActivity : AppCompatActivity() {
         }
         catch (e:Exception)
         {
+
             Log.d("SignInActivity", "Error in Sign-in with Google"+e.message)
             Toast.makeText(this, "Error in Sign-in with Google", Toast.LENGTH_SHORT).show()
         }
@@ -150,24 +154,48 @@ class SignInActivity : AppCompatActivity() {
 
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
 
-                auth.signInWithCredential(credential)
-                    .addOnCompleteListener(this) {
-                        if (it.isSuccessful) {
-                            val user = auth.currentUser
-                            if (user!=null){
-                                val intent = Intent(this@SignInActivity, MainActivity::class.java)
-                                startActivity(intent)
-                                finish()
+                auth.fetchSignInMethodsForEmail(account!!.email.toString())
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful){
+                            val result = task.result
+                            val signInMethods = result.signInMethods
+
+                            Log.d("Signin Singup Method",git  signInMethods.toString())
+
+                            if (signInMethods != null && signInMethods.contains(GoogleAuthProvider.PROVIDER_ID)){
+
+                                auth.signInWithCredential(credential)
+                                    .addOnCompleteListener(this) {
+                                        if (it.isSuccessful) {
+                                            val user = auth.currentUser
+                                            if (user!=null){
+                                                val intent = Intent(this@SignInActivity, MainActivity::class.java)
+                                                startActivity(intent)
+                                                finish()
+                                            }
+                                            else{
+                                                Toast.makeText(this@SignInActivity, "Error in Sign-In With Google", Toast.LENGTH_SHORT).show()
+                                            }
+                                        } else {
+                                            Toast.makeText(this@SignInActivity, "Error in Sign-In With Google", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                    .addOnFailureListener{
+                                        Toast.makeText(this@SignInActivity, "Error in Sign-In With Google", Toast.LENGTH_SHORT).show()
+                                    }
                             }
                             else{
-                                Toast.makeText(this@SignInActivity, "Error in Sign-In With Google", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@SignInActivity, "Account already exists", Toast.LENGTH_SHORT).show()
+                                googleSignInClient.signOut()
+                                auth.signOut()
                             }
-                        } else {
+                        }
+                        else{
                             Toast.makeText(this@SignInActivity, "Error in Sign-In With Google", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    .addOnFailureListener{
-                        Toast.makeText(this@SignInActivity, "Error in Sign-In With Google", Toast.LENGTH_SHORT).show()
+                    .addOnFailureListener {
+                        Log.d("SignInActivity", "Error in Sign-in with Google"+it.message)
                     }
             } catch (e: ApiException) {
                 Toast.makeText(this, "Error in Sign-in with Google", Toast.LENGTH_SHORT).show()
