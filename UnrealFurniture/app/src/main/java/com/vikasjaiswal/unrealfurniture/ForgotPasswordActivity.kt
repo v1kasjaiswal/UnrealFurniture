@@ -47,6 +47,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
                                             "Password reset email sent successfully"
                                             , Toast.LENGTH_SHORT
                                         ).show()
+
+                                        finish()
                                     }
                                     else
                                     {
@@ -57,14 +59,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
                         }
                         else
                         {
-                            femailedit.error = "4Email is not registered"
+                            femailedit.error = "Email is not registered"
                             Log.d("Exception", task.exception.toString())
                             femailedit.requestFocus()
                         }
                     }
                     else
                     {
-                        femailedit.error = "2Email is not registered"
+                        femailedit.error = "Email is not registered"
                         femailedit.requestFocus()
                     }
                 }

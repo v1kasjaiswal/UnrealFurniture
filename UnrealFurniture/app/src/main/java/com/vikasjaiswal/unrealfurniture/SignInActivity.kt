@@ -73,8 +73,11 @@ class SignInActivity : AppCompatActivity() {
                 auth.fetchSignInMethodsForEmail(emailtxt)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            val result = task.result
+                            val signInMethods = result?.signInMethods
+                            if (signInMethods != null && signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)) {
 
-                            auth.signInWithEmailAndPassword(emailtxt, passtxt)
+                                auth.signInWithEmailAndPassword(emailtxt, passtxt)
                                 .addOnCompleteListener(this) { task ->
 
                                     var user = auth.currentUser
@@ -97,9 +100,14 @@ class SignInActivity : AppCompatActivity() {
                                     }
                                 }
                                 .addOnFailureListener {
-                                    signinemail.error = "Account not found"
+                                    signinemail.error = "Email or Password is incorrect"
                                     signinemail.requestFocus()
                                 }
+                            }
+                            else{
+                                signinemail.error = "Account not found"
+                                signinemail.requestFocus()
+                            }
 
                         } else {
                             signinemail.error = "Email is not registered"
@@ -160,9 +168,9 @@ class SignInActivity : AppCompatActivity() {
                             val result = task.result
                             val signInMethods = result.signInMethods
 
-                            Log.d("Signin Singup Method",git  signInMethods.toString())
+                            Log.d("Signin Singup Method",signInMethods.toString())
 
-                            if (signInMethods != null && signInMethods.contains(GoogleAuthProvider.PROVIDER_ID)){
+                            if (signInMethods == null || !signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)){
 
                                 auth.signInWithCredential(credential)
                                     .addOnCompleteListener(this) {
