@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -80,5 +81,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     fun backToSignIn(view: View) {
         finish()
+    }
+
+    fun openSupport(view: View) {
+        val intent = Intent(this@ForgotPasswordActivity, SupportActivity::class.java)
+        startActivity(intent)
     }
 }

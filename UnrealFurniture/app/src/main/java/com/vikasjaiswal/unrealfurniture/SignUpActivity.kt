@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -150,5 +151,10 @@ class SignUpActivity : AppCompatActivity() {
             nameedit.error = "Invalid name"
             nameedit.requestFocus()
         }
+    }
+
+    fun openSupport(view: View) {
+        val intent = Intent(this@SignUpActivity, SupportActivity::class.java)
+        startActivity(intent)
     }
 }

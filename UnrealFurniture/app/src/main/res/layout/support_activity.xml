@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".SupportActivity">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView"
@@ -25,19 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
-        android:src="@drawable/support"
-        android:onClick="openSupport"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="15dp"
         android:src="@drawable/info"
-        app:layout_constraintEnd_toStartOf="@+id/shapeableImageView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
@@ -55,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/artech" />
+            android:src="@drawable/csupport" />
 
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
@@ -66,7 +55,7 @@
         android:fontFamily="@font/satoshibold"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="Start Something Extraordinary"
+        android:text="We are Always Ready to Assist!"
         android:textColor="@color/dark"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/materialTextView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameedit"
+            android:id="@+id/snameedit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshibold"
@@ -108,7 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/username">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailedit"
+            android:id="@+id/semailedit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshibold"
@@ -119,126 +108,72 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/textInputLayout6"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        app:endIconMode="password_toggle"
-        app:startIconDrawable="@drawable/password"
+        android:hint="Message"
+        app:counterEnabled="true"
+        app:counterMaxLength="300"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pass1edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/satoshibold"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="@color/darker" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:endIconMode="password_toggle"
-        app:startIconDrawable="@drawable/password"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pass2edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/satoshibold"
-            android:hint="Re-Enter Password"
-            android:inputType="textPassword"
-            android:textColor="@color/darker" />
-
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:lines="7"
+            android:scrollbars="vertical"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton4"
+        android:id="@+id/materialButton7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/satoshibold"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:text="Sign Up"
-        android:onClick="signUp"
-        android:fontFamily="@font/satoshibold"
-        android:textSize="18sp"
         android:paddingBottom="10dp"
+        android:text="Submit"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton3"
+        android:id="@+id/materialButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/satoshibold"
-        android:onClick="backToSignIn"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
+        android:paddingBottom="10dp"
+        android:onClick="backToPreviousActivity"
         android:text="Cancel"
         android:textSize="18sp"
-        android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already have an account?"
-        android:textColor="@color/dark"
-        android:textSize="18sp"
-        android:fontFamily="@font/satoshibold"
-        android:layout_marginTop="13dp"
-        app:layout_constraintEnd_toStartOf="@+id/materialButton3"
-        app:layout_constraintStart_toEndOf="@+id/materialButton4"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton3" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:fontFamily="@font/satoshibold"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:text="Sign In"
-        android:onClick="backToSignIn"
-        android:textSize="18sp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/materialTextView6"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="@+id/materialTextView6"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="@font/satoshibold"
         android:text="@string/app_footer"
         android:textColor="@color/light"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/materialButton5"
-        app:layout_constraintStart_toStartOf="@+id/materialButton5"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton5" />
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

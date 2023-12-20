@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="75dp"
         android:fontFamily="@font/satoshibold"
-        android:text="Real Furniture 2024 | All Rights Reserved"
+        android:text="@string/app_footer"
         android:textColor="@color/light"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"

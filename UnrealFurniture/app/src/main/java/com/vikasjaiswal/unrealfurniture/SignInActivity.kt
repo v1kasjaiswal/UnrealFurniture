@@ -220,4 +220,9 @@ class SignInActivity : AppCompatActivity() {
         val intent = Intent(this@SignInActivity, ForgotPasswordActivity::class.java)
         startActivity(intent)
     }
+
+    fun openSupport(view: View) {
+        val intent = Intent(this@SignInActivity, SupportActivity::class.java)
+        startActivity(intent)
+    }
 }
