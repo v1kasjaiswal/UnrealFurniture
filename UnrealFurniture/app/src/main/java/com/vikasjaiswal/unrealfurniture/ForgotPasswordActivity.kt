@@ -87,4 +87,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val intent = Intent(this@ForgotPasswordActivity, SupportActivity::class.java)
         startActivity(intent)
     }
+
+    fun openInfo(view: View) {
+        val intent = Intent(this@ForgotPasswordActivity, InfoActivity::class.java)
+        startActivity(intent)
+    }
 }

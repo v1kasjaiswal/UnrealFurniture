@@ -225,4 +225,9 @@ class SignInActivity : AppCompatActivity() {
         val intent = Intent(this@SignInActivity, SupportActivity::class.java)
         startActivity(intent)
     }
+
+    fun openInfo(view: View) {
+        val intent = Intent(this@SignInActivity, InfoActivity::class.java)
+        startActivity(intent)
+    }
 }

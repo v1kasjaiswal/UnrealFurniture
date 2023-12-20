@@ -157,4 +157,9 @@ class SignUpActivity : AppCompatActivity() {
         val intent = Intent(this@SignUpActivity, SupportActivity::class.java)
         startActivity(intent)
     }
+
+    fun openInfo(view: View) {
+        val intent = Intent(this@SignUpActivity, InfoActivity::class.java)
+        startActivity(intent)
+    }
 }

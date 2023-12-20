@@ -1,8 +1,10 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 class OfflineActivity : AppCompatActivity() {
 
@@ -22,5 +24,10 @@ class OfflineActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         unregisterReceiver(networkReceiver)
+    }
+
+    fun openInfo(view: View) {
+        val intent =  Intent(this@OfflineActivity, InfoActivity::class.java)
+        startActivity(intent)
     }
 }

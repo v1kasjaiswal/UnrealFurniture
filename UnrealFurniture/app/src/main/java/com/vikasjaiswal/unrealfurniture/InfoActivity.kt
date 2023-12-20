@@ -5,18 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 
-class SupportActivity : AppCompatActivity() {
+class InfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.support_activity)
+        setContentView(R.layout.info_activity)
     }
 
-    fun backToPreviousActivity(view: View) {
-        finish()
-    }
-
-    fun openInfo(view: View) {
-        val intent =  Intent(this@SupportActivity, InfoActivity::class.java)
+    fun openSupport(view: View) {
+        val intent =  Intent(this@InfoActivity, SupportActivity::class.java)
         startActivity(intent)
     }
 }
