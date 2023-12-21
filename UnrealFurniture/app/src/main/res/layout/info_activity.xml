@@ -71,17 +71,20 @@
         app:layout_constraintEnd_toEndOf="@+id/materialTextView11"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView11" />
 
+
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
         android:layout_width="80dp"
         android:layout_height="110dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="55dp"
         app:strokeWidth="3dp"
+        android:onClick="goBack"
         app:strokeColor="@color/darker"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView11" >
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/goback"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/goback"
@@ -105,11 +108,12 @@
         app:layout_constraintVertical_bias="0.497" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="42dp"
         android:fontFamily="@font/hansen"
-        android:text="20-12-2023"
+        android:text="77-77-2024"
         android:textColor="@color/darker"
         android:textSize="23dp"
         app:layout_constraintBottom_toTopOf="@+id/materialTextView14"
