@@ -7,13 +7,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     lateinit var networkReceiver: CheckConnectivity
+
+    lateinit var bottomnav : BottomNavigationView
 
     var auth = FirebaseAuth.getInstance()
     lateinit var googleSignInClient: GoogleSignInClient
@@ -30,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gsio)
 
         networkReceiver = CheckConnectivity()
+
+        bottomnav = findViewById(R.id.bottomnav)
     }
 
     override fun onResume() {

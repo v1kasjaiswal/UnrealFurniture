@@ -23,7 +23,7 @@
 
     <!-- Button Style -->
     <style name="Widget.UnrealFurniture.Button" parent="Widget.Material3.Button">
-        <item name="backgroundTint">@color/dark</item>
+        <item name="backgroundTint">@color/darker</item>
         <item name="android:textColor">@color/lightest</item>
     </style>
 
