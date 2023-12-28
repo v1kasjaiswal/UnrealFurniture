@@ -36,6 +36,53 @@ class MainActivity : AppCompatActivity() {
         networkReceiver = CheckConnectivity()
 
         bottomnav = findViewById(R.id.bottomnav)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, HomeFragment())
+            .commit();
+
+        bottomnav.setOnItemSelectedListener {item ->
+            when(item.itemId) {
+                R.id.home -> {
+                    // Replace the existing fragment with HomeFragment and add animations
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                        .replace(R.id.fragment_container, HomeFragment())
+                        .commit();
+
+                    true
+                }
+                R.id.search -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                        .replace(R.id.fragment_container, SearchFragment())
+                        .commit();
+                    true
+                }
+                R.id.wishlist -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                        .replace(R.id.fragment_container, WishListFragment())
+                        .commit();
+                    true
+                }
+                R.id.cart -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                        .replace(R.id.fragment_container, CartFragment())
+                        .commit();
+                    true
+                }
+                R.id.profile -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                        .replace(R.id.fragment_container, ProfileFragment())
+                        .commit();
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onResume() {

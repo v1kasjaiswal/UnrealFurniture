@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/searchbar_scrolling_view_behavior"></androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.search.SearchBar
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Find your Dream Furniture!" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.search.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Find your Dream Furniture!"
+            app:voiceIcon="@drawable/cart"
+            app:layout_anchor="@id/searchBar">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                app:chipSpacing="10dp"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/table"
+                    app:chipIcon="@drawable/cart"
+                    android:fontFamily="@font/satoshibold"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Table" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chair"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/satoshibold"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_height="wrap_content"
+                    android:text="Chair"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sofa"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/satoshibold"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"
+                    android:text="Sofa"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/bed"
+                    android:layout_width="wrap_content"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:fontFamily="@font/satoshibold"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"
+                    android:text="Bed"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/other"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/satoshibold"
+                    android:textSize="15sp"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_height="wrap_content"
+                    android:text="Other"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </com.google.android.material.search.SearchView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
