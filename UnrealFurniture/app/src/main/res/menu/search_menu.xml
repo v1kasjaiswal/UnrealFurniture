@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mic"
+        android:enabled="true"
+        app:showAsAction="always"
+        android:icon="@drawable/mic"
+        android:title="Mic"/>
+
+    <item
+        android:id="@+id/appinfo"
+        android:enabled="true"
+        android:icon="@drawable/info"
+        android:title="App Info"/>
+
+    <item
+        android:id="@+id/privacypolicy"
+        android:enabled="true"
+        android:icon="@drawable/privacy"
+        android:title="Privacy and Poilicy"/>
+
+    <item
+        android:id="@+id/support"
+        android:enabled="true"
+        android:icon="@drawable/support"
+        android:title="Support"/>
+</menu>
+
