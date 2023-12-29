@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView15"
         android:layout_width="wrap_content"
@@ -43,11 +42,19 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="735dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView15">
+
+        <com.faltenreich.skeletonlayout.SkeletonLayout
+            android:id="@+id/skeletonLayout"
+            app:shimmerAngle="15"
+            app:shimmerDurationInMillis="900"
+            app:maskCornerRadius="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -58,11 +65,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView15">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="match_parent"
@@ -84,34 +90,1169 @@
                 app:layout_constraintStart_toStartOf="@+id/materialCardView"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="110dp"
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                android:layout_marginLeft="20dp"
+                android:scrollbars="none"
+                android:layout_marginRight="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/blank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/blank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/blank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/blank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/blank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/blank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/blank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="Our Popular Products"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView17"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView17">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="70dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/blank" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="48dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Master Bed Set"
+                    android:textColor="@color/dark"
+                    android:textSize="15dp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom |center_horizontal"
-                    android:layout_marginBottom="7dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | end"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
                     android:fontFamily="@font/satoshibold"
-                    android:text="Bedroom"
+                    android:text="22.22% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="₹55,000"
+                        android:fontFamily="@font/satoshibold"
+                        android:textColor="@color/light"
+                        android:textSize="15dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹45,000"
+                        android:textColor="@color/darker"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView4"
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView17">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="48dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Master Bed Set"
                     android:textColor="@color/dark"
-                    android:textSize="15sp" />
+                    android:textSize="15dp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | end"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="22.22% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹55,000"
+                        android:textColor="@color/light"
+                        android:textSize="15dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹45,000"
+                        android:textColor="@color/darker"
+                        android:textSize="15dp" />
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView5"
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView2"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="48dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Master Bed Set"
+                    android:textColor="@color/dark"
+                    android:textSize="15dp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | end"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="22.22% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹55,000"
+                        android:textColor="@color/light"
+                        android:textSize="15dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹45,000"
+                        android:textColor="@color/darker"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView6"
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView4"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="48dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Master Bed Set"
+                    android:textColor="@color/dark"
+                    android:textSize="15dp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | end"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="22.22% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹55,000"
+                        android:textColor="@color/light"
+                        android:textSize="15dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹45,000"
+                        android:textColor="@color/darker"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView3"
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView5"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView5">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="48dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Master Bed Set"
+                    android:textColor="@color/dark"
+                    android:textSize="15dp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | end"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="22.22% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹55,000"
+                        android:textColor="@color/light"
+                        android:textSize="15dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹45,000"
+                        android:textColor="@color/darker"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView7"
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView6"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView6">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="48dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Master Bed Set"
+                    android:textColor="@color/dark"
+                    android:textSize="15dp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | end"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="22.22% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹55,000"
+                        android:textColor="@color/light"
+                        android:textSize="15dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹45,000"
+                        android:textColor="@color/darker"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="Pots and Decorations"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView8"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView19"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView19">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Anitque Flower Pot Decor"
+                    android:textColor="@color/dark"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="35dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="Min. 20% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="57dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,500"
+                        android:textColor="@color/light"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,200"
+                        android:textColor="@color/darker"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView9"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView8"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView8"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView8">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Anitque Flower Pot Decor"
+                    android:textColor="@color/dark"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="35dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="Min. 20% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="57dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,500"
+                        android:textColor="@color/light"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,200"
+                        android:textColor="@color/darker"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView10"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView9"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView9"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView9">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Anitque Flower Pot Decor"
+                    android:textColor="@color/dark"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="35dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="Min. 20% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="57dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,500"
+                        android:textColor="@color/light"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,200"
+                        android:textColor="@color/darker"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView11"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView10"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView10"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView10">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/satoshibold"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Anitque Flower Pot Decor"
+                    android:textColor="@color/dark"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="35dp"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="Min. 20% Off"
+                    android:textColor="@color/darker"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="57dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/strikeText10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,500"
+                        android:textColor="@color/light"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/satoshibold"
+                        android:text="₹1,200"
+                        android:textColor="@color/darker"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="More Feed Sections Soon!"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView11" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimationView"
+                android:layout_width="350dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView22"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/furniture" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/app_footer"
+                android:textColor="@color/light"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.faltenreich.skeletonlayout.SkeletonLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

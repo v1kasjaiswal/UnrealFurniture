@@ -49,4 +49,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //External Implementation
+    implementation("com.faltenreich:skeletonlayout:5.0.0")
+    implementation("com.airbnb.android:lottie:6.2.0")
 }
