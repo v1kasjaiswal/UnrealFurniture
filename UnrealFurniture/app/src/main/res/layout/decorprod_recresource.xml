@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView8"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/blank" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:text="22.22%"
+                android:fontFamily="@font/satoshibold"
+                android:textColor="@color/darker"
+                android:textSize="10dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/satoshibold"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="Anitque Flower Pot Decor"
+            android:textColor="@color/dark"
+            android:textSize="15sp" />
+
+        <RatingBar
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="35dp"
+            android:rating="4.5"
+            android:stepSize="0.5" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="(17,586)"
+            android:textColor="@color/darker"
+            android:textSize="12sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/decorstrikeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="130dp"
+            android:layout_marginBottom="7dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="₹55,000"
+            android:textColor="@color/light"
+            android:textSize="15dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom |center_horizontal"
+            android:layout_marginLeft="55dp"
+            android:layout_marginBottom="7dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="₹45,000"
+            android:textColor="@color/darker"
+            android:textSize="15dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end | bottom"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/heart"
+            app:layout_constraintBottom_toBottomOf="@+id/materialCardView8" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,12 +12,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     lateinit var networkReceiver: CheckConnectivity
 
-    lateinit var bottomnav : BottomNavigationView
+    lateinit var bottomnav : NavigationBarView
 
     var auth = FirebaseAuth.getInstance()
     lateinit var googleSignInClient: GoogleSignInClient
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         bottomnav = findViewById(R.id.bottomnav)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, HomeFragment())
+            .add(R.id.fragment_container, HomeFragment())
             .commit();
 
         bottomnav.setOnItemSelectedListener {item ->
@@ -82,6 +83,38 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        bottomnav.setOnItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+
+                    true
+                }
+
+                R.id.search -> {
+
+                    true
+                }
+
+                R.id.wishlist -> {
+
+                    true
+                }
+
+                R.id.cart -> {
+
+                    true
+                }
+
+                R.id.profile -> {
+
+                    true
+                }
+
+                else -> false
+            }
+        }
+
     }
 
     override fun onResume() {
