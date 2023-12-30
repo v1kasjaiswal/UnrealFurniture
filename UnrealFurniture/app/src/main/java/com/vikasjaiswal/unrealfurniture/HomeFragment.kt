@@ -1,5 +1,7 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -74,8 +76,6 @@ class HomeFragment : Fragment() {
             skeleton.showOriginal()
         }, 1800)
 
-
-        // Start automatic sliding
         startSliding()
 
         // Stop sliding when the user interacts with the HorizontalScrollView
@@ -106,7 +106,7 @@ class HomeFragment : Fragment() {
         handler.removeCallbacksAndMessages(null)
     }
 
-//    private fun onDataLoaded() {
-//        skeleton.showOriginal()
-//    }
+    private fun onDataLoaded() {
+        skeleton.showOriginal()
+    }
 }

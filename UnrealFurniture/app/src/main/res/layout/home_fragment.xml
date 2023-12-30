@@ -424,20 +424,14 @@
                     android:textColor="@color/darker"
                     android:textSize="12dp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="7dp"
-                    android:orientation="horizontal">
-
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/strikeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:text="₹55,000"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginLeft="10dp"
                         android:fontFamily="@font/satoshibold"
                         android:textColor="@color/light"
                         android:textSize="15dp" />
@@ -446,13 +440,13 @@
                         android:id="@+id/materialTextView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="bottom |center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginBottom="7dp"
                         android:fontFamily="@font/satoshibold"
                         android:text="₹45,000"
                         android:textColor="@color/darker"
                         android:textSize="15dp" />
-                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -507,35 +501,29 @@
                     android:textColor="@color/darker"
                     android:textSize="12dp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
+                    android:text="₹55,000"
                     android:layout_marginBottom="7dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹55,000"
-                        android:textColor="@color/light"
-                        android:textSize="15dp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹45,000"
-                        android:textColor="@color/darker"
-                        android:textSize="15dp" />
-                </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -590,35 +578,30 @@
                     android:textColor="@color/darker"
                     android:textSize="12dp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
+                    android:text="₹55,000"
                     android:layout_marginBottom="7dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹55,000"
-                        android:textColor="@color/light"
-                        android:textSize="15dp" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹45,000"
-                        android:textColor="@color/darker"
-                        android:textSize="15dp" />
-                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -672,35 +655,30 @@
                     android:textColor="@color/darker"
                     android:textSize="12dp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
+                    android:text="₹55,000"
                     android:layout_marginBottom="7dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹55,000"
-                        android:textColor="@color/light"
-                        android:textSize="15dp" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹45,000"
-                        android:textColor="@color/darker"
-                        android:textSize="15dp" />
-                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -754,35 +732,30 @@
                     android:textColor="@color/darker"
                     android:textSize="12dp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
+                    android:text="₹55,000"
                     android:layout_marginBottom="7dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹55,000"
-                        android:textColor="@color/light"
-                        android:textSize="15dp" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹45,000"
-                        android:textColor="@color/darker"
-                        android:textSize="15dp" />
-                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -836,35 +809,30 @@
                     android:textColor="@color/darker"
                     android:textSize="12dp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
+                    android:text="₹55,000"
                     android:layout_marginBottom="7dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹55,000"
-                        android:textColor="@color/light"
-                        android:textSize="15dp" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹45,000"
-                        android:textColor="@color/darker"
-                        android:textSize="15dp" />
-                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.textview.MaterialTextView
@@ -931,33 +899,29 @@
                     android:textColor="@color/darker"
                     android:textSize="12sp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="₹55,000"
+                    android:layout_marginBottom="7dp"
                     android:layout_marginLeft="130dp"
-                    android:layout_marginTop="57dp"
-                    android:orientation="horizontal">
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,500"
-                        android:textColor="@color/light"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,200"
-                        android:textColor="@color/darker"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -1013,33 +977,29 @@
                     android:textColor="@color/darker"
                     android:textSize="12sp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="₹55,000"
+                    android:layout_marginBottom="7dp"
                     android:layout_marginLeft="130dp"
-                    android:layout_marginTop="57dp"
-                    android:orientation="horizontal">
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,500"
-                        android:textColor="@color/light"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,200"
-                        android:textColor="@color/darker"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -1095,33 +1055,29 @@
                     android:textColor="@color/darker"
                     android:textSize="12sp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="₹55,000"
+                    android:layout_marginBottom="7dp"
                     android:layout_marginLeft="130dp"
-                    android:layout_marginTop="57dp"
-                    android:orientation="horizontal">
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,500"
-                        android:textColor="@color/light"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,200"
-                        android:textColor="@color/darker"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -1177,33 +1133,29 @@
                     android:textColor="@color/darker"
                     android:textSize="12sp" />
 
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strikeText10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="₹55,000"
+                    android:layout_marginBottom="7dp"
                     android:layout_marginLeft="130dp"
-                    android:layout_marginTop="57dp"
-                    android:orientation="horizontal">
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/light"
+                    android:textSize="15dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/strikeText10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,500"
-                        android:textColor="@color/light"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="₹1,200"
-                        android:textColor="@color/darker"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |center_horizontal"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="₹45,000"
+                    android:textColor="@color/darker"
+                    android:textSize="15dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
