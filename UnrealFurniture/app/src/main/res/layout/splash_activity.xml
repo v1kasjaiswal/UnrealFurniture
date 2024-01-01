@@ -22,15 +22,15 @@
         android:id="@+id/logotxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="345dp"
-        android:fontFamily="@font/clash"
+        android:layout_marginTop="360dp"
+        android:fontFamily="@font/boruna"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textAllCaps="true"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="45dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
