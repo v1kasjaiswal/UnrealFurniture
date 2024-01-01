@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -16,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
 
-    lateinit var logoimg : ImageView
+    lateinit var logoimg : TextView
     lateinit var logoanim : Animation
 
     lateinit var bottomtxt : TextView
@@ -26,9 +28,13 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         setContentView(R.layout.splash_activity)
 
-        logoimg = findViewById(R.id.logoimg)
+        logoimg = findViewById(R.id.logotxt)
 
         val logoanim = AnimationUtils.loadAnimation(this, R.anim.logoanim)
         logoimg.startAnimation(logoanim)
@@ -54,14 +60,14 @@ class SplashActivity : AppCompatActivity() {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-            }, 2500)
+            }, 1500)
         }
         else{
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(this@SplashActivity, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
-            }, 2500)
+            }, 1500)
 
         }
     }

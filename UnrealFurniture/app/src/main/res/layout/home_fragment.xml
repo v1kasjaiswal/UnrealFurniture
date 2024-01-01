@@ -73,8 +73,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/blank" />
+                    android:scaleType="centerCrop" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -88,6 +87,15 @@
                 android:textColor="@color/dark"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/materialCardView"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/more"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
             <HorizontalScrollView
@@ -117,8 +125,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/blank" />
+                            android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -153,8 +160,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/blank" />
+                            android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -189,8 +195,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/blank" />
+                            android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -224,79 +229,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/blank" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom |center_horizontal"
-                            android:layout_marginBottom="23dp"
-                            android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
-                            android:textColor="@color/dark"
-                            android:textSize="15sp" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom |center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
-                            android:textColor="@color/light"
-                            android:textSize="12sp" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="110dp"
-                        android:layout_height="130dp"
-                        android:layout_marginLeft="10dp"
-                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
-                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/blank" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom |center_horizontal"
-                            android:layout_marginBottom="23dp"
-                            android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
-                            android:textColor="@color/dark"
-                            android:textSize="15sp" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom |center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
-                            android:textColor="@color/light"
-                            android:textSize="12sp" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="110dp"
-                        android:layout_height="130dp"
-                        android:layout_marginLeft="10dp"
-                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
-                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/blank" />
+                            android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -331,8 +264,76 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/blank" />
+                            android:scaleType="centerCrop" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="23dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Bedroom"
+                            android:textColor="@color/dark"
+                            android:textSize="15sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom |center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/satoshibold"
+                            android:text="Min. 15% Off"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="110dp"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="45dp"
+                            android:scaleType="centerCrop"/>
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -372,6 +373,14 @@
                 app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/more"
+                app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popularprodrecycler"
@@ -397,6 +406,16 @@
                 android:textColor="@color/dark"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/popularprodrecycler" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.766"
+                app:layout_constraintStart_toEndOf="@+id/materialTextView19"
                 app:layout_constraintTop_toBottomOf="@+id/popularprodrecycler" />
 
             <androidx.recyclerview.widget.RecyclerView

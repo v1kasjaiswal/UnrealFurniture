@@ -22,14 +22,15 @@ class HomeFragment : Fragment() {
     private val cardCount = 5 // Replace with the actual number of cards
     private val cardWidth = 330 // Replace with the actual width of your cards
 
-    private lateinit var popProdLayoutManager: GridLayoutManager
-    private lateinit var decorProdLayoutManager: GridLayoutManager
 
-    private var popProdAdapter: RecyclerView.Adapter<PopProductsRecAdapter.ViewHolder>? = null
-    private var decorProdAdapter: RecyclerView.Adapter<DecorProdRecAdapter.ViewHolder>? = null
+    private lateinit var popProdLayoutManager: GridLayoutManager
+//    private lateinit var decorProdLayoutManager: GridLayoutManager
+
+    private var popProdAdapter: PopProductsRecAdapter? = null
+//    private var decorProdAdapter: DecorProdRecAdapter? = null
 
     private lateinit var popularProdRecyclerView: RecyclerView
-    private lateinit var decorProdRecyclerView: RecyclerView
+//    private lateinit var decorProdRecyclerView: RecyclerView
 
     private lateinit var horizontalScrollView: HorizontalScrollView
     private lateinit var skeleton: Skeleton
@@ -44,19 +45,19 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.home_fragment, container, false)
 
         popularProdRecyclerView = view.findViewById(R.id.popularprodrecycler)
-        decorProdRecyclerView = view.findViewById(R.id.decorprodrecycler)
+//        decorProdRecyclerView = view.findViewById(R.id.decorprodrecycler)
 
         popProdLayoutManager = GridLayoutManager(context, 2)
-        decorProdLayoutManager = GridLayoutManager(context, 1)
+//        decorProdLayoutManager = GridLayoutManager(context, 1)
 
         popularProdRecyclerView.layoutManager = popProdLayoutManager
-        decorProdRecyclerView.layoutManager = decorProdLayoutManager
+//        decorProdRecyclerView.layoutManager = decorProdLayoutManager
 
-        popProdAdapter = PopProductsRecAdapter()
-        decorProdAdapter = DecorProdRecAdapter()
+        popProdAdapter = PopProductsRecAdapter() // Replace with your actual PopProductsRecAdapter
+//        decorProdAdapter = DecorProdRecAdapter() // Replace with your actual DecorProdRecAdapter
 
         popularProdRecyclerView.adapter = popProdAdapter
-        decorProdRecyclerView.adapter = decorProdAdapter
+//        decorProdRecyclerView.adapter = decorProdAdapter
 
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView)
         skeleton = view.findViewById(R.id.skeletonLayout)
@@ -99,5 +100,9 @@ class HomeFragment : Fragment() {
 
     private fun onDataLoaded() {
         skeleton.showOriginal()
+
+        // Notify the adapters that data has been loaded
+        popProdAdapter?.notifyDataSetChanged()
+//        decorProdAdapter?.notifyDataSetChanged()
     }
 }

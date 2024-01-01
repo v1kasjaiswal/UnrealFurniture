@@ -23,6 +23,7 @@ class PopProductsRecAdapter: RecyclerView.Adapter<PopProductsRecAdapter.ViewHold
         return 10
     }
 
+
     override fun onBindViewHolder(holder: PopProductsRecAdapter.ViewHolder, position: Int) {
     }
 
