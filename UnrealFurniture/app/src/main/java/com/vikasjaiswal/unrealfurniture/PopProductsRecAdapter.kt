@@ -20,7 +20,7 @@ class PopProductsRecAdapter: RecyclerView.Adapter<PopProductsRecAdapter.ViewHold
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 4
     }
 
 
