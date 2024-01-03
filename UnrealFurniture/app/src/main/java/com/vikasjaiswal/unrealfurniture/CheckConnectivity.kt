@@ -52,8 +52,15 @@ class CheckConnectivity : BroadcastReceiver()
                         }
                     }
                     else{
-                        val intent = Intent(context, OfflineActivity::class.java)
-                        context.startActivity(intent)
+                        if(context is OfflineActivity)
+                        {
+                            return@launch
+                        }
+                        else
+                        {
+                            val intent = Intent(context, OfflineActivity::class.java)
+                            context.startActivity(intent)
+                        }
                     }
                 }
             }
