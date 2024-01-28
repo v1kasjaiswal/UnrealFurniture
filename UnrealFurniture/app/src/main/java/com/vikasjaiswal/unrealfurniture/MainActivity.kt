@@ -16,6 +16,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     lateinit var networkReceiver: CheckConnectivity
@@ -48,39 +51,50 @@ class MainActivity : AppCompatActivity() {
         bottomnav.setOnItemSelectedListener {item ->
             when(item.itemId) {
                 R.id.home -> {
+                    CoroutineScope(Dispatchers.Main).launch {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
                         .replace(R.id.fragment_container, HomeFragment())
                         .commit();
+                    }
+
 
                     true
                 }
                 R.id.search -> {
-                    supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                        .replace(R.id.fragment_container, SearchFragment())
-                        .commit();
+                    CoroutineScope(Dispatchers.Main).launch {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                            .replace(R.id.fragment_container, SearchFragment())
+                            .commit();
+                    }
                     true
                 }
                 R.id.wishlist -> {
-                    supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                        .replace(R.id.fragment_container, WishListFragment())
-                        .commit();
+                    CoroutineScope(Dispatchers.Main).launch {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                            .replace(R.id.fragment_container, WishListFragment())
+                            .commit();
+                    }
                     true
                 }
                 R.id.cart -> {
-                    supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                        .replace(R.id.fragment_container, CartFragment())
-                        .commit();
+                    CoroutineScope(Dispatchers.Main).launch {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                            .replace(R.id.fragment_container, CartFragment())
+                            .commit();
+                    }
                     true
                 }
                 R.id.profile -> {
-                    supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                        .replace(R.id.fragment_container, ProfileFragment())
-                        .commit();
+                    CoroutineScope(Dispatchers.Main).launch {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
+                            .replace(R.id.fragment_container, ProfileFragment())
+                            .commit();
+                    }
                     true
                 }
                 else -> false

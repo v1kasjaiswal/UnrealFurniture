@@ -3,33 +3,62 @@ package com.vikasjaiswal.unrealfurniture
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.*
 
-class PopProductsRecAdapter: RecyclerView.Adapter<PopProductsRecAdapter.ViewHolder>()
-{
-    lateinit var strikeText : TextView
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopProductsRecAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.popularprod_recresource, parent, false)
+class PopProductsRecAdapter : RecyclerView.Adapter<PopProductsRecAdapter.ViewHolder>() {
 
-        strikeText = v.findViewById(R.id.popstrikeText)
-        strikeText.paint.isStrikeThruText = true
+    private var itemCountLimit = 20
+    private var currentItemCount = 4
+    var isLoading = false
+    private var isLoadMoreCoroutineRunning = false
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val strikeText: TextView = itemView.findViewById(R.id.popstrikeText)
+        init {
+            strikeText.paint.isStrikeThruText = true
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.popularprod_recresource, parent, false)
 
         return ViewHolder(v)
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return currentItemCount
     }
 
-
-    override fun onBindViewHolder(holder: PopProductsRecAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Load data for each item here if needed
     }
 
-    inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
-
+    fun loadMoreItems() {
+        if (!isLoading && currentItemCount < itemCountLimit && !isLoadMoreCoroutineRunning) {
+            isLoading = true
+            isLoadMoreCoroutineRunning = true
+            CoroutineScope(Dispatchers.Main).launch {
+                val newItemsCount = minOf(2, itemCountLimit - currentItemCount)
+                val result = doBackgroundWorkAsync(newItemsCount)
+                currentItemCount += result
+                notifyItemRangeInserted(currentItemCount - result, result)
+                isLoading = false
+                isLoadMoreCoroutineRunning = false
+            }
+        }
     }
 
+    private suspend fun doBackgroundWorkAsync(newItemsCount: Int): Int {
+        return withContext(Dispatchers.IO) {
+            delay(500) // Simulating some background work
+            newItemsCount
+        }
+    }
+
+    fun getCurrentItemCount(): Int {
+        return currentItemCount
+    }
 }

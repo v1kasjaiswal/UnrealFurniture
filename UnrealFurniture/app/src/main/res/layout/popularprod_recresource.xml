@@ -31,7 +31,7 @@
                 android:text="22.22%"
                 android:fontFamily="@font/satoshibold"
                 android:textColor="@color/darker"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -48,7 +48,7 @@
             android:singleLine="true"
             android:text="Master Bed Set"
             android:textColor="@color/dark"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <RatingBar
             style="@style/Widget.AppCompat.RatingBar.Small"
@@ -69,7 +69,7 @@
             android:fontFamily="@font/satoshibold"
             android:text="(17,958)"
             android:textColor="@color/darker"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/popstrikeText"
@@ -81,7 +81,7 @@
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/satoshibold"
             android:textColor="@color/light"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView18"
@@ -93,7 +93,7 @@
             android:fontFamily="@font/satoshibold"
             android:text="₹45,000"
             android:textColor="@color/darker"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
     </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.Skeleton
 import com.google.android.material.imageview.ShapeableImageView
-import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private val handler = Handler(Looper.getMainLooper())
     private var currentIndex = 0
-    private val cardCount = 5 // Replace with the actual number of cards
-    private val cardWidth = 330 // Replace with the actual width of your cards
+    private val cardCount = 5
+    private val cardWidth = 330
 
     private lateinit var popProdLayoutManager: GridLayoutManager
     private lateinit var decorProdLayoutManager: GridLayoutManager
@@ -52,8 +55,8 @@ class HomeFragment : Fragment() {
         popularProdRecyclerView.layoutManager = popProdLayoutManager
         decorProdRecyclerView.layoutManager = decorProdLayoutManager
 
-        popProdAdapter = PopProductsRecAdapter() // Replace with your actual PopProductsRecAdapter
-        decorProdAdapter = DecorProdRecAdapter() // Replace with your actual DecorProdRecAdapter
+        popProdAdapter = PopProductsRecAdapter()
+        decorProdAdapter = DecorProdRecAdapter()
 
         popularProdRecyclerView.adapter = popProdAdapter
         decorProdRecyclerView.adapter = decorProdAdapter
@@ -69,7 +72,6 @@ class HomeFragment : Fragment() {
 
         startSliding()
 
-        // Stop sliding when the user interacts with the HorizontalScrollView
         horizontalScrollView.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> stopSliding()
@@ -81,6 +83,34 @@ class HomeFragment : Fragment() {
             false
         }
 
+        // Add scroll listener for lazy loading
+        popularProdRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val totalItemCount = popProdLayoutManager.itemCount
+                val lastVisibleItemPosition =
+                    popProdLayoutManager.findLastVisibleItemPosition()
+
+                if (!popProdAdapter!!.isLoading && totalItemCount - 1 <= lastVisibleItemPosition) {
+                    popProdAdapter?.loadMoreItems()
+                }
+            }
+        })
+
+        //lazy loading for decor products
+        decorProdRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val totalItemCount = decorProdLayoutManager.itemCount
+                val lastVisibleItemPosition =
+                    decorProdLayoutManager.findLastVisibleItemPosition()
+
+                if (!decorProdAdapter!!.isLoading && totalItemCount - 1 <= lastVisibleItemPosition) {
+                    decorProdAdapter?.loadMoreItems()
+                }
+            }
+        })
+
         return view
     }
 
@@ -89,12 +119,11 @@ class HomeFragment : Fragment() {
             currentIndex = (currentIndex + 1) % cardCount
             val scrollX = currentIndex * cardWidth
             horizontalScrollView.smoothScrollTo(scrollX, 0)
-            startSliding() // Continue the sliding loop
+            startSliding()
         }, slidingDelay)
     }
 
     private fun stopSliding() {
         handler.removeCallbacksAndMessages(null)
     }
-
 }
