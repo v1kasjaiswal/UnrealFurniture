@@ -73,6 +73,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:src="@drawable/blank"
                     android:scaleType="centerCrop" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -125,6 +126,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
+                            android:src="@drawable/blank"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -160,6 +162,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
+                            android:src="@drawable/blank"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -195,6 +198,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
+                            android:src="@drawable/blank"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -229,6 +233,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
+                            android:src="@drawable/blank"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -263,6 +268,7 @@
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:src="@drawable/blank"
                             android:layout_marginBottom="45dp"
                             android:scaleType="centerCrop" />
 
@@ -298,6 +304,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
+                            android:src="@drawable/blank"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -333,7 +340,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:scaleType="centerCrop"/>
+                            android:src="@drawable/blank"
+                            android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -467,6 +475,7 @@
                 android:text="@string/app_footer"
                 android:textColor="@color/light"
                 android:textSize="15sp"
+                android:fontFamily="@font/satoshibold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"

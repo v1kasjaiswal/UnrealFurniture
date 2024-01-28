@@ -161,7 +161,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialButton8">
@@ -213,7 +212,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView13"
+                android:id="@+id/myProfileCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginLeft="20dp"
@@ -271,7 +270,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView14"
+                android:id="@+id/myAddressCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginLeft="20dp"
@@ -280,7 +279,7 @@
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView13">
+                app:layout_constraintTop_toBottomOf="@+id/myProfileCard">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="wrap_content"
@@ -329,7 +328,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView15"
+                android:id="@+id/appInfoCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginLeft="20dp"
@@ -338,7 +337,7 @@
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView14">
+                app:layout_constraintTop_toBottomOf="@+id/myAddressCard">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="wrap_content"
@@ -396,9 +395,9 @@
                 android:textColor="@color/light"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/materialCardView15"
-                app:layout_constraintStart_toStartOf="@+id/materialCardView15"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView15"
+                app:layout_constraintEnd_toEndOf="@+id/appInfoCard"
+                app:layout_constraintStart_toStartOf="@+id/appInfoCard"
+                app:layout_constraintTop_toBottomOf="@+id/appInfoCard"
                 app:layout_constraintVertical_bias="0.042" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

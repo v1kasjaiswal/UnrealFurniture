@@ -7,13 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
@@ -74,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     CoroutineScope(Dispatchers.Main).launch {
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                            .replace(R.id.fragment_container, WishListFragment())
+                            .replace(R.id.fragment_container, MyWishListFragment())
                             .commit();
                     }
                     true
@@ -83,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     CoroutineScope(Dispatchers.Main).launch {
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                            .replace(R.id.fragment_container, CartFragment())
+                            .replace(R.id.fragment_container, MyCartFragment())
                             .commit();
                     }
                     true

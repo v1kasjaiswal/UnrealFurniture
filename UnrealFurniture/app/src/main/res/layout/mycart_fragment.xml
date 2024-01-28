@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyCartFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="My Cart"
+        android:textColor="@color/darker"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/trash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myCartRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="570dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/myCartAnimation"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.435"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/emptycart" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/emptyCartTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="Your Cart is Empty!"
+        android:textColor="@color/darker"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/myCartAnimation"
+        app:layout_constraintStart_toStartOf="@+id/myCartAnimation"
+        app:layout_constraintTop_toBottomOf="@+id/myCartAnimation" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="Total:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton9"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/myCartPriceStrikeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="₹0"
+        android:layout_marginLeft="5dp"
+        android:textSize="20sp"
+        android:textColor="@color/light"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton9"
+        app:layout_constraintStart_toEndOf="@+id/materialTextView23" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="₹0"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton9"
+        app:layout_constraintStart_toEndOf="@+id/myCartPriceStrikeText" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="22.22% ↓"
+        android:layout_marginRight="20dp"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton9"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/satoshibold"
+        android:paddingBottom="10dp"
+        android:text="Checkout"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

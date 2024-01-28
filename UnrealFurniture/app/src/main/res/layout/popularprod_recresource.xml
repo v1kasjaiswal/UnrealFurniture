@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="70dp"
+            android:src="@drawable/blank"
             android:scaleType="centerCrop"/>
 
         <com.google.android.material.card.MaterialCardView
@@ -28,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
-                android:text="22.22%"
+                android:text="22.22% ↓"
                 android:fontFamily="@font/satoshibold"
                 android:textColor="@color/darker"
                 android:textSize="12sp" />
@@ -76,10 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:text="₹55,000"
-            android:layout_marginBottom="7dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="7dp"
             android:fontFamily="@font/satoshibold"
+            android:text="₹55,000"
             android:textColor="@color/light"
             android:textSize="15sp" />
 

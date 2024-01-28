@@ -6,7 +6,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="110dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,14 +22,14 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:text="Bed and Sofa Set"
-            android:textSize="20sp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:textColor="@color/darker"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="130dp"
-            android:fontFamily="@font/satoshibold"/>
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/satoshibold"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:text="Bed and Sofa Set"
+            android:textColor="@color/dark"
+            android:textSize="18sp" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
@@ -40,71 +40,60 @@
             android:layout_marginTop="13dp"
             android:scaleType="centerCrop"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            android:layout_marginTop="37dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="130dp"
-            android:singleLine="true"
-            android:fontFamily="@font/satoshibold"
-            android:textColor="@color/light"
-            android:textSize="14sp"/>
-
         <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.RatingBar.Small"
-            android:rating="4.5"
-            android:stepSize="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="37dp"
+            android:rating="4.5"
+            android:stepSize="0.5" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/satoshibold"
             android:text="(17,456)"
-            android:fontFamily="@font/satoshibold"
-            android:textColor="@color/dark"
-            android:layout_marginTop="57dp"
-            android:layout_marginLeft="220dp"/>
+            android:textColor="@color/dark" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/myCartStrikeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="₹ 17,958"
-            android:textSize="15sp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="55dp"
             android:fontFamily="@font/satoshibold"
+            android:text="₹17,958"
             android:textColor="@color/light"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="130dp"/>
+            android:textSize="15sp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="₹ 15000"
+            android:text="₹15000"
             android:fontFamily="@font/satoshibold"
             android:textSize="15sp"
             android:textColor="@color/dark"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="55dp"
             android:layout_marginLeft="200dp"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22.22% Off"
+            android:text="22.22% ↓"
             android:textSize="15sp"
             app:fontFamily="@font/satoshibold"
             android:textColor="@color/dark"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="55dp"
             android:layout_marginLeft="270dp"/>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/add"
-            android:layout_marginTop="105dp"
+            android:layout_marginTop="78dp"
             android:layout_marginLeft="130dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -112,17 +101,17 @@
             android:layout_height="wrap_content"
             android:text="07"
             android:fontFamily="@font/satoshibold"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="@color/dark"
-            android:layout_marginTop="105dp"
-            android:layout_marginLeft="165dp"/>
+            android:layout_marginTop="78dp"
+            android:layout_marginLeft="160dp"/>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/minus"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="105dp"/>
+            android:layout_marginLeft="190dp"
+            android:layout_marginTop="78dp"/>
 
     </com.google.android.material.card.MaterialCardView>
 
