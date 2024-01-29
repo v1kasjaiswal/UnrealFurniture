@@ -22,7 +22,6 @@ class MyWishListRecAdapter : RecyclerView.Adapter<MyWishListRecAdapter.ViewHolde
         init {
             strikeText.paint.isStrikeThruText = true
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -64,6 +63,4 @@ class MyWishListRecAdapter : RecyclerView.Adapter<MyWishListRecAdapter.ViewHolde
             newItemsCount
         }
     }
-
-
 }
