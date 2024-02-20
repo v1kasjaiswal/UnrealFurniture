@@ -20,24 +20,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/shapeableImageView"
+        android:id="@+id/openSupport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:onClick="openSupport"
         android:layout_marginRight="25dp"
         android:src="@drawable/support"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/openInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginRight="15dp"
         android:src="@drawable/info"
-        android:onClick="openInfo"
-        app:layout_constraintEnd_toStartOf="@+id/shapeableImageView"
+        app:layout_constraintEnd_toStartOf="@+id/openSupport"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -48,14 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView15">
 
-        <com.faltenreich.skeletonlayout.SkeletonLayout
-            android:id="@+id/skeletonLayout"
-            app:shimmerAngle="15"
-            app:shimmerDurationInMillis="900"
-            app:maskCornerRadius="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -63,7 +54,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +64,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/blank"
+                    android:src="@drawable/baner"
                     android:scaleType="centerCrop" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -84,19 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/satoshibold"
-                android:text="Our Featured Products"
+                android:text="Shop By Category"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/materialCardView"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/more"
-                app:layout_constraintEnd_toEndOf="@+id/materialCardView"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
             <HorizontalScrollView
@@ -118,9 +100,7 @@
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="110dp"
-                        android:layout_height="130dp"
-                        app:layout_constraintStart_toStartOf="@+id/materialTextView16"
-                        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+                        android:layout_height="130dp">
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="match_parent"
@@ -375,7 +355,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/satoshibold"
-                android:text="Our Popular Products"
+                android:text="Our Featured Products"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
@@ -391,7 +371,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/popularprodrecycler"
+                android:id="@+id/featprodrecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="13dp"
@@ -400,31 +380,57 @@
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/materialTextView19"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="View More"
+                android:textColor="@color/dark"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/featprodrecycler"
+                app:layout_constraintTop_toBottomOf="@+id/featprodrecycler" />
+
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light"
+                android:backgroundTint="@color/light"
+                app:layout_constraintEnd_toEndOf="@+id/featprodrecycler"
+                app:layout_constraintStart_toStartOf="@+id/featprodrecycler"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView22" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/satoshibold"
-                android:text="Pots and Decorations"
+                android:text="Our Popular Products"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/popularprodrecycler" />
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
 
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/more"
+                android:layout_marginTop="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.766"
                 app:layout_constraintStart_toEndOf="@+id/materialTextView19"
-                app:layout_constraintTop_toBottomOf="@+id/popularprodrecycler" />
+                app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -437,32 +443,54 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/materialCardView11"
-                android:id="@+id/decorprodrecycler" />
+                android:id="@+id/popprodrecycler" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView22"
+                android:id="@+id/materialTextView25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="View More"
+                android:textColor="@color/dark"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/popprodrecycler" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light"
+                android:backgroundTint="@color/light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView25" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/satoshibold"
                 android:text="More Feed Sections Soon!"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/decorprodrecycler" />
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottieAnimationView"
                 android:layout_width="350dp"
-                android:layout_height="150dp"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView22"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView26"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/furniture" />
@@ -470,12 +498,11 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:fontFamily="@font/satoshibold"
                 android:text="@string/app_footer"
                 android:textColor="@color/light"
                 android:textSize="15sp"
-                android:fontFamily="@font/satoshibold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
@@ -483,8 +510,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.faltenreich.skeletonlayout.SkeletonLayout>
 
     </androidx.core.widget.NestedScrollView>
 

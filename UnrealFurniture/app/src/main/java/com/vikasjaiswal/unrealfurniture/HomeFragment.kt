@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,15 +9,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.faltenreich.skeletonlayout.Skeleton
-import com.google.android.material.imageview.ShapeableImageView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -25,20 +21,21 @@ class HomeFragment : Fragment() {
     private val cardCount = 5
     private val cardWidth = 330
 
+    private lateinit var featProdLayoutManager: GridLayoutManager
     private lateinit var popProdLayoutManager: GridLayoutManager
-    private lateinit var decorProdLayoutManager: GridLayoutManager
 
+    private var featProdAdapter: FeatProductsRecAdapter? = null
     private var popProdAdapter: PopProductsRecAdapter? = null
-    private var decorProdAdapter: DecorProdRecAdapter? = null
 
-    private lateinit var popularProdRecyclerView: RecyclerView
-    private lateinit var decorProdRecyclerView: RecyclerView
+    private lateinit var featularProdRecyclerView: RecyclerView
+    private lateinit var popProdRecyclerView: RecyclerView
 
     private lateinit var horizontalScrollView: HorizontalScrollView
-    private lateinit var skeleton: Skeleton
 
-    private val skeletonShowDelay = 1800L
-    private val slidingDelay = 2200L
+    lateinit var openInfo : ImageView
+    lateinit var openSupport : ImageView
+
+    private val slidingDelay = 1600L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,29 +43,25 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.home_fragment, container, false)
 
-        popularProdRecyclerView = view.findViewById(R.id.popularprodrecycler)
-        decorProdRecyclerView = view.findViewById(R.id.decorprodrecycler)
+        featularProdRecyclerView = view.findViewById(R.id.featprodrecycler)
+        popProdRecyclerView = view.findViewById(R.id.popprodrecycler)
 
-        popProdLayoutManager = GridLayoutManager(context, 2)
-        decorProdLayoutManager = GridLayoutManager(context, 1)
+        featProdLayoutManager = GridLayoutManager(context, 2)
+        popProdLayoutManager = GridLayoutManager(context, 1)
 
-        popularProdRecyclerView.layoutManager = popProdLayoutManager
-        decorProdRecyclerView.layoutManager = decorProdLayoutManager
+        featularProdRecyclerView.layoutManager = featProdLayoutManager
+        popProdRecyclerView.layoutManager = popProdLayoutManager
 
+        featProdAdapter = FeatProductsRecAdapter()
         popProdAdapter = PopProductsRecAdapter()
-        decorProdAdapter = DecorProdRecAdapter()
 
-        popularProdRecyclerView.adapter = popProdAdapter
-        decorProdRecyclerView.adapter = decorProdAdapter
+        featularProdRecyclerView.adapter = featProdAdapter
+        popProdRecyclerView.adapter = popProdAdapter
 
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView)
-        skeleton = view.findViewById(R.id.skeletonLayout)
 
-        skeleton.showSkeleton()
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            skeleton.showOriginal()
-        }, skeletonShowDelay)
+        openInfo = view.findViewById(R.id.openInfo)
+        openSupport = view.findViewById(R.id.openSupport)
 
         startSliding()
 
@@ -83,33 +76,15 @@ class HomeFragment : Fragment() {
             false
         }
 
-        // Add scroll listener for lazy loading
-        popularProdRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val totalItemCount = popProdLayoutManager.itemCount
-                val lastVisibleItemPosition =
-                    popProdLayoutManager.findLastVisibleItemPosition()
+        openInfo.setOnClickListener {
+            val intent =  Intent(context, InfoActivity::class.java)
+            startActivity(intent)
+        }
 
-                if (!popProdAdapter!!.isLoading && totalItemCount - 1 <= lastVisibleItemPosition) {
-                    popProdAdapter?.loadMoreItems()
-                }
-            }
-        })
-
-        //lazy loading for decor products
-        decorProdRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val totalItemCount = decorProdLayoutManager.itemCount
-                val lastVisibleItemPosition =
-                    decorProdLayoutManager.findLastVisibleItemPosition()
-
-                if (!decorProdAdapter!!.isLoading && totalItemCount - 1 <= lastVisibleItemPosition) {
-                    decorProdAdapter?.loadMoreItems()
-                }
-            }
-        })
+        openSupport.setOnClickListener {
+            val intent =  Intent(context, SupportActivity::class.java)
+            startActivity(intent)
+        }
 
         return view
     }

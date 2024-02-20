@@ -4,12 +4,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Toast
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
@@ -17,116 +12,48 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    lateinit var networkReceiver: CheckConnectivity
-
-    lateinit var bottomnav : NavigationBarView
-
-    var auth = FirebaseAuth.getInstance()
-    lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var networkReceiver: CheckConnectivity
+    private lateinit var bottomnav: NavigationBarView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        val gsio = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .requestId()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gsio)
-
         networkReceiver = CheckConnectivity()
-
         bottomnav = findViewById(R.id.bottomnav)
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, HomeFragment())
-            .commit();
+        setupFragment(HomeFragment())
 
-        bottomnav.setOnItemSelectedListener {item ->
-            when(item.itemId) {
-                R.id.home -> {
-                    CoroutineScope(Dispatchers.Main).launch {
-                    supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                        .replace(R.id.fragment_container, HomeFragment())
-                        .commit();
-                    }
-
-
-                    true
-                }
-                R.id.search -> {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                            .replace(R.id.fragment_container, SearchFragment())
-                            .commit();
-                    }
-                    true
-                }
-                R.id.wishlist -> {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                            .replace(R.id.fragment_container, MyWishListFragment())
-                            .commit();
-                    }
-                    true
-                }
-                R.id.cart -> {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                            .replace(R.id.fragment_container, MyCartFragment())
-                            .commit();
-                    }
-                    true
-                }
-                R.id.profile -> {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.slidein_right, R.anim.slideout_left)
-                            .replace(R.id.fragment_container, ProfileFragment())
-                            .commit();
-                    }
-                    true
-                }
-                else -> false
-            }
+        bottomnav.setOnItemSelectedListener { item ->
+            handleNavigation(item.itemId)
         }
 
         bottomnav.setOnItemReselectedListener { item ->
-            when (item.itemId) {
-                R.id.home -> {
-
-                    true
-                }
-
-                R.id.search -> {
-
-                    true
-                }
-
-                R.id.wishlist -> {
-
-                    true
-                }
-
-                R.id.cart -> {
-
-                    true
-                }
-
-                R.id.profile -> {
-
-                    true
-                }
-
-                else -> false
-            }
+            handleNavigation(item.itemId)
         }
+    }
+
+    private fun setupFragment(fragment: Fragment) {
+        CoroutineScope(Dispatchers.Main).launch {
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .replace(R.id.fragment_container, fragment)
+                .commit()
+        }
+    }
+
+    private fun handleNavigation(itemId: Int): Boolean {
+        val fragment = when (itemId) {
+            R.id.home -> HomeFragment()
+            R.id.search -> SearchFragment()
+            R.id.wishlist -> MyWishListFragment()
+            R.id.cart -> MyCartFragment()
+            R.id.profile -> ProfileFragment()
+            else -> return false
+        }
+
+        setupFragment(fragment)
+        return true
     }
 
     override fun onResume() {
@@ -138,19 +65,5 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         unregisterReceiver(networkReceiver)
-    }
-
-    fun signOut(view: View) {
-        try {
-            auth.signOut()
-            googleSignInClient.signOut()
-
-            val intent = Intent(this@MainActivity, SignInActivity::class.java)
-            startActivity(intent)
-            finish()
-        } catch (e: Exception) {
-            Toast.makeText(this@MainActivity, "Something went wrong!", Toast.LENGTH_SHORT).show()
-            Log.d("MainActivity", "Error: " + e.message)
-        }
     }
 }

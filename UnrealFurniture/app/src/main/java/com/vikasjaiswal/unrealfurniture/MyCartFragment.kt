@@ -54,19 +54,6 @@ class MyCartFragment : Fragment() {
             emptyCartTextView.visibility = View.GONE
         }
 
-        myCartRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val totalItemCount = myCartLayoutManager.itemCount
-                val lastVisibleItemPosition =
-                    myCartLayoutManager.findLastVisibleItemPosition()
-
-                if (!myCartAdapter!!.isLoading && totalItemCount - 1 <= lastVisibleItemPosition) {
-                    myCartAdapter?.loadMoreItems()
-                }
-            }
-        })
-
         return view
     }
 

@@ -6,401 +6,383 @@
     android:layout_height="match_parent"
     tools:context=".ProfileFragment">
 
-    <com.faltenreich.skeletonlayout.SkeletonLayout
-        android:id="@+id/skeletonLayout"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="150dp"
+        android:background="@drawable/profile_shape"
+        android:orientation="vertical" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="@string/app_name"
+        android:textColor="@color/lightest"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:maskCornerRadius="10dp"
-        app:shimmerAngle="15"
-        app:shimmerDurationInMillis="900">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView12"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="70dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/blank" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@drawable/profile_shape"
-                android:orientation="vertical" />
+    </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/satoshibold"
-                android:text="@string/app_name"
-                android:textColor="@color/lightest"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView12"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="70dp"
-                app:cardCornerRadius="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/satoshibold"
+        android:singleLine="true"
+        android:text="Vikas Jaiswal"
+        android:textColor="@color/darker"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView12"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView12" />
 
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/blank" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardView12"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView12">
 
-            </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:src="@drawable/edit"
+            app:layout_constraintBottom_toBottomOf="@+id/materialCardView12"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView12" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/satoshibold"
-                android:singleLine="true"
-                android:text="Vikas Jaiswal"
-                android:textColor="@color/darker"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/materialCardView12"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView12" />
+    </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/materialCardView12"
-                app:layout_constraintEnd_toEndOf="@+id/materialCardView12">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/privacy"
+            android:layout_margin="10dp" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/shapeableImageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/edit"
-                    app:layout_constraintBottom_toBottomOf="@+id/materialCardView12"
-                    app:layout_constraintEnd_toEndOf="@+id/materialCardView12" />
+    </com.google.android.material.card.MaterialCardView>
 
-            </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/notifications" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/privacy"
-                    android:layout_margin="10dp" />
+    </com.google.android.material.card.MaterialCardView>
 
-            </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/satoshibold"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingBottom="10dp"
+        android:text="Edit Profile"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView16" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/satoshibold"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingBottom="10dp"
+        android:text="Sign Out"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView16" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/notifications" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/myOrdersCard"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton8">
 
-            </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/myorders"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/satoshibold"
-                android:paddingLeft="35dp"
-                android:paddingRight="35dp"
-                android:paddingBottom="10dp"
-                android:text="Edit Profile"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView16" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="My Orders"
+            android:textColor="@color/dark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/satoshibold"
-                android:paddingLeft="35dp"
-                android:paddingRight="35dp"
-                android:paddingBottom="10dp"
-                android:text="Sign Out"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView16" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/satoshibold"
+            android:text="View and Track your Orders"
+            android:textColor="@color/light"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/myOrdersCard"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialButton8">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/more"
+            android:layout_gravity="center_vertical"/>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/myorders"
-                    android:layout_gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="My Orders"
-                    android:textColor="@color/dark"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/myProfileCard"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myOrdersCard">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginBottom="18dp"
-                    android:layout_gravity="bottom"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="View and Track your Orders"
-                    android:textColor="@color/light"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/profile"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="300dp"
-                    android:src="@drawable/more"
-                    android:layout_gravity="center_vertical"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="View Profile"
+            android:textColor="@color/dark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/satoshibold"
+            android:text="View your Full Profile"
+            android:textColor="@color/light"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/myProfileCard"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/myOrdersCard">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/more"
+            android:layout_gravity="center_vertical"/>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/profile"
-                    android:layout_gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="View Profile"
-                    android:textColor="@color/dark"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/myAddressCard"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myProfileCard">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginBottom="18dp"
-                    android:layout_gravity="bottom"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="View your Full Profile"
-                    android:textColor="@color/light"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/drop"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="300dp"
-                    android:src="@drawable/more"
-                    android:layout_gravity="center_vertical"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="Shipping Addresses"
+            android:textColor="@color/dark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/satoshibold"
+            android:text="View and Manage your Addresses"
+            android:textColor="@color/light"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/myAddressCard"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/myProfileCard">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/more"
+            android:layout_gravity="center_vertical"/>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/drop"
-                    android:layout_gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="Shipping Addresses"
-                    android:textColor="@color/dark"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/appInfoCard"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myAddressCard">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginBottom="18dp"
-                    android:layout_gravity="bottom"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="View and Manage your Addresses"
-                    android:textColor="@color/light"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/filter"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="300dp"
-                    android:src="@drawable/more"
-                    android:layout_gravity="center_vertical"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="App Info &amp; Settings"
+            android:textColor="@color/dark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/satoshibold"
+            android:text="View and Manage App Settings"
+            android:textColor="@color/light"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/appInfoCard"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/myAddressCard">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/more"
+            android:layout_gravity="center_vertical"/>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/filter"
-                    android:layout_gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="App Info &amp; Settings"
-                    android:textColor="@color/dark"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginBottom="18dp"
-                    android:layout_gravity="bottom"
-                    android:fontFamily="@font/satoshibold"
-                    android:text="View and Manage App Settings"
-                    android:textColor="@color/light"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="300dp"
-                    android:src="@drawable/more"
-                    android:layout_gravity="center_vertical"/>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:fontFamily="@font/satoshibold"
-                android:text="@string/app_footer"
-                android:textColor="@color/light"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/appInfoCard"
-                app:layout_constraintStart_toStartOf="@+id/appInfoCard"
-                app:layout_constraintTop_toBottomOf="@+id/appInfoCard"
-                app:layout_constraintVertical_bias="0.042" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.faltenreich.skeletonlayout.SkeletonLayout>
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="@string/app_footer"
+        android:textColor="@color/light"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/appInfoCard"
+        app:layout_constraintStart_toStartOf="@+id/appInfoCard"
+        app:layout_constraintTop_toBottomOf="@+id/appInfoCard"
+        app:layout_constraintVertical_bias="0.042" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

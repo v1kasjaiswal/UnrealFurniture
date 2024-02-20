@@ -6,20 +6,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PopProductsRecAdapter : RecyclerView.Adapter<PopProductsRecAdapter.ViewHolder>() {
+class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewHolder>() {
 
     private var itemCountLimit = 4
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val strikeText: TextView = itemView.findViewById(R.id.popstrikeText)
-        init {
+        val strikeText: TextView = itemView.findViewById(R.id.featStrikeText)
+        init{
             strikeText.paint.isStrikeThruText = true
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.popprod_recresource, parent, false)
+            .inflate(R.layout.featprod_recresource, parent, false)
 
         return ViewHolder(v)
     }

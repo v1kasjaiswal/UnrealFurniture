@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/shapeableImageView"
+        android:id="@+id/openSupport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -55,7 +55,7 @@
         android:text="KOTLIN"
         android:textColor="@color/darker"
         android:textSize="70dp"
-        app:layout_constraintEnd_toEndOf="@+id/shapeableImageView"
+        app:layout_constraintEnd_toEndOf="@+id/openSupport"
         app:layout_constraintStart_toStartOf="@+id/materialTextView"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
 
@@ -73,22 +73,23 @@
 
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/circularRevealCardView3"
         android:layout_width="80dp"
         android:layout_height="110dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="55dp"
-        app:strokeWidth="3dp"
         android:onClick="goBack"
-        app:strokeColor="@color/darker"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView11" >
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView11"
+        app:strokeColor="@color/darker"
+        app:strokeWidth="3dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/goback"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/goback"
-            android:layout_margin="25dp"/>
+            android:layout_margin="25dp"
+            android:src="@drawable/goback" />
 
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
@@ -113,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="42dp"
         android:fontFamily="@font/hansen"
-        android:text="77-77-2024"
+        android:text="01-06-2024"
         android:textColor="@color/darker"
         android:textSize="23dp"
         app:layout_constraintBottom_toTopOf="@+id/materialTextView14"
@@ -130,6 +131,16 @@
         android:src="@drawable/android"
         app:layout_constraintBottom_toTopOf="@+id/materialTextView14"
         app:layout_constraintStart_toEndOf="@+id/materialTextView13" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/vikas"
+        android:layout_marginRight="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/materialTextView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circularRevealCardView3"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView12" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView14"

@@ -4,21 +4,31 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.cardview.widget.CardView
-import com.faltenreich.skeletonlayout.Skeleton
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
-
-    lateinit var skeleton: Skeleton
 
     lateinit var myOrdersCard : CardView
     lateinit var myProfileCard : CardView
     lateinit var myAddressCard : CardView
     lateinit var appInfoCard : CardView
+
+    lateinit var signOut : Button
+
+    var auth = FirebaseAuth.getInstance()
+    lateinit var googleSignInClient: GoogleSignInClient
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,13 +36,20 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.profile_fragment, container, false)
 
-        skeleton = view.findViewById(R.id.skeletonLayout)
-        skeleton.showSkeleton()
-
         myOrdersCard = view.findViewById(R.id.myOrdersCard)
         myProfileCard = view.findViewById(R.id.myProfileCard)
         myAddressCard = view.findViewById(R.id.myAddressCard)
         appInfoCard = view.findViewById(R.id.appInfoCard)
+
+        signOut = view.findViewById(R.id.signOut)
+
+        val gsio = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .requestId()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gsio)
 
         myOrdersCard.setOnClickListener {
             val intent = Intent(context, MyOrdersActivity::class.java)
@@ -54,10 +71,18 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            skeleton.showOriginal()
-        }, 1800)
-          
+        signOut.setOnClickListener {
+            try {
+                auth.signOut()
+                googleSignInClient.signOut()
+
+                requireActivity().finish()
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Something went wrong!", Toast.LENGTH_SHORT).show()
+                Log.d("MainActivity", "Error: " + e.message)
+            }
+        }
+
         return  view
     }
 }
