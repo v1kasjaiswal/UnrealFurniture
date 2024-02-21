@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView2"
+        android:id="@+id/selectedProductCard"
         android:layout_width="170dp"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="3dp"

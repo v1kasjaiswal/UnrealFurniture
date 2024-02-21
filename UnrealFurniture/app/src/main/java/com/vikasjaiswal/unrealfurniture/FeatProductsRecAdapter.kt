@@ -1,9 +1,11 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewHolder>() {
@@ -12,8 +14,15 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val strikeText: TextView = itemView.findViewById(R.id.featStrikeText)
+
+        val selectedProductCard: CardView = itemView.findViewById(R.id.selectedProductCard)
         init{
             strikeText.paint.isStrikeThruText = true
+
+            selectedProductCard.setOnClickListener {
+                val intent = Intent(itemView.context, ProductActivity::class.java)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 
