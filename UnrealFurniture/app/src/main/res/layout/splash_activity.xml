@@ -41,7 +41,7 @@
         android:layout_marginTop="240dp"
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/satoshibold"
-        android:text="Fused with Unreal Engine"
+        android:text="Explore Unreal Comfort"
         android:textColor="@color/darker"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

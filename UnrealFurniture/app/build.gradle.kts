@@ -54,4 +54,5 @@ dependencies {
 
     //External Implementation
     implementation("com.airbnb.android:lottie:6.2.0")
+    implementation("com.github.colourmoon:readmore-textview:v1.0.2")
 }

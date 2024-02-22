@@ -100,6 +100,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/open3DView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom |right"
@@ -434,7 +435,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/prodreviewrecylcer"
+                android:id="@+id/ratingReviewsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -452,10 +453,10 @@
                 android:fontFamily="@font/satoshibold"
                 android:text="View More"
                 android:textColor="@color/dark"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/prodreviewrecylcer"
-                app:layout_constraintStart_toStartOf="@+id/prodreviewrecylcer"
-                app:layout_constraintTop_toBottomOf="@+id/prodreviewrecylcer" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/ratingReviewsRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/ratingReviewsRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/ratingReviewsRecyclerView" />
 
             <View
                 android:id="@+id/view5"
@@ -466,8 +467,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/light"
                 android:backgroundTint="@color/light"
-                app:layout_constraintEnd_toEndOf="@+id/prodreviewrecylcer"
-                app:layout_constraintStart_toStartOf="@+id/prodreviewrecylcer"
+                app:layout_constraintEnd_toEndOf="@+id/ratingReviewsRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/ratingReviewsRecyclerView"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView35" />
 
             <com.google.android.material.textview.MaterialTextView
