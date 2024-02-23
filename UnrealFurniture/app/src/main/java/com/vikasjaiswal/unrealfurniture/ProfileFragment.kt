@@ -76,6 +76,8 @@ class ProfileFragment : Fragment() {
                 auth.signOut()
                 googleSignInClient.signOut()
 
+                val intent = Intent(context, SignInActivity::class.java)
+                startActivity(intent)
                 requireActivity().finish()
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Something went wrong!", Toast.LENGTH_SHORT).show()
