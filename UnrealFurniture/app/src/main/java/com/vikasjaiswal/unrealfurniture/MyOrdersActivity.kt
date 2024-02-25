@@ -44,19 +44,5 @@ class MyOrdersActivity : AppCompatActivity() {
             myOrderAnimation.visibility = View.GONE
             emptyOrderTextView.visibility = View.GONE
         }
-
-        myOrderRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val totalItemCount = myOrderLayoutManager.itemCount
-                val lastVisibleItemPosition =
-                    myOrderLayoutManager.findLastVisibleItemPosition()
-
-                if (!myOrderAdapter!!.isLoading && totalItemCount - 1 <= lastVisibleItemPosition) {
-                    myOrderAdapter?.loadMoreItems()
-                }
-            }
-        })
-
     }
 }

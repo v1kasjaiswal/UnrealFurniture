@@ -70,7 +70,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="60dp"
             app:colorClickableText="@color/darker"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/satoshibold"
             android:textColor="@color/dark"
             android:textSize="15sp"

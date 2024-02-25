@@ -3,26 +3,18 @@ package com.vikasjaiswal.unrealfurniture
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
-import kotlinx.coroutines.*
 
-class MyOrdersRecAdapter : RecyclerView.Adapter<MyOrdersRecAdapter.ViewHolder>() {
+class MyAddressRecAdapter : RecyclerView.Adapter<MyAddressRecAdapter.ViewHolder>() {
 
-    private var itemCountLimit = 10
+    private var itemCountLimit = 4
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val strikeText: TextView = itemView.findViewById(R.id.myOrderStrikeText)
-        init {
-            strikeText.paint.isStrikeThruText = true
-        }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.myorders_recresource, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.myaddress_recresource, parent, false)
 
         return ViewHolder(v)
     }
@@ -34,5 +26,4 @@ class MyOrdersRecAdapter : RecyclerView.Adapter<MyOrdersRecAdapter.ViewHolder>()
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Load data for each item here if needed
     }
-
 }

@@ -30,11 +30,10 @@ import java.util.UUID
 class ProfileFragment : Fragment() {
 
     lateinit var myOrdersCard : CardView
-    lateinit var myProfileCard : CardView
     lateinit var myAddressCard : CardView
     lateinit var appInfoCard : CardView
 
-    lateinit var signOut : Button
+    lateinit var signOut : CardView
 
     lateinit var updateProfilePic : CardView
 
@@ -56,7 +55,6 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.profile_fragment, container, false)
 
         myOrdersCard = view.findViewById(R.id.myOrdersCard)
-        myProfileCard = view.findViewById(R.id.myProfileCard)
         myAddressCard = view.findViewById(R.id.myAddressCard)
         appInfoCard = view.findViewById(R.id.appInfoCard)
 
@@ -78,11 +76,6 @@ class ProfileFragment : Fragment() {
 
         myOrdersCard.setOnClickListener {
             val intent = Intent(context, MyOrdersActivity::class.java)
-            startActivity(intent)
-        }
-
-        myProfileCard.setOnClickListener {
-            val intent = Intent(context, MyProfileActivity::class.java)
             startActivity(intent)
         }
 
@@ -215,15 +208,15 @@ class ProfileFragment : Fragment() {
                             .with(this)
                             .load(userimage)
                             .centerCrop()
-                            .placeholder(R.drawable.blank)
+                            .placeholder(R.drawable.user)
                             .into(userImage)
                     }
                     else{
                         Glide
                             .with(this)
-                            .load(R.drawable.blank)
+                            .load(R.drawable.user)
                             .centerCrop()
-                            .placeholder(R.drawable.blank)
+                            .placeholder(R.drawable.user)
                             .into(userImage)
                     }
                 } else {

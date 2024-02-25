@@ -5,6 +5,5 @@
 
     <string name="default_web_client_id">REDACTED-u68ek4b908dgiuvapsb7i8rkhq85aqpu.apps.googleusercontent.com</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mapsapikey">REMOVED</string>
 </resources>

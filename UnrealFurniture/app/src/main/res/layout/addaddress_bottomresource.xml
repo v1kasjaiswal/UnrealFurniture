@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:id="@+id/bottomSheetDragHandleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetDragHandleView"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetDragHandleView"
+        app:startIconDrawable="@drawable/profile">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshibold"
+            android:hint="Full Name"
+            android:inputType="text"
+            android:textColor="@color/darker" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usercontact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:startIconDrawable="@drawable/call">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contactedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshibold"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:textColor="@color/darker" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userhouse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/usercontact"
+        app:layout_constraintStart_toStartOf="@+id/usercontact"
+        app:layout_constraintTop_toBottomOf="@+id/usercontact"
+        app:startIconDrawable="@drawable/home">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/houseedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshibold"
+            android:hint="House Number, Building Name"
+            android:inputType="text"
+            android:textColor="@color/darker" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userlandmark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/userhouse"
+        app:layout_constraintStart_toStartOf="@+id/userhouse"
+        app:layout_constraintTop_toBottomOf="@+id/userhouse"
+        app:startIconDrawable="@drawable/landmark">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/landmarkedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshibold"
+            android:hint="Nearby Landmark"
+            android:inputType="text"
+            android:textColor="@color/darker" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/satoshibold"
+        android:paddingBottom="10dp"
+        android:text="Use Current Location"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/userlandmark"
+        app:layout_constraintStart_toStartOf="@+id/userlandmark"
+        app:layout_constraintTop_toBottomOf="@+id/userlandmark" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/satoshibold"
+        android:text="Use to fill below field automatically"
+        android:textColor="@color/light"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/materialButton10"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton10" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userregion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/materialButton10"
+        app:layout_constraintStart_toStartOf="@+id/materialButton10"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton10"
+        app:startIconDrawable="@drawable/area">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/regionedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshibold"
+            android:hint="Road, Area, City, State, Pincode"
+            android:inputType="text"
+            android:textColor="@color/darker" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/satoshibold"
+        android:paddingBottom="10dp"
+        android:text="Add Address"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/userregion"
+        app:layout_constraintStart_toStartOf="@+id/userregion"
+        app:layout_constraintTop_toBottomOf="@+id/userregion" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
