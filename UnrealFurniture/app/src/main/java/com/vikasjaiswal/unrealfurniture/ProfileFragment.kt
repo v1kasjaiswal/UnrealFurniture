@@ -1,6 +1,8 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,12 +12,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import com.bumptech.glide.Glide
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.util.UUID
 
 class ProfileFragment : Fragment() {
 
@@ -26,8 +36,17 @@ class ProfileFragment : Fragment() {
 
     lateinit var signOut : Button
 
+    lateinit var updateProfilePic : CardView
+
     var auth = FirebaseAuth.getInstance()
     lateinit var googleSignInClient: GoogleSignInClient
+
+    private lateinit var storageReference: StorageReference
+    private var selectedImageUri: Uri? = null
+
+    lateinit var userImage : ImageView
+
+    val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +62,17 @@ class ProfileFragment : Fragment() {
 
         signOut = view.findViewById(R.id.signOut)
 
+        updateProfilePic = view.findViewById(R.id.updateProfilePic)
+
+        userImage = view.findViewById(R.id.userImage)
+
         val gsio = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .requestId()
             .build()
+
+        storageReference = FirebaseStorage.getInstance().reference
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gsio)
 
@@ -85,6 +110,128 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        updateProfilePic.setOnClickListener {
+            imagePicker()
+        }
+
+        loadProfileData()
+
         return  view
+    }
+
+    private fun imagePicker(){
+        ImagePicker.with(this)
+            .cropSquare()
+            .compress(1024)
+            .galleryMimeTypes(  //Exclude gif images
+                mimeTypes = arrayOf(
+                    "image/png",
+                    "image/jpg",
+                    "image/jpeg"
+                )
+            )
+            .maxResultSize(1080, 1080)
+            .start()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            ImagePicker.REQUEST_CODE -> {
+                when (resultCode) {
+                    Activity.RESULT_OK -> {
+                        selectedImageUri = data?.data
+
+                        uploadImageToFirebaseStorage()
+                    }
+                    ImagePicker.RESULT_ERROR -> {
+                        Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            else -> {
+                Toast.makeText(context, "Unrecognized request code", Toast.LENGTH_SHORT).show()
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun uploadImageToFirebaseStorage() {
+        val selectedImageUri = selectedImageUri
+        if (selectedImageUri != null) {
+            val uid = auth.currentUser?.uid
+            val filename = UUID.randomUUID().toString()
+            val ref = storageReference.child("UsersData/$uid/$filename")
+            ref.putFile(selectedImageUri)
+                .addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                        Log.d("Image", "File Location: $uri")
+                        if (uid != null) {
+                            db.collection("users").document(uid)
+                                .update("userimage", uri.toString())
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Image Uploaded",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                    loadProfileData()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Image Upload Failed",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+
+                        } else {
+                            Toast.makeText(context, "User not authenticated", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Image Upload Failed", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            Toast.makeText(context, "No image selected", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun loadProfileData(){
+        db.collection("users").document(auth.currentUser?.uid.toString())
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val userimage = document.getString("userimage")
+                    if (userimage != null) {
+                        Glide
+                            .with(this)
+                            .load(userimage)
+                            .centerCrop()
+                            .placeholder(R.drawable.blank)
+                            .into(userImage)
+                    }
+                    else{
+                        Glide
+                            .with(this)
+                            .load(R.drawable.blank)
+                            .centerCrop()
+                            .placeholder(R.drawable.blank)
+                            .into(userImage)
+                    }
+                } else {
+                    Toast.makeText(context, "No such document", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(context, "Error getting documents: $exception", Toast.LENGTH_SHORT).show()
+            }
     }
 }

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.faltenreich.skeletonlayout.SkeletonLayout
+        android:id="@+id/skeletonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:maskCornerRadius="10dp"
+        app:shimmerAngle="15">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/selectedProductCard"
@@ -96,5 +103,5 @@
             android:textColor="@color/darker"
             android:textSize="15sp" />
     </com.google.android.material.card.MaterialCardView>
-
+    </com.faltenreich.skeletonlayout.SkeletonLayout>
 </LinearLayout>

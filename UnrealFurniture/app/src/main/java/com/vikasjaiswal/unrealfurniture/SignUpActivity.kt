@@ -9,9 +9,14 @@ import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.Firebase
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
@@ -22,6 +27,8 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var emailedit : EditText
     lateinit var pass1edit : EditText
     lateinit var pass2edit : EditText
+
+    val db = Firebase.firestore
 
     var auth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,12 +106,46 @@ class SignUpActivity : AppCompatActivity() {
                                                             user?.sendEmailVerification()
                                                                 ?.addOnCompleteListener { task ->
                                                                     if (task.isSuccessful) {
-                                                                        finish()
-                                                                        Toast.makeText(
-                                                                            this@SignUpActivity,
-                                                                            "Email sent",
-                                                                            Toast.LENGTH_SHORT
-                                                                        ).show()
+                                                                        val userMap = hashMapOf(
+                                                                            "useruid" to user.uid,
+                                                                            "username" to nametxt,
+                                                                            "useremail" to emailtxt
+                                                                        )
+
+                                                                        CoroutineScope(Dispatchers.IO).launch {
+                                                                            try{
+                                                                                db.collection("users").document(user.uid).set(userMap)
+                                                                                    .addOnSuccessListener {
+                                                                                        runOnUiThread {
+                                                                                            finish()
+                                                                                            Toast.makeText(
+                                                                                                this@SignUpActivity,
+                                                                                                "Email sent",
+                                                                                                Toast.LENGTH_SHORT
+                                                                                            ).show()
+                                                                                        }
+                                                                                    }
+                                                                                    .addOnFailureListener {
+                                                                                        runOnUiThread {
+                                                                                            Toast.makeText(
+                                                                                                this@SignUpActivity,
+                                                                                                "Error: ${it.message}",
+                                                                                                Toast.LENGTH_SHORT
+                                                                                            ).show()
+                                                                                        }
+                                                                                    }
+                                                                            }
+                                                                            catch (e: Exception){
+                                                                                runOnUiThread {
+                                                                                    Toast.makeText(
+                                                                                        this@SignUpActivity,
+                                                                                        "Error: ${e.message}",
+                                                                                        Toast.LENGTH_SHORT
+                                                                                    ).show()
+                                                                                }
+                                                                            }
+                                                                        }
+
                                                                     } else {
                                                                         emailedit.error =
                                                                             "Email not sent"

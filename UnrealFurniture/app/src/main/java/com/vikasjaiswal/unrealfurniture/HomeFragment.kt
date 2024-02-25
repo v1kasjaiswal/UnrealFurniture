@@ -13,6 +13,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.faltenreich.skeletonlayout.Skeleton
+import kotlinx.coroutines.*
 
 class HomeFragment : Fragment() {
 
@@ -32,10 +34,18 @@ class HomeFragment : Fragment() {
 
     private lateinit var horizontalScrollView: HorizontalScrollView
 
-    lateinit var openInfo : ImageView
-    lateinit var openSupport : ImageView
+    lateinit var openInfo: ImageView
+    lateinit var openSupport: ImageView
+
+    lateinit var skeleton: Skeleton
 
     private val slidingDelay = 1600L
+    private val smoothScrollDelay = 16L  // Adjust as needed
+    private val skeletonDisplayDelay = 1500L // 0.8 seconds
+
+    private var slidingRunnable: Runnable? = null
+
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +65,23 @@ class HomeFragment : Fragment() {
         featProdAdapter = FeatProductsRecAdapter()
         popProdAdapter = PopProductsRecAdapter()
 
-        featularProdRecyclerView.adapter = featProdAdapter
-        popProdRecyclerView.adapter = popProdAdapter
+        openInfo = view.findViewById(R.id.openInfo)
+        openSupport = view.findViewById(R.id.openSupport)
 
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView)
 
-        openInfo = view.findViewById(R.id.openInfo)
-        openSupport = view.findViewById(R.id.openSupport)
+        skeleton = view.findViewById(R.id.skeletonLayout)
+
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            featularProdRecyclerView.adapter = featProdAdapter
+        }, 100)
+
+        skeleton.showSkeleton()
+        Handler(Looper.getMainLooper()).postDelayed({
+            popProdRecyclerView.adapter = popProdAdapter
+            skeleton.showOriginal()
+        }, 1000)
 
         startSliding()
 
@@ -77,12 +97,12 @@ class HomeFragment : Fragment() {
         }
 
         openInfo.setOnClickListener {
-            val intent =  Intent(context, InfoActivity::class.java)
+            val intent = Intent(context, InfoActivity::class.java)
             startActivity(intent)
         }
 
         openSupport.setOnClickListener {
-            val intent =  Intent(context, SupportActivity::class.java)
+            val intent = Intent(context, SupportActivity::class.java)
             startActivity(intent)
         }
 
@@ -90,15 +110,26 @@ class HomeFragment : Fragment() {
     }
 
     private fun startSliding() {
-        handler.postDelayed({
-            currentIndex = (currentIndex + 1) % cardCount
-            val scrollX = currentIndex * cardWidth
-            horizontalScrollView.smoothScrollTo(scrollX, 0)
-            startSliding()
-        }, slidingDelay)
+        slidingRunnable = object : Runnable {
+            override fun run() {
+                currentIndex = (currentIndex + 1) % cardCount
+                val scrollX = currentIndex * cardWidth
+                horizontalScrollView.smoothScrollTo(scrollX, 0)
+                handler.postDelayed(this, slidingDelay)
+            }
+        }
+        handler.postDelayed(slidingRunnable!!, slidingDelay)
     }
 
     private fun stopSliding() {
-        handler.removeCallbacksAndMessages(null)
+        slidingRunnable?.let {
+            handler.removeCallbacks(it)
+            slidingRunnable = null
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        coroutineScope.cancel()
     }
 }

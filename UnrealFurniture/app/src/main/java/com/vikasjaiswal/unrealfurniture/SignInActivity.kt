@@ -180,15 +180,16 @@ class SignInActivity : AppCompatActivity() {
                                     .addOnCompleteListener(this) {
                                         if (it.isSuccessful) {
                                             val user = auth.currentUser
+
                                             if (user != null) {
+                                                CoroutineScope(Dispatchers.IO).launch {
+
                                                 val userMap = hashMapOf(
                                                     "useruid" to user.uid,
                                                     "username" to convertToTitleCase(user.displayName.toString()),
                                                     "useremail" to user.email,
-                                                    "userimage" to user.photoUrl.toString(),
-                                                    "userphone" to user.phoneNumber,
                                                 )
-                                                CoroutineScope(Dispatchers.IO).launch {
+
                                                     try {
                                                         db.collection("users").document(user.uid)
                                                             .set(userMap)

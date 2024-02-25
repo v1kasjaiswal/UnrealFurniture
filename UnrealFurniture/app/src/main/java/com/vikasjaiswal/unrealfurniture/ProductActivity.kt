@@ -49,7 +49,7 @@ class ProductActivity : AppCompatActivity() {
                         "file",
                         "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf"
                     )
-                    .appendQueryParameter("mode", "ar_only")
+                    .appendQueryParameter("mode", "ar_preferred")
                     .build()
                 sceneViewerIntent.setData(intentUri)
                 sceneViewerIntent.setPackage("com.google.ar.core")

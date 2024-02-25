@@ -49,6 +49,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.google.firebase:firebase-firestore:24.10.2")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -56,4 +57,7 @@ dependencies {
     //External Implementation
     implementation("com.airbnb.android:lottie:6.2.0")
     implementation("com.github.colourmoon:readmore-textview:v1.0.2")
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.faltenreich:skeletonlayout:5.0.0")
 }

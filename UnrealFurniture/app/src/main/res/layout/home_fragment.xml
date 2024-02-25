@@ -47,6 +47,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView15">
 
+    <com.faltenreich.skeletonlayout.SkeletonLayout
+        android:id="@+id/skeletonLayout"
+        android:layout_width="match_parent"
+        app:maskCornerRadius="10dp"
+        app:shimmerAngle="15"
+        android:layout_height="match_parent">
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -511,6 +519,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </com.faltenreich.skeletonlayout.SkeletonLayout>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
