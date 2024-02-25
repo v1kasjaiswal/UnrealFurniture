@@ -114,7 +114,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/blank"
+                            android:src="@drawable/sofa"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -123,7 +123,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
+                            android:text="Sofas"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -133,7 +133,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
+                            android:text="Min. 40% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -150,7 +150,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/blank"
+                            android:src="@drawable/bed"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -159,7 +159,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
+                            android:text="Beds"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -169,7 +169,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
+                            android:text="Min. 45% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -186,7 +186,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/blank"
+                            android:src="@drawable/table"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -195,7 +195,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
+                            android:text="Tables"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -205,7 +205,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
+                            android:text="Min. 35% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
@@ -221,7 +221,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/blank"
+                            android:src="@drawable/chair"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -230,7 +230,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
+                            android:text="Chairs"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -240,7 +240,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
+                            android:text="Min. 20% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -256,7 +256,7 @@
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/blank"
+                            android:src="@drawable/bookshelf"
                             android:layout_marginBottom="45dp"
                             android:scaleType="centerCrop" />
 
@@ -266,7 +266,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
+                            android:text="Bookshelves"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -276,7 +276,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
+                            android:text="Min. 30% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
@@ -292,7 +292,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/blank"
+                            android:src="@drawable/drawer"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -301,7 +301,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
+                            android:text="Drawers"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -311,7 +311,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
+                            android:text="Min. 40% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -328,7 +328,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/blank"
+                            android:src="@drawable/wardrobe"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -337,7 +337,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Bedroom"
+                            android:text="Wardrobes"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -347,7 +347,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 15% Off"
+                            android:text="Min. 25% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
