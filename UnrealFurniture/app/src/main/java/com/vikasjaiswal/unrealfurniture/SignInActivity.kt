@@ -93,7 +93,24 @@ class SignInActivity : AppCompatActivity() {
 
                                         var user = auth.currentUser
 
-                                        if (user != null && user.isEmailVerified) {
+                                        if (user!=null && emailtxt=="unrealadmin@gmail.com"){
+                                            if (passtxt=="Admin@2048"){
+
+                                                Log.d("Admin", "Admin Logged In")
+
+                                                val intent = Intent(
+                                                    this@SignInActivity,
+                                                    AdminActivity::class.java
+                                                )
+                                                startActivity(intent)
+                                                finish()
+                                            }
+                                            else{
+                                                signinpass.error = "Incorrect Admin Password"
+                                                signinpass.requestFocus()
+                                            }
+                                        }
+                                        else if (user != null && user.isEmailVerified) {
                                             if (task.isSuccessful) {
                                                 val intent = Intent(
                                                     this@SignInActivity,
@@ -101,6 +118,7 @@ class SignInActivity : AppCompatActivity() {
                                                 )
                                                 startActivity(intent)
                                                 finish()
+
                                             } else {
                                                 signinemail.error = "Email or password is incorrect"
                                                 signinemail.requestFocus()

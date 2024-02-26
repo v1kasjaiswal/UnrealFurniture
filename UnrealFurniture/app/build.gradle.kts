@@ -61,4 +61,5 @@ dependencies {
     implementation("com.github.dhaval2404:imagepicker:2.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.faltenreich:skeletonlayout:5.0.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

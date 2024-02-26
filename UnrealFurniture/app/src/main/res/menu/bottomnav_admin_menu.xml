@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/analytics"
+        android:enabled="true"
+        android:icon="@drawable/chart_onselect"
+        android:title="Analytics"/>
+
+    <item
+        android:id="@+id/addproduct"
+        android:enabled="true"
+        android:icon="@drawable/addprod_onselect"
+        android:title="Add Product"/>
+
+    <item
+        android:id="@+id/transactions"
+        android:enabled="true"
+        android:icon="@drawable/transaction_onselect"
+        android:title="Transactions"/>
+
+</menu>

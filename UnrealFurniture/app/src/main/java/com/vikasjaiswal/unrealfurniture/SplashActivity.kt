@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
@@ -56,7 +57,16 @@ class SplashActivity : AppCompatActivity() {
         val user = auth.currentUser
         val account = GoogleSignIn.getLastSignedInAccount(this)
 
-        if (user !=null && user.isEmailVerified || account != null){
+        Log.d("SplashActivity", "onCreate: ${user?.email}")
+
+        if (user != null && user?.email == "unrealadmin@gmail.com") {
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this@SplashActivity, AdminActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 1500)
+        }
+        else if (user !=null && user.isEmailVerified || account != null){
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
