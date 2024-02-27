@@ -56,7 +56,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView2"
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
+                android:layout_height="300dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/blank" />
+                    android:src="@drawable/sofa1" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
