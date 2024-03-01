@@ -47,7 +47,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView16"
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -56,9 +56,19 @@
         android:text="Vikas Jaiswal"
         android:textColor="@color/darker"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView12"
         app:layout_constraintStart_toStartOf="@+id/materialCardView12"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView12" />
 
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/userName"
+        app:layout_constraintStart_toEndOf="@+id/userName"
+        app:layout_constraintTop_toTopOf="@+id/userName" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/updateProfilePic"
@@ -79,7 +89,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/notificationsCard"
+        android:id="@+id/privacyCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -90,7 +100,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/notifications"
+            android:src="@drawable/privacy"
             android:layout_margin="10dp" />
 
     </com.google.android.material.card.MaterialCardView>
@@ -121,7 +131,7 @@
         android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView16">
+        app:layout_constraintTop_toBottomOf="@+id/userName">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
@@ -228,23 +238,81 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/appInfoCard"
+        android:id="@+id/resetPassCard"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/myAddressCard"
+        app:layout_constraintStart_toStartOf="@+id/myAddressCard"
         app:layout_constraintTop_toBottomOf="@+id/myAddressCard">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/password"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="Reset Password"
+            android:textColor="@color/dark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="75dp"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/satoshibold"
+            android:text="Change your Password"
+            android:textColor="@color/light"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView6"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView17" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/more" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/appInfoCard"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/resetPassCard"
+        app:layout_constraintStart_toStartOf="@+id/resetPassCard"
+        app:layout_constraintTop_toBottomOf="@+id/resetPassCard">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:src="@drawable/filter"
-            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -265,9 +333,9 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_marginLeft="75dp"
             android:layout_marginBottom="18dp"
-            android:layout_gravity="bottom"
             android:fontFamily="@font/satoshibold"
             android:text="View and Manage App Settings"
             android:textColor="@color/light"
@@ -279,13 +347,14 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="300dp"
-            android:src="@drawable/more"
-            android:layout_gravity="center_vertical"/>
+            android:src="@drawable/more" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"

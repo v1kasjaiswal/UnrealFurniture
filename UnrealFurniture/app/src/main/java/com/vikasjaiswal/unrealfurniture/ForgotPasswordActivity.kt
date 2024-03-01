@@ -8,6 +8,9 @@ import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
@@ -15,9 +18,20 @@ class ForgotPasswordActivity : AppCompatActivity() {
     lateinit var femailedit : EditText
     var auth = FirebaseAuth.getInstance()
 
+    lateinit var googleSignInClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.forgotpassword_activity)
+
+
+
+        val gsio = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .requestId()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this@ForgotPasswordActivity, gsio)
     }
 
     fun resetPassword(view: View) {
@@ -43,13 +57,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful)
                                     {
-                                        Toast.makeText(
-                                            this@ForgotPasswordActivity,
-                                            "Password reset email sent successfully"
-                                            , Toast.LENGTH_SHORT
-                                        ).show()
+                                        try {
+                                            auth.signOut()
+                                            googleSignInClient.signOut()
 
-                                        finish()
+                                            val intent = Intent(this@ForgotPasswordActivity, SignInActivity::class.java)
+                                            startActivity(intent)
+                                            finish()
+                                        } catch (e: Exception) {
+                                            Toast.makeText(this@ForgotPasswordActivity, "Password reset email sent successfully", Toast.LENGTH_SHORT).show()
+                                        }
                                     }
                                     else
                                     {

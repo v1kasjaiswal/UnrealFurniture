@@ -3,24 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    tools:context=".AddAddressFragment"
+    android:background="@color/white"
+    android:layout_height="match_parent">
 
-    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-        android:id="@+id/bottomSheetDragHandleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/goBack"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/addaddresstitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="Add Address"
+        android:textColor="@color/darker"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomSheetDragHandleView"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username"
@@ -28,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomSheetDragHandleView"
+        app:layout_constraintTop_toBottomOf="@+id/addaddresstitle"
         app:startIconDrawable="@drawable/profile">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -62,6 +61,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshibold"
             android:hint="Phone Number"
+            android:maxLength="10"
             android:inputType="phone"
             android:textColor="@color/darker" />
 
@@ -86,6 +86,7 @@
             android:fontFamily="@font/satoshibold"
             android:hint="House Number, Building Name"
             android:inputType="text"
+            android:maxLength="50"
             android:textColor="@color/darker" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -109,46 +110,51 @@
             android:fontFamily="@font/satoshibold"
             android:hint="Nearby Landmark"
             android:inputType="text"
+            android:maxLength="50"
             android:textColor="@color/darker" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton10"
+        android:id="@+id/useLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
         android:fontFamily="@font/satoshibold"
         android:paddingBottom="10dp"
         android:text="Use Current Location"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/userlandmark"
-        app:layout_constraintStart_toStartOf="@+id/userlandmark"
-        app:layout_constraintTop_toBottomOf="@+id/userlandmark" />
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/userregion"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="@+id/userregion"
+        app:layout_constraintTop_toBottomOf="@+id/userregion" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/satoshibold"
-        android:text="Use to fill below field automatically"
-        android:textColor="@color/light"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/materialButton10"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton10" />
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/useLocation"
+        app:layout_constraintTop_toBottomOf="@+id/useLocation" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userregion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/materialButton10"
-        app:layout_constraintStart_toStartOf="@+id/materialButton10"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton10"
+        app:layout_constraintEnd_toEndOf="@+id/userlandmark"
+        app:layout_constraintStart_toStartOf="@+id/userlandmark"
+        app:layout_constraintTop_toBottomOf="@+id/userlandmark"
         app:startIconDrawable="@drawable/area">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -156,6 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshibold"
+            android:maxLength="150"
             android:hint="Road, Area, City, State, Pincode"
             android:inputType="text"
             android:textColor="@color/darker" />
@@ -163,21 +170,48 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton11"
+        android:id="@+id/addNewAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
         android:fontFamily="@font/satoshibold"
         android:paddingBottom="10dp"
         android:text="Add Address"
         android:textSize="15sp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/userregion"
-        app:layout_constraintStart_toStartOf="@+id/userregion"
-        app:layout_constraintTop_toBottomOf="@+id/userregion" />
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/view6"
+        app:layout_constraintStart_toStartOf="@+id/view6"
+        app:layout_constraintTop_toBottomOf="@+id/view6" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addressCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/satoshibold"
+        android:paddingBottom="10dp"
+        android:text="Cancel"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/addNewAddress"
+        app:layout_constraintStart_toStartOf="@+id/addNewAddress"
+        app:layout_constraintTop_toBottomOf="@+id/addNewAddress" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/satoshibold"
+        android:text="@string/app_footer"
+        android:textColor="@color/light"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressCancel"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

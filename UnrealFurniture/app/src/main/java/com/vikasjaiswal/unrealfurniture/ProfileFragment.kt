@@ -15,11 +15,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.carousel.FullScreenCarouselStrategy
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
@@ -44,6 +47,10 @@ class ProfileFragment : Fragment() {
     private var selectedImageUri: Uri? = null
 
     lateinit var userImage : ImageView
+
+    lateinit var privacyCard : CardView
+
+    lateinit var resetPassCard : CardView
 
     val db = Firebase.firestore
 
@@ -105,6 +112,24 @@ class ProfileFragment : Fragment() {
 
         updateProfilePic.setOnClickListener {
             imagePicker()
+        }
+
+        privacyCard = view.findViewById(R.id.privacyCard)
+
+        privacyCard.setOnClickListener {
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Privacy Policy")
+                .setMessage("This app does not collect any personal data. It only stores the data that you provide for the purpose of the app. The data is stored in a secure database and is not shared with any third party.")
+                .setPositiveButton("Ok", null)
+                .show()
+        }
+
+        resetPassCard = view.findViewById(R.id.resetPassCard)
+
+        resetPassCard.setOnClickListener {
+            val intent = Intent(context, ForgotPasswordActivity::class.java)
+            startActivity(intent)
         }
 
         loadProfileData()
