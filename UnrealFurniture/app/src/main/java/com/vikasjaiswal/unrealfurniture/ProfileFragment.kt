@@ -1,6 +1,7 @@
 package com.vikasjaiswal.unrealfurniture
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
@@ -25,10 +28,15 @@ import com.google.android.material.carousel.FullScreenCarouselStrategy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.UUID
+import java.util.regex.Pattern
 
 class ProfileFragment : Fragment() {
 
@@ -47,12 +55,15 @@ class ProfileFragment : Fragment() {
     private var selectedImageUri: Uri? = null
 
     lateinit var userImage : ImageView
+    lateinit var userName : TextView
 
     lateinit var privacyCard : CardView
 
     lateinit var resetPassCard : CardView
 
-    val db = Firebase.firestore
+    lateinit var changeName : ImageView
+
+    val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +80,11 @@ class ProfileFragment : Fragment() {
 
         updateProfilePic = view.findViewById(R.id.updateProfilePic)
 
+        changeName = view.findViewById(R.id.changeName)
+
         userImage = view.findViewById(R.id.userImage)
+
+        userName = view.findViewById(R.id.userName)
 
         val gsio = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -132,7 +147,13 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        loadProfileData()
+        changeName.setOnClickListener {
+            changeUserName()
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            loadProfileData()
+        }
 
         return  view
     }
@@ -160,7 +181,9 @@ class ProfileFragment : Fragment() {
                     Activity.RESULT_OK -> {
                         selectedImageUri = data?.data
 
-                        uploadImageToFirebaseStorage()
+                        CoroutineScope(Dispatchers.IO).launch {
+                            uploadImageToFirebaseStorage()
+                        }
                     }
                     ImagePicker.RESULT_ERROR -> {
                         Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
@@ -205,8 +228,7 @@ class ProfileFragment : Fragment() {
                                         context,
                                         "Image Upload Failed",
                                         Toast.LENGTH_SHORT
-                                    )
-                                        .show()
+                                    ).show()
                                 }
 
                         } else {
@@ -223,33 +245,91 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadProfileData(){
-        db.collection("users").document(auth.currentUser?.uid.toString())
-            .get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val userimage = document.getString("userimage")
-                    if (userimage != null) {
-                        Glide
-                            .with(this)
-                            .load(userimage)
-                            .centerCrop()
-                            .placeholder(R.drawable.user)
-                            .into(userImage)
+        try{
+
+            db.collection("users").document(auth.currentUser?.uid.toString())
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null && isAdded) {
+                        val userimage = document.getString("userimage")
+                        if (userimage != null) {
+                            Glide
+                                .with(this)
+                                .load(userimage)
+                                .centerCrop()
+                                .placeholder(R.drawable.user)
+                                .into(userImage)
+                        }
+                        else{
+                            Glide
+                                .with(this)
+                                .load(R.drawable.user)
+                                .centerCrop()
+                                .placeholder(R.drawable.user)
+                                .into(userImage)
+                        }
+
+                        val username = document.getString("username")
+                        if (username != null) {
+                            val name = "$username"
+
+                            userName.text = name
+                        }
+                    } else {
+                        Log.d("MainActivity", "No such document")
                     }
-                    else{
-                        Glide
-                            .with(this)
-                            .load(R.drawable.user)
-                            .centerCrop()
-                            .placeholder(R.drawable.user)
-                            .into(userImage)
-                    }
-                } else {
-                    Toast.makeText(context, "No such document", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { exception ->
+                    Log.d("MainActivity", "get failed with ", exception)
                 }
             }
-            .addOnFailureListener { exception ->
-                Toast.makeText(context, "Error getting documents: $exception", Toast.LENGTH_SHORT).show()
+        catch (e: Exception){
+            Log.e("MainActivity", "Error: ${e.message}", e)
+        }
+    }
+
+    private fun changeUserName() {
+        try {
+            val dialogView =
+                LayoutInflater.from(requireContext()).inflate(R.layout.editusername_dialog, null)
+
+            val userName  = dialogView.findViewById<EditText>(R.id.newUserName)
+
+            val alertDialog = MaterialAlertDialogBuilder(requireContext())
+                .setTitle("New User Name")
+                .setView(dialogView)
+                .setPositiveButton("Save", null) // Set positive button with null click listener
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setOnClickListener {
+                val newUserName = userName.text.toString()
+                if (newUserName.isNotBlank() && Pattern.matches(
+                        "^(?!\\s)[a-zA-Z\\s]{2,}$",
+                        newUserName
+                    )
+                ) {
+                    db.collection("users").document(auth.currentUser?.uid.toString())
+                        .update("username", newUserName)
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "User Name Updated", Toast.LENGTH_SHORT).show()
+                            loadProfileData()
+                            alertDialog.dismiss()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(context, "User Name Update Failed", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                } else {
+                    Toast.makeText(context, "User Name can't be empty", Toast.LENGTH_SHORT).show()
+                }
             }
+
+        } catch (e: Exception) {
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
+            Log.e("MainActivity", "Error: ${e.message}", e)
+        }
     }
 }

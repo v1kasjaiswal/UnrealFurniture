@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -31,6 +32,8 @@ import java.util.UUID
 import java.util.regex.Pattern
 
 class AddAddressFragment : Fragment() {
+
+    lateinit var addaddresstitle : TextView
 
     private lateinit var addressCancel: Button
     private lateinit var addNewAddress: Button
@@ -60,6 +63,7 @@ class AddAddressFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.addaddress_fragment, container, false)
 
+        addaddresstitle = view.findViewById(R.id.addaddresstitle)
         addressCancel = view.findViewById(R.id.addressCancel)
         addNewAddress = view.findViewById(R.id.addNewAddress)
         userName = view.findViewById(R.id.nameedit)
@@ -87,6 +91,24 @@ class AddAddressFragment : Fragment() {
             if (validateInput()) {
                 saveAddress()
             }
+        }
+
+        var type = arguments?.getString("type")
+        var docId = arguments?.getString("docId")
+        var name = arguments?.getString("name")
+        var phone = arguments?.getString("phone")
+        var house = arguments?.getString("house")
+        var landmark = arguments?.getString("landmark")
+        var region = arguments?.getString("region")
+
+        if (type == "edit") {
+            addaddresstitle.text = "Edit Address"
+            addNewAddress.text = "Update Address"
+            userName.setText(name)
+            userPhone.setText(phone)
+            userHouse.setText(house)
+            userLandmark.setText(landmark)
+            userRegion.setText(region)
         }
 
         return view
@@ -222,6 +244,21 @@ class AddAddressFragment : Fragment() {
 
             val documentId = UUID.randomUUID().toString()
 
+            if (arguments?.getString("type") == "edit") {
+                db.collection("users").document(auth.currentUser!!.uid)
+                    .collection("addresses")
+                    .document(arguments?.getString("docId").toString())
+                    .set(address)
+                    .addOnSuccessListener {
+                        Toast.makeText(requireContext(), "Address Updated Successfully", Toast.LENGTH_SHORT).show()
+                        requireActivity().supportFragmentManager.popBackStack()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), "Something went wrong!", Toast.LENGTH_SHORT).show()
+                    }
+                return@launch
+            }
+
             db.collection("users").document(auth.currentUser!!.uid)
                 .collection("addresses")
                 .document(documentId)
@@ -233,6 +270,7 @@ class AddAddressFragment : Fragment() {
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Something went wrong!", Toast.LENGTH_SHORT).show()
                 }
+                return@launch
         }
     }
 }

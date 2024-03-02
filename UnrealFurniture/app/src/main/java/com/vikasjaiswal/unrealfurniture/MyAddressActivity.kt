@@ -42,8 +42,6 @@ class MyAddressActivity : AppCompatActivity()    {   //, OnMapReadyCallback {
 
     lateinit var goBack : CardView
 
-    lateinit var reload : CardView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.myaddress_activity)
@@ -62,12 +60,6 @@ class MyAddressActivity : AppCompatActivity()    {   //, OnMapReadyCallback {
         emptyAddressTextView = findViewById(R.id.emptyAddressTextView)
 
         skeleton  = findViewById(R.id.skeletonLayout)
-
-        reload = findViewById(R.id.reload)
-
-        reload.setOnClickListener {
-        }
-
 
         if (myAddressAdapter?.itemCount == 0) {
             myAddressAnimation.visibility = LottieAnimationView.VISIBLE

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/editAddress"
+        android:title="Edit Address"/>
+
+    <item
+        android:id="@+id/removeAddress"
+        android:title="Remove Address"/>
+
+</menu>
