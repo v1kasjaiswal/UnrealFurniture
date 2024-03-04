@@ -88,7 +88,6 @@ class AddProductFragment : Fragment() {
 
     lateinit var cardClicked : CardView
 
-    lateinit var previewProduct : Button
     lateinit var addProduct : Button
 
     private val PERMISSION_CODE = 1001
@@ -150,7 +149,6 @@ class AddProductFragment : Fragment() {
         productDiscount = view.findViewById(R.id.proddiscountedit)
         productStock = view.findViewById(R.id.prodstockedit)
 
-        previewProduct = view.findViewById(R.id.previewProduct)
         addProduct = view.findViewById(R.id.addProduct)
 
         prodMainImageCard.setOnClickListener {
@@ -206,11 +204,6 @@ class AddProductFragment : Fragment() {
             prodDimenFileImage.setImageResource(R.drawable.add)
             deleteDimenFile.visibility = View.GONE
             selectedDimenFileUri = null
-        }
-
-        previewProduct.setOnClickListener {
-            val intent = Intent(context, ProductActivity::class.java)
-            startActivity(intent)
         }
 
         addProduct.setOnClickListener {
@@ -291,26 +284,70 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
-                if (productPrice.text.toString().isBlank() && !Pattern.matches("^(?!\\s)[0-9]{1,}$", productPrice.text.toString()) && productPrice.text.toString().toInt() > 0){
+                if (productPrice.text.toString().isEmpty()){
                     withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(), "Please enter valid price", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
 
-                if (productDiscount.text.toString().isBlank() && !Pattern.matches("^(?!\\s)[0-9]{1,}$", productDiscount.text.toString()) && productDiscount.text.toString().toInt() > 0 && productDiscount.text.toString().toInt() < 100){
+                if (productPrice.text.toString().toInt() <= 0){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(requireContext(), "Please enter valid price", Toast.LENGTH_SHORT).show()
+                    }
+                    return@launch
+                }
+
+                if (productDiscount.text.toString().isEmpty()){
                     withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(), "Please enter valid discount", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
 
-                if (productStock.text.toString().isBlank() && !Pattern.matches("^(?!\\s)[0-9]{1,}$", productStock.text.toString()) && productStock.text.toString().toInt() > 0){
+                if (productDiscount.text.toString().toInt() <= 0 && productDiscount.text.toString().toInt() >= 100){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(requireContext(), "Please enter valid discount", Toast.LENGTH_SHORT).show()
+                    }
+                    return@launch
+                }
+
+
+                if (productStock.text.toString().isEmpty()){
                     withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(), "Please enter valid stock", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
+
+                if (productStock.text.toString().toInt() <= 0){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(requireContext(), "Please enter valid stock", Toast.LENGTH_SHORT).show()
+                    }
+                    return@launch
+                }
+
+
+////                if (productPrice.text.toString().isBlank() && productPrice.text.toString().isEmpty() && productPrice.text.toString().toInt() > 0){
+////                    withContext(Dispatchers.Main){
+////                        Toast.makeText(requireContext(), "Please enter valid price", Toast.LENGTH_SHORT).show()
+////                    }
+////                    return@launch
+////                }
+//
+//                if (productDiscount.text.toString().isBlank() && productDiscount.text.toString().isEmpty() && productDiscount.text.toString().toInt() > 0 && productDiscount.text.toString().toInt() < 100){
+//                    withContext(Dispatchers.Main){
+//                        Toast.makeText(requireContext(), "Please enter valid discount", Toast.LENGTH_SHORT).show()
+//                    }
+//                    return@launch
+//                }
+//
+//                if (productStock.text.toString().isBlank() && productStock.text.toString().isEmpty()  && productStock.text.toString().toInt() > 0){
+//                    withContext(Dispatchers.Main){
+//                        Toast.makeText(requireContext(), "Please enter valid stock", Toast.LENGTH_SHORT).show()
+//                    }
+//                    return@launch
+//                }
 
                 withContext(Dispatchers.Main){
                     progressDialog.show()
@@ -355,9 +392,10 @@ class AddProductFragment : Fragment() {
                     }
                 }
             } catch (e: Exception) {
+                Log.d("Error", e.toString())
                 withContext(Dispatchers.Main) {
                     progressDialog.dismiss()
-                    Toast.makeText(requireContext(), "Failed to upload product", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to upload product1", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -366,7 +366,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout7"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayout7"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
-                app:startIconDrawable="@drawable/discount">
+                app:startIconDrawable="@drawable/stock">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/prodstockedit"
@@ -381,22 +381,6 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/previewProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/satoshibold"
-                android:paddingBottom="10dp"
-                android:text="Preview Product"
-                android:textSize="15sp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/textInputLayout8"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/addProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -407,9 +391,9 @@
                 android:text="Add Product"
                 android:fontFamily="@font/satoshibold"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/previewProduct"
-                app:layout_constraintStart_toStartOf="@+id/previewProduct"
-                app:layout_constraintTop_toBottomOf="@+id/previewProduct" />
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout8"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"

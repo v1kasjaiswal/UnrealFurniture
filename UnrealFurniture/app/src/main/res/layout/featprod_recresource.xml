@@ -20,6 +20,7 @@
         android:layout_height="200dp">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/featProdMainImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="70dp"
@@ -32,6 +33,7 @@
             android:layout_gravity="end">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/featProdDiscount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -44,6 +46,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/featProdName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -59,6 +62,7 @@
             android:textSize="15sp" />
 
         <RatingBar
+            android:id="@+id/featProdRatingBar"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +73,7 @@
             android:stepSize="0.5" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/featProdRatingCounts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom | end"
@@ -80,7 +85,7 @@
             android:textSize="12sp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/featStrikeText"
+            android:id="@+id/featProdRealPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -92,7 +97,7 @@
             android:textSize="15sp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView18"
+            android:id="@+id/featProdDiscountedPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom |center_horizontal"

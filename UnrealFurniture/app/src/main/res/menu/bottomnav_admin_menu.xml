@@ -8,6 +8,12 @@
         android:title="Analytics"/>
 
     <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/search_onselect"
+        android:title="Search"/>
+
+    <item
         android:id="@+id/addproduct"
         android:enabled="true"
         android:icon="@drawable/addprod_onselect"
