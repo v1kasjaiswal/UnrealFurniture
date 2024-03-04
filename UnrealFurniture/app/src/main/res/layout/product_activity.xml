@@ -80,22 +80,24 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/satoshibold"
                         android:padding="10dp"
+                        android:textSize="13dp"
                         android:text="22.22% ↓"
                         android:textColor="@color/dark" />
 
                 </com.google.android.material.card.MaterialCardView>
 
+
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="right"
                     android:layout_margin="15dp">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:src="@drawable/heart" />
+                <co.ankurg.expressview.ExpressView
+                    android:id="@+id/expressView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -113,7 +115,7 @@
                         android:padding="10dp"
                         android:text="View in 3D"
                         android:textColor="@color/dark"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -131,7 +133,7 @@
                         android:padding="10dp"
                         android:text="View in AR"
                         android:textColor="@color/dark"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </com.google.android.material.card.MaterialCardView>
 

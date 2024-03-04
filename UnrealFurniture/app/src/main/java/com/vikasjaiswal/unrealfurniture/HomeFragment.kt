@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -13,8 +14,15 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.faltenreich.skeletonlayout.Skeleton
-import kotlinx.coroutines.*
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -34,16 +42,22 @@ class HomeFragment : Fragment() {
 
     private lateinit var horizontalScrollView: HorizontalScrollView
 
-    lateinit var openInfo: ImageView
-    lateinit var openSupport: ImageView
+    private lateinit var openInfo: ImageView
+    private lateinit var openSupport: ImageView
 
-    lateinit var skeleton: Skeleton
+    private lateinit var skeleton: Skeleton
 
     private val slidingDelay = 1600L
-    private val smoothScrollDelay = 16L  // Adjust as needed
-    private val skeletonDisplayDelay = 1500L // 0.8 seconds
+    private val smoothScrollDelay = 16L
+    private val skeletonDisplayDelay = 1500L
 
     private var slidingRunnable: Runnable? = null
+
+    private lateinit var bannerImage: ImageView
+    private var currentBannerIndex = 1
+    private val totalBannerCount = 5
+
+    private var storageReference = FirebaseStorage.getInstance().reference
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -72,19 +86,23 @@ class HomeFragment : Fragment() {
 
         skeleton = view.findViewById(R.id.skeletonLayout)
 
+        bannerImage = view.findViewById(R.id.bannerImage)
 
-        Handler(Looper.getMainLooper()).postDelayed({
+        // Start loading featured products with a slight delay
+        handler.postDelayed({
             featularProdRecyclerView.adapter = featProdAdapter
         }, 100)
 
+        // Show skeleton view for a short duration before loading popular products
         skeleton.showSkeleton()
-        Handler(Looper.getMainLooper()).postDelayed({
+        handler.postDelayed({
             popProdRecyclerView.adapter = popProdAdapter
             skeleton.showOriginal()
         }, 1000)
 
         startSliding()
 
+        // Handle touch events on the horizontal scroll view
         horizontalScrollView.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> stopSliding()
@@ -96,17 +114,22 @@ class HomeFragment : Fragment() {
             false
         }
 
+        // Open Info Activity on click
         openInfo.setOnClickListener {
-            val intent = Intent(context, InfoActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(context, InfoActivity::class.java))
         }
 
+        // Open Support Activity on click
         openSupport.setOnClickListener {
-            val intent = Intent(context, SupportActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(context, SupportActivity::class.java))
         }
 
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        loadBannerImagesLoop()
     }
 
     private fun startSliding() {
@@ -132,4 +155,28 @@ class HomeFragment : Fragment() {
         super.onDestroy()
         coroutineScope.cancel()
     }
+
+    private fun loadBannerImagesLoop() {
+        coroutineScope.launch {
+            while (true) {
+                loadBannerImage()
+                delay(3000) // 3 seconds delay between banners
+            }
+        }
+    }
+
+    private fun loadBannerImage() {
+        val bannerRef = storageReference.child("BannerImages/$currentBannerIndex.jpg")
+
+        bannerRef.downloadUrl.addOnSuccessListener { imageUrl ->
+            Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.blank)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(bannerImage)
+
+            currentBannerIndex = (currentBannerIndex % totalBannerCount) + 1
+        }
+    }
+
 }

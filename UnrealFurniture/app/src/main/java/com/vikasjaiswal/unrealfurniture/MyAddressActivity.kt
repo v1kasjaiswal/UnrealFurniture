@@ -13,17 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.faltenreich.skeletonlayout.Skeleton
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MyAddressActivity : AppCompatActivity()    {   //, OnMapReadyCallback {
-
+class MyAddressActivity : AppCompatActivity()    {
 
     private lateinit var myAddressLayoutManager: GridLayoutManager
 

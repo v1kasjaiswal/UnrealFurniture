@@ -73,7 +73,7 @@ class MyAddressRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.
         Log.d("TAG111", "getItemCount: $names")
         return names.size
     }
-    
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = names[position]
         holder.phone.text = "+91 "+phones[position]

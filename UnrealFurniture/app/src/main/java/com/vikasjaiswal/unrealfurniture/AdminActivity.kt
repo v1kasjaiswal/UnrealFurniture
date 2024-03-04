@@ -5,6 +5,7 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -22,7 +23,7 @@ class AdminActivity : AppCompatActivity() {
     var auth = FirebaseAuth.getInstance()
     lateinit var googleSignInClient: GoogleSignInClient
 
-    lateinit var signOut : CardView
+    lateinit var signOut : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

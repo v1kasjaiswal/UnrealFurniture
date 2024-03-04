@@ -50,7 +50,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.google.firebase:firebase-firestore:24.10.2")
     implementation("com.google.firebase:firebase-storage:20.3.0")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -63,4 +62,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.faltenreich:skeletonlayout:5.0.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("co.ankurg.expressview:expressview:0.0.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
 }
