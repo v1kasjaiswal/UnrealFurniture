@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         setupFragment(HomeFragment())
 
         bottomNav.setOnItemSelectedListener { handleNavigation(it.itemId) }
-        bottomNav.setOnItemReselectedListener { handleNavigation(it.itemId) }
+        bottomNav.setOnItemReselectedListener {  }
 
         checkAndRequestPermissions()
     }

@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.faltenreich.skeletonlayout.Skeleton
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -160,22 +161,27 @@ class HomeFragment : Fragment() {
         coroutineScope.launch {
             while (true) {
                 loadBannerImage()
-                delay(3000) // 3 seconds delay between banners
+                delay(3000)
             }
         }
     }
 
     private fun loadBannerImage() {
-        val bannerRef = storageReference.child("BannerImages/$currentBannerIndex.jpg")
+        try{
+        if (isAdded() && activity != null) {
+            val bannerRef = storageReference.child("BannerImages/$currentBannerIndex.jpg")
+            bannerRef.downloadUrl.addOnSuccessListener { imageUrl ->
 
-        bannerRef.downloadUrl.addOnSuccessListener { imageUrl ->
-            Glide.with(this)
-                .load(imageUrl)
-                .placeholder(R.drawable.blank)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(bannerImage)
+                Glide.with(this)
+                    .load(imageUrl)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(bannerImage)
 
-            currentBannerIndex = (currentBannerIndex % totalBannerCount) + 1
+                currentBannerIndex = (currentBannerIndex % totalBannerCount) + 1
+            }
+        }
+        }catch (e: Exception){
+            e.printStackTrace()
         }
     }
 

@@ -19,7 +19,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
-import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -253,18 +253,18 @@ class ProfileFragment : Fragment() {
                     if (document != null && isAdded) {
                         val userimage = document.getString("userimage")
                         if (userimage != null) {
-                            Glide
-                                .with(this)
+
+                            Picasso
+                                .get()
                                 .load(userimage)
-                                .centerCrop()
                                 .placeholder(R.drawable.user)
                                 .into(userImage)
+
                         }
                         else{
-                            Glide
-                                .with(this)
+                            Picasso
+                                .get()
                                 .load(R.drawable.user)
-                                .centerCrop()
                                 .placeholder(R.drawable.user)
                                 .into(userImage)
                         }

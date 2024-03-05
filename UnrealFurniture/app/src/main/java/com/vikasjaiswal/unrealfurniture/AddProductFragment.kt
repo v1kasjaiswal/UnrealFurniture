@@ -277,7 +277,7 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
-                if (productDescription.text.toString().isBlank() && !Pattern.matches("^(?!\\s)[a-zA-Z0-9\\s]{2,}$", productDescription.text.toString())){
+                if (productDescription.text.toString().isBlank() && productDescription.text.toString().length < 100)  {
                     withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(),    "Please enter valid descriptioin", Toast.LENGTH_SHORT).show()
                     }
@@ -326,28 +326,6 @@ class AddProductFragment : Fragment() {
                     }
                     return@launch
                 }
-
-
-////                if (productPrice.text.toString().isBlank() && productPrice.text.toString().isEmpty() && productPrice.text.toString().toInt() > 0){
-////                    withContext(Dispatchers.Main){
-////                        Toast.makeText(requireContext(), "Please enter valid price", Toast.LENGTH_SHORT).show()
-////                    }
-////                    return@launch
-////                }
-//
-//                if (productDiscount.text.toString().isBlank() && productDiscount.text.toString().isEmpty() && productDiscount.text.toString().toInt() > 0 && productDiscount.text.toString().toInt() < 100){
-//                    withContext(Dispatchers.Main){
-//                        Toast.makeText(requireContext(), "Please enter valid discount", Toast.LENGTH_SHORT).show()
-//                    }
-//                    return@launch
-//                }
-//
-//                if (productStock.text.toString().isBlank() && productStock.text.toString().isEmpty()  && productStock.text.toString().toInt() > 0){
-//                    withContext(Dispatchers.Main){
-//                        Toast.makeText(requireContext(), "Please enter valid stock", Toast.LENGTH_SHORT).show()
-//                    }
-//                    return@launch
-//                }
 
                 withContext(Dispatchers.Main){
                     progressDialog.show()

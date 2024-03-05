@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -16,97 +17,119 @@
         android:layout_width="170dp"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="3dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
         android:layout_height="200dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/featProdMainImage"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="70dp"
-            android:src="@drawable/blank"
-            android:scaleType="centerCrop"/>
+            android:layout_height="match_parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/featProdMainImage"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/blank"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/featProdDiscount"
+                android:id="@+id/featProdName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/satoshibold"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="Master Bed Set"
+                android:textColor="@color/dark"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/featProdMainImage" />
+
+            <RatingBar
+                android:id="@+id/featProdRatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:text="22.22% ↓"
+                android:layout_gravity="bottom"
+                android:rating="4.5"
+                android:layout_marginTop="3dp"
+                android:stepSize="0.5"
+                app:layout_constraintStart_toStartOf="@+id/featProdName"
+                app:layout_constraintTop_toBottomOf="@+id/featProdName" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/featProdRatingCounts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom | end"
                 android:fontFamily="@font/satoshibold"
+                android:text="(17,958)"
+                android:layout_marginTop="3dp"
                 android:textColor="@color/darker"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/featProdName"
+                app:layout_constraintTop_toBottomOf="@+id/featProdName" />
 
-        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/featProdName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="48dp"
-            android:ellipsize="marquee"
-            android:fontFamily="@font/satoshibold"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:text="Master Bed Set"
-            android:textColor="@color/dark"
-            android:textSize="15sp" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/featProdRealPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:fontFamily="@font/satoshibold"
+                android:text="₹55,000"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/light"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/featProdRatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/featProdRatingBar" />
 
-        <RatingBar
-            android:id="@+id/featProdRatingBar"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="30dp"
-            android:rating="4.5"
-            android:stepSize="0.5" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/featProdDiscountedPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom |center_horizontal"
+                android:fontFamily="@font/satoshibold"
+                android:text="₹45,000"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/darker"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/featProdRatingCounts"
+                app:layout_constraintTop_toBottomOf="@+id/featProdRatingBar" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/featProdRatingCounts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom | end"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="30dp"
-            android:fontFamily="@font/satoshibold"
-            android:text="(17,958)"
-            android:textColor="@color/darker"
-            android:textSize="12sp" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/featProdRealPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="7dp"
-            android:fontFamily="@font/satoshibold"
-            android:text="₹55,000"
-            android:textColor="@color/light"
-            android:textSize="15sp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/featProdDiscountedPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom |center_horizontal"
-            android:layout_marginLeft="25dp"
-            android:layout_marginBottom="7dp"
-            android:fontFamily="@font/satoshibold"
-            android:text="₹45,000"
-            android:textColor="@color/darker"
-            android:textSize="15sp" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/featProdDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="7dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:text="22.22% ↓"
+                    android:textColor="@color/darker"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="82dp"
+                    tools:layout_editor_absoluteY="83dp" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
     </com.faltenreich.skeletonlayout.SkeletonLayout>
 </LinearLayout>

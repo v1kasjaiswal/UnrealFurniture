@@ -12,11 +12,10 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.faltenreich.skeletonlayout.Skeleton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -97,12 +96,9 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
             holder.skeleton.showOriginal()
         }, 1000)
 
-
-
-        Glide.with(holder.itemView.context)
+        Picasso.get()
             .load(productMainImages[position])
             .placeholder(R.drawable.blank)
-            .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.prodMainImage)
 
         holder.prodName.text = productNames[position]

@@ -49,6 +49,12 @@
         app:layout_constraintTop_toBottomOf="@+id/materialTextView15"
         app:layout_constraintVertical_bias="0.0">
 
+        <com.faltenreich.skeletonlayout.SkeletonLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:maskCornerRadius="10dp"
+            app:shimmerAngle="15">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -56,7 +62,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView2"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
@@ -96,8 +102,11 @@
                     android:layout_margin="15dp">
 
                 <co.ankurg.expressview.ExpressView
-                    android:id="@+id/expressView"
+                    android:id="@+id/addToWishList"
+                    app:burstColor="@color/dark"
+                    android:outlineSpotShadowColor="@color/darker"
                     android:layout_width="wrap_content"
+                    app:checkedIconTint="@color/dark"
                     android:layout_height="match_parent"
                     android:layout_gravity="end" />
 
@@ -261,111 +270,6 @@
                 app:layout_constraintStart_toStartOf="@+id/productDimenImageEdit"
                 app:layout_constraintTop_toBottomOf="@+id/productDimenImageEdit">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="Height:"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="31.5” | 80 cm"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="Depth:"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="33” | 84 cm"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="Width:"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="73.5” | 187 cm"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="Seat Height:"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="18.5” | 47 cm"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="Arm Height:"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/satoshibold"
-                        android:text="24” | 61 cm"
-                        android:textColor="@color/dark"
-                        android:textSize="15sp" />
-                </TableRow>
-
             </TableLayout>
 
             <View
@@ -505,6 +409,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView38" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.faltenreich.skeletonlayout.SkeletonLayout>
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
