@@ -54,13 +54,7 @@ class MyAddressActivity : AppCompatActivity()    {
 
         skeleton  = findViewById(R.id.skeletonLayout)
 
-        if (myAddressAdapter?.itemCount == 0) {
-            myAddressAnimation.visibility = LottieAnimationView.VISIBLE
-            emptyAddressTextView.visibility = TextView.VISIBLE
-        } else {
-            myAddressAnimation.visibility = LottieAnimationView.GONE
-            emptyAddressTextView.visibility = TextView.GONE
-        }
+        updateEmptyViewVisibility()
 
         myAddressRecyclerView.adapter = myAddressAdapter
 

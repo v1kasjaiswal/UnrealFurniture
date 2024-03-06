@@ -19,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -254,19 +255,22 @@ class ProfileFragment : Fragment() {
                         val userimage = document.getString("userimage")
                         if (userimage != null) {
 
-                            Picasso
+                            lifecycleScope.launchWhenCreated {
+                                Picasso
                                 .get()
                                 .load(userimage)
                                 .placeholder(R.drawable.user)
                                 .into(userImage)
-
+                            }
                         }
                         else{
+                            lifecycleScope.launchWhenCreated {
                             Picasso
                                 .get()
                                 .load(R.drawable.user)
                                 .placeholder(R.drawable.user)
                                 .into(userImage)
+                            }
                         }
 
                         val username = document.getString("username")

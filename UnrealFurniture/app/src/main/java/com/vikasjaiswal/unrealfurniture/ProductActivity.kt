@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.ankurg.expressview.ExpressView
@@ -98,6 +99,8 @@ class ProductActivity : AppCompatActivity() {
         productRatingBar = findViewById(R.id.productRatingBarEdit)
         productRatingCount = findViewById(R.id.productRatingCountEdit)
 
+        productRealPrice.paint.isStrikeThruText = true
+
         addToCard = findViewById(R.id.addToCart)
         buyNow = findViewById(R.id.buyNow)
 
@@ -135,11 +138,14 @@ class ProductActivity : AppCompatActivity() {
                 val result = db.collection("products").document(productId).get().await()
 
                 withContext(Dispatchers.Main) {
+
+                    lifecycleScope.launchWhenCreated {
                     Picasso
                         .get()
                         .load(result.getString("prodMainImage").toString())
                         .placeholder(R.drawable.blank)
                         .into(productMainImage)
+                    }
 
                     productName.text = result.getString("productName").toString()
 //                    productDescription.text = result.getString("prodDescription").toString()
@@ -148,17 +154,22 @@ class ProductActivity : AppCompatActivity() {
                     val discountedPrice = result.getLong("productPrice").toString().toInt() - (result.getLong("productPrice").toString().toInt() * result.getLong("productDiscount").toString().toFloat() / 100)
                     productDiscountedPrice.text = "₹$discountedPrice"
 
-                    Picasso
-                        .get()
-                        .load(result.getString("prodLookImage").toString())
-                        .placeholder(R.drawable.blank)
-                        .into(productLookImage)
+                    lifecycleScope.launchWhenCreated {
+                        Picasso
+                            .get()
+                            .load(result.getString("prodLookImage").toString())
+                            .placeholder(R.drawable.blank)
+                            .into(productLookImage)
 
-                    Picasso
-                        .get()
-                        .load(result.getString("prodDimenImage").toString())
-                        .placeholder(R.drawable.blank)
-                        .into(productDimenImage)
+                    }
+
+                    lifecycleScope.launchWhenCreated {
+                        Picasso
+                            .get()
+                            .load(result.getString("prodDimenImage").toString())
+                            .placeholder(R.drawable.blank)
+                            .into(productDimenImage)
+                    }
 
                     val dimenData = result.get("prodDimensions") as Map<*, *>
                     for ((key, value) in dimenData) {

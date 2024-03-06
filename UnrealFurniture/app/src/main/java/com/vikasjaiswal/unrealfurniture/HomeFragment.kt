@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -171,12 +172,13 @@ class HomeFragment : Fragment() {
         if (isAdded() && activity != null) {
             val bannerRef = storageReference.child("BannerImages/$currentBannerIndex.jpg")
             bannerRef.downloadUrl.addOnSuccessListener { imageUrl ->
+                lifecycleScope.launchWhenCreated {
+                    Glide.with(this@HomeFragment)
+                        .load(imageUrl)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(bannerImage)
 
-                Glide.with(this)
-                    .load(imageUrl)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(bannerImage)
-
+                }
                 currentBannerIndex = (currentBannerIndex % totalBannerCount) + 1
             }
         }

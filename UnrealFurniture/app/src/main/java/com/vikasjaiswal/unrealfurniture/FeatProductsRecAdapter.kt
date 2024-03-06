@@ -142,4 +142,6 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
             }
         }
     }
+
+
 }
