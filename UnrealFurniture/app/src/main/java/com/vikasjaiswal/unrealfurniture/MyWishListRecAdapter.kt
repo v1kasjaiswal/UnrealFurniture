@@ -10,11 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
+import java.util.UUID
+import kotlin.random.Random
 
 class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Adapter<MyWishListRecAdapter.ViewHolder>() {
 
@@ -176,4 +179,39 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
             }
         }
     }
+
+    public fun moveAllToCart(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = auth.currentUser
+            if (user != null) {
+                val userRef = db.collection("users").document(user.uid)
+                userRef.get().addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val wishList = document.get("wishList") as? List<String> ?: emptyList()
+                        if (wishList.isNotEmpty()) {
+                            for (item in wishList){
+                                var cartMap = hashMapOf(
+                                    "productId" to item,
+                                    "quantity" to 1
+                                )
+
+                                var cartId = UUID.randomUUID().toString()
+
+                                userRef.collection("cart").document(cartId).set(cartMap)
+                                    .addOnSuccessListener {
+                                        emptyWishList()
+                                        notifyDataSetChanged()
+                                        onDataChanged.invoke()
+                                    }
+                                    .addOnFailureListener {
+                                        Log.d("WishListActivity", "Error: ${it.message}")
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

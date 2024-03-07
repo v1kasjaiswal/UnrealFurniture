@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.DeleteGesture
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,6 +32,8 @@ class MyWishListFragment : Fragment() {
 
     private lateinit var deleteWishList : ImageView
 
+    private lateinit var moveAllToCart : Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +46,8 @@ class MyWishListFragment : Fragment() {
         skeletonLayout = view.findViewById(R.id.skeletonLayout)
 
         deleteWishList = view.findViewById(R.id.deleteWishList)
+
+        moveAllToCart = view.findViewById(R.id.moveAllToCart)
 
         myWishListLayoutManager = GridLayoutManager(context, 1)
 
@@ -63,6 +68,30 @@ class MyWishListFragment : Fragment() {
                     myWishListAdapter!!.emptyWishList()
                 }
                 .show()
+        }
+
+        moveAllToCart.setOnClickListener {
+            if (myWishListAdapter!!.itemCount != 0) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Move All To Cart")
+                    .setMessage("Are you sure you want to move all items from your wishlist to cart?")
+                    .setNegativeButton("No") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton("Yes") { dialog, which ->
+                        myWishListAdapter!!.moveAllToCart()
+                    }
+                    .show()
+            }
+            else{
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Move All To Cart")
+                    .setMessage("Your wishlist is empty")
+                    .setPositiveButton("Ok") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
         }
 
         skeletonLayout.showSkeleton()
@@ -89,5 +118,6 @@ class MyWishListFragment : Fragment() {
             emptyWishTextView.visibility = View.GONE
         }
     }
+
 
 }
