@@ -1,118 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/blank"
-            android:scaleType="centerCrop"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="10dp"
-            android:ellipsize="marquee"
-            android:fontFamily="@font/satoshibold"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:text="Bed and Sofa Set"
-            android:textColor="@color/dark"
-            android:textSize="18sp" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/cartProdMainImage"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/blank"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/delete"
-            android:layout_gravity="end"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="13dp"
-            android:scaleType="centerCrop"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cartProdName"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="9dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/satoshibold"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="Bed and Sofa Set"
+                android:textColor="@color/dark"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/cartProdMainImage"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <RatingBar
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="37dp"
-            android:rating="4.5"
-            android:stepSize="0.5" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/removeCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:scaleType="centerCrop"
+                android:src="@drawable/delete"
+                android:layout_marginRight="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="35dp"
-            android:fontFamily="@font/satoshibold"
-            android:text="(17,456)"
-            android:textColor="@color/dark" />
+            <RatingBar
+                android:id="@+id/cartProdRating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:rating="4.5"
+                android:stepSize="0.5"
+                app:layout_constraintStart_toStartOf="@+id/cartProdName"
+                app:layout_constraintTop_toBottomOf="@+id/cartProdName" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/myCartStrikeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="55dp"
-            android:fontFamily="@font/satoshibold"
-            android:text="₹17,958"
-            android:textColor="@color/light"
-            android:textSize="15sp" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cartProdRatingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="(17,456)"
+                android:textColor="@color/dark"
+                app:layout_constraintStart_toEndOf="@+id/cartProdRating"
+                app:layout_constraintTop_toBottomOf="@+id/cartProdName" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="₹15000"
-            android:fontFamily="@font/satoshibold"
-            android:textSize="15sp"
-            android:textColor="@color/dark"
-            android:layout_marginTop="55dp"
-            android:layout_marginLeft="200dp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cartProdPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshibold"
+                android:text="₹17,958"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/light"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/cartProdRating"
+                app:layout_constraintTop_toBottomOf="@+id/cartProdRating" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="22.22% ↓"
-            android:textSize="15sp"
-            app:fontFamily="@font/satoshibold"
-            android:textColor="@color/dark"
-            android:layout_marginTop="55dp"
-            android:layout_marginLeft="270dp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cartProdDiscountedPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="₹15000"
+                android:textColor="@color/dark"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/cartProdPrice"
+                app:layout_constraintTop_toBottomOf="@+id/cartProdRating" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add"
-            android:layout_marginTop="78dp"
-            android:layout_marginLeft="130dp" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="07"
-            android:fontFamily="@font/satoshibold"
-            android:textSize="15sp"
-            android:textColor="@color/dark"
-            android:layout_marginTop="78dp"
-            android:layout_marginLeft="160dp"/>
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/minus"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="78dp"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/cartProdDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="7dp"
+                    android:text="22.22% ↓"
+                    android:textColor="@color/darker"
+                    android:textSize="11sp"
+                    app:fontFamily="@font/satoshibold" />
 
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/incrementQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/add"
+                app:layout_constraintStart_toStartOf="@+id/cartProdPrice"
+                app:layout_constraintTop_toBottomOf="@+id/cartProdPrice" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/prodQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshibold"
+                android:text="07"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/dark"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/incrementQuantity"
+                app:layout_constraintTop_toTopOf="@+id/incrementQuantity" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/decrementQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/minus"
+                app:layout_constraintStart_toEndOf="@+id/prodQuantity"
+                app:layout_constraintTop_toTopOf="@+id/prodQuantity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

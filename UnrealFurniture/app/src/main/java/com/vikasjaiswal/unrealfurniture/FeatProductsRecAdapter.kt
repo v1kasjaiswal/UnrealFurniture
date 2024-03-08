@@ -130,8 +130,7 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
                 Log.d("TAG111", "updateData: ${document.getString("productName").toString()}")
                 productRealPrices += document.getLong("productPrice")?.toString()?: "0"
                 productDiscounts += document.getLong("productDiscount")?.toString()?:"0"
-                var discountedPrice = document.getLong("productPrice").toString().toInt() - (document.getLong("productPrice").toString().toInt() * document.getLong("productDiscount").toString().toFloat() / 100)
-                productDiscountedPrices += discountedPrice.toString()
+                productDiscountedPrices += document.getLong("productDiscountedPrice")?.toString()?:"0"
             }
 
             withContext(Dispatchers.Main){

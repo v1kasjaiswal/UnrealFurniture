@@ -58,16 +58,28 @@ class MyWishListFragment : Fragment() {
         }
 
         deleteWishList.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Delete WishList")
-                .setMessage("Are you sure you want to delete all items from your wishlist?")
-                .setNegativeButton("No") { dialog, which ->
-                    dialog.dismiss()
-                }
-                .setPositiveButton("Yes") { dialog, which ->
-                    myWishListAdapter!!.emptyWishList()
-                }
-                .show()
+            if (myWishListAdapter!!.itemCount == 0) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Delete WishList")
+                    .setMessage("Your wishlist is empty")
+                    .setPositiveButton("Ok") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+            else{
+
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Delete WishList")
+                    .setMessage("Are you sure you want to delete all items from your wishlist?")
+                    .setNegativeButton("No") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton("Yes") { dialog, which ->
+                        myWishListAdapter!!.emptyWishList()
+                    }
+                    .show()
+            }
         }
 
         moveAllToCart.setOnClickListener {

@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/emptyCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -29,21 +30,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.faltenreich.skeletonlayout.SkeletonLayout
+        android:id="@+id/skeletonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:shimmerAngle="15"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/cartRealPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView"
+        app:maskCornerRadius="10dp">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myCartRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+        android:layout_height="match_parent" />
+    </com.faltenreich.skeletonlayout.SkeletonLayout>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/myCartAnimation"
         android:layout_width="350dp"
         android:layout_height="350dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -61,6 +73,7 @@
         android:layout_marginTop="-20dp"
         android:fontFamily="@font/satoshibold"
         android:text="Your Cart is Empty!"
+        android:visibility="gone"
         android:textColor="@color/darker"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/myCartAnimation"
@@ -80,12 +93,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/myCartPriceStrikeText"
+        android:id="@+id/cartRealPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/satoshibold"
-        android:text="₹0"
+        android:text="₹00"
         android:layout_marginLeft="5dp"
         android:textSize="20sp"
         android:textColor="@color/light"
@@ -93,22 +106,24 @@
         app:layout_constraintStart_toEndOf="@+id/materialTextView23" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cartDiscountedPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/satoshibold"
-        android:text="₹0"
+        android:text="₹00"
         android:textSize="20sp"
-        android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toTopOf="@+id/moveAllToCart"
-        app:layout_constraintStart_toEndOf="@+id/myCartPriceStrikeText" />
+        app:layout_constraintStart_toEndOf="@+id/cartRealPrice" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cartDiscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
         android:fontFamily="@font/satoshibold"
-        android:text="22.22% ↓"
+        android:text="00.00% ↓"
         android:layout_marginRight="20dp"
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/moveAllToCart"

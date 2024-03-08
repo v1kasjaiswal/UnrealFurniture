@@ -151,8 +151,7 @@ class ProductActivity : AppCompatActivity() {
 //                    productDescription.text = result.getString("prodDescription").toString()
                     productRealPrice.text = "₹${result.getLong("productPrice").toString()}"
                     prodcutDiscount.text = "${result.getLong("productDiscount").toString()}% ↓"
-                    val discountedPrice = result.getLong("productPrice").toString().toInt() - (result.getLong("productPrice").toString().toInt() * result.getLong("productDiscount").toString().toFloat() / 100)
-                    productDiscountedPrice.text = "₹$discountedPrice"
+                    productDiscountedPrice.text = "₹${result.getLong("productDiscountedPrice").toString()}"
 
                     lifecycleScope.launchWhenCreated {
                         Picasso

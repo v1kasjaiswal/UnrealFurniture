@@ -111,7 +111,7 @@
                     android:layout_margin="7dp"
                     android:text="22.22% ↓"
                     android:textColor="@color/dark"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     app:fontFamily="@font/satoshibold" />
 
             </com.google.android.material.card.MaterialCardView>

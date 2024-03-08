@@ -44,7 +44,7 @@
                     android:fontFamily="@font/satoshibold"
                     android:text="22.22% ↓"
                     android:textColor="@color/darker"
-                    android:textSize="10dp"
+                    android:textSize="11dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

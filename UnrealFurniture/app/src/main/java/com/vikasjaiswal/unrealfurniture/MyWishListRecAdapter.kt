@@ -31,18 +31,19 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
     var names = listOf<String>()
     var prices = listOf<String>()
     var discounts = listOf<String>()
+    var discountedPrice = listOf<String>()
     var ratings = listOf<String>()
     var ratingCounts = listOf<String>()
 
-    init {
-        updateData()
-    }
+        init {
+            updateData()
+        }
 
-    fun setData(data: List<String>) {
-        prodIds = data
-        notifyDataSetChanged()
-        onDataChanged.invoke()
-    }
+        fun setData(data: List<String>) {
+            prodIds = data
+            notifyDataSetChanged()
+            onDataChanged.invoke()
+        }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var wishMainImage: ImageView
@@ -55,7 +56,7 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
 
         lateinit var removeWish: ImageView
 
-        init{
+        init {
             wishMainImage = itemView.findViewById(R.id.wishMainImage)
             wishName = itemView.findViewById(R.id.wishName)
             wishPrice = itemView.findViewById(R.id.wishPrice)
@@ -69,7 +70,8 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.mywishlist_recresource, parent, false)
+        val v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.mywishlist_recresource, parent, false)
 
         return ViewHolder(v)
     }
@@ -80,9 +82,9 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.wishName.text = names[position]
-        holder.wishPrice.text = "₹"+prices[position]
+        holder.wishPrice.text = "₹" + prices[position]
         holder.wishDiscount.text = discounts[position] + "% off"
-        holder.wishDiscountedPrice.text = "₹"+(prices[position].toInt() - (prices[position].toInt() * discounts[position].toInt() / 100)).toString()
+        holder.wishDiscountedPrice.text = "₹" + discountedPrice[position]
 //        holder.wishRating.rating = ratings[position].toFloat()
 //        holder.wishRatingCount.text = ratingCounts[position]
 
@@ -93,7 +95,7 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
         }
     }
 
-    private fun removeWish(position: Int){
+    private fun removeWish(position: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val user = auth.currentUser
             if (user != null) {
@@ -109,6 +111,7 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                                     names = names.minus(names[position])
                                     prices = prices.minus(prices[position])
                                     discounts = discounts.minus(discounts[position])
+                                    discountedPrice = discountedPrice.minus(discountedPrice[position])
                                     notifyDataSetChanged()
                                     onDataChanged.invoke()
                                 }
@@ -124,11 +127,11 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
         }
     }
 
-    private fun updateData(){
+    private fun updateData() {
         CoroutineScope(Dispatchers.IO).launch {
             val user = auth.currentUser
             if (user != null) {
-                val userRef = db.collection("users").document(user.uid)
+                val userRef = db.collection("users").document(uid)
                 userRef.get().addOnSuccessListener { document ->
                     if (document.exists()) {
                         val wishList = document.get("wishList") as? List<String> ?: emptyList()
@@ -138,10 +141,18 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                                 val prodRef = db.collection("products").document(i)
                                 prodRef.get().addOnSuccessListener { document ->
                                     if (document.exists()) {
-                                        mainImages = mainImages.plus(document.get("prodMainImage").toString())
+                                        mainImages = mainImages.plus(
+                                            document.get("prodMainImage").toString()
+                                        )
                                         names = names.plus(document.get("productName").toString())
-                                        prices = prices.plus(document.get("productPrice").toString())
-                                        discounts = discounts.plus(document.get("productDiscount").toString())
+                                        prices =
+                                            prices.plus(document.get("productPrice").toString())
+                                        discounts = discounts.plus(
+                                            document.get("productDiscount").toString()
+                                        )
+                                        discountedPrice = discountedPrice.plus(
+                                            document.get("productDiscountedPrice").toString()
+                                        )
 //                                        ratings = ratings.plus(document.get("rating").toString())
 //                                        ratingCounts = ratingCounts.plus(document.get("ratingCount").toString())
                                     }
@@ -156,7 +167,7 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
         }
     }
 
-    public fun emptyWishList(){
+    public fun emptyWishList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val userRef = db.collection("users").document(uid)
@@ -168,6 +179,7 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                         names = emptyList()
                         prices = emptyList()
                         discounts = emptyList()
+                        discountedPrice = emptyList()
                         notifyDataSetChanged()
                         onDataChanged.invoke()
                     }
@@ -180,7 +192,7 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
         }
     }
 
-    public fun moveAllToCart(){
+    public fun moveAllToCart() {
         CoroutineScope(Dispatchers.IO).launch {
             val user = auth.currentUser
             if (user != null) {
@@ -188,23 +200,35 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                 userRef.get().addOnSuccessListener { document ->
                     if (document.exists()) {
                         val wishList = document.get("wishList") as? List<String> ?: emptyList()
+
                         if (wishList.isNotEmpty()) {
-                            for (item in wishList){
-                                var cartMap = hashMapOf(
-                                    "productId" to item,
-                                    "quantity" to 1
-                                )
+                            val cartList = document.get("cartList") as? List<String> ?: emptyList()
 
-                                var cartId = UUID.randomUUID().toString()
+                            // Filter out duplicates before adding to the cart
+                            val uniqueWishList = wishList.filter { !cartList.contains(it) }
 
-                                userRef.collection("cart").document(cartId).set(cartMap)
+                            if (uniqueWishList.isNotEmpty()) {
+                                val newCartList = cartList.plus(uniqueWishList)
+                                userRef.update("cartList", newCartList)
                                     .addOnSuccessListener {
-                                        emptyWishList()
-                                        notifyDataSetChanged()
-                                        onDataChanged.invoke()
+                                        userRef.update("wishList", emptyList<String>())
+                                            .addOnSuccessListener {
+                                                // Clear the local wish list and notify the adapter
+                                                prodIds = emptyList()
+                                                mainImages = emptyList()
+                                                names = emptyList()
+                                                prices = emptyList()
+                                                discounts = emptyList()
+                                                discountedPrice = emptyList()
+                                                notifyDataSetChanged()
+                                                onDataChanged.invoke()
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Log.d("WishListActivity", "Error deleting wishes: ${e.message}")
+                                            }
                                     }
-                                    .addOnFailureListener {
-                                        Log.d("WishListActivity", "Error: ${it.message}")
+                                    .addOnFailureListener { e ->
+                                        Log.d("WishListActivity", "Error moving wishes to cart: ${e.message}")
                                     }
                             }
                         }

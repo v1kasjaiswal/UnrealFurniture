@@ -345,12 +345,15 @@ class AddProductFragment : Fragment() {
                 if (prodMainImageDownloadUrl.isNotEmpty() && prodLookImageDownloadUrl.isNotEmpty() &&
                     prodDimenImageDownloadUrl.isNotEmpty() && prod3DModelDownloadUrl.isNotEmpty()) {
 
+                    var discountedPrice = productPrice.text.toString().toInt() - (productPrice.text.toString().toInt() * productDiscount.text.toString().toInt() / 100)
+
                     // Create the product data
                     val product = hashMapOf(
                         "productName" to productName.text.toString(),
                         "productDescription" to productDescription.text.toString(),
                         "productPrice" to productPrice.text.toString().toInt(),
                         "productDiscount" to productDiscount.text.toString().toInt(),
+                        "productDiscountedPrice" to discountedPrice,
                         "productStock" to productStock.text.toString().toInt(),
                         "prodMainImage" to prodMainImageDownloadUrl,
                         "prodLookImage" to prodLookImageDownloadUrl,
