@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,6 +32,8 @@ class MyCartFragment : Fragment() {
     private lateinit var myCartDiscountedPrice : TextView
     private lateinit var myCartDiscount : TextView
 
+    lateinit var checkOutCart : Button
+
     private lateinit var skeleton : SkeletonLayout
 
     lateinit var emptyCart : ImageView
@@ -46,6 +49,8 @@ class MyCartFragment : Fragment() {
         skeleton = view.findViewById(R.id.skeletonLayout)
 
         emptyCart = view.findViewById(R.id.emptyCart)
+
+        checkOutCart = view.findViewById(R.id.checkOutCart)
 
         myCartLayoutManager = GridLayoutManager(context, 1)
 
@@ -95,6 +100,10 @@ class MyCartFragment : Fragment() {
             }
         }
 
+        checkOutCart.setOnClickListener {
+            checkOutProducts()
+        }
+
         updateEmptyViewVisibility()
 
         return view
@@ -118,4 +127,27 @@ class MyCartFragment : Fragment() {
         }
     }
 
+    private fun checkOutProducts(){
+        if (myCartAdapter!!.itemCount != 0) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Check Out")
+                .setMessage("Are you sure you want to check out?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    myCartAdapter!!.checkOutProducts()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+        else{
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Check Out")
+                .setMessage("Your cart is empty!")
+                .setPositiveButton("Ok") { dialog, which ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+    }
 }

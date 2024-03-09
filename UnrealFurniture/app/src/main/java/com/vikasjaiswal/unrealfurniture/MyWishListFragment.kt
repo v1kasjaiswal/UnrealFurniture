@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.DeleteGesture
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -47,7 +46,7 @@ class MyWishListFragment : Fragment() {
 
         deleteWishList = view.findViewById(R.id.deleteWishList)
 
-        moveAllToCart = view.findViewById(R.id.moveAllToCart)
+        moveAllToCart = view.findViewById(R.id.checkOutCart)
 
         myWishListLayoutManager = GridLayoutManager(context, 1)
 

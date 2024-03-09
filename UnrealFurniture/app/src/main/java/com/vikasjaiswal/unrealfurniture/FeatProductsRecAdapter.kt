@@ -61,15 +61,15 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
 
         lateinit var skeleton: Skeleton
         init {
-            selectedProductCard = itemView.findViewById(R.id.selectedProductCard)
+            selectedProductCard = itemView.findViewById(R.id.checkoutProdCard)
 
-            prodMainImage = itemView.findViewById(R.id.featProdMainImage)
-            prodName = itemView.findViewById(R.id.featProdName)
-            realPrice = itemView.findViewById(R.id.featProdRealPrice)
-            discount = itemView.findViewById(R.id.featProdDiscount)
-            discountedPrice = itemView.findViewById(R.id.featProdDiscountedPrice)
-            rating = itemView.findViewById(R.id.featProdRatingBar)
-            ratingCount = itemView.findViewById(R.id.featProdRatingCounts)
+            prodMainImage = itemView.findViewById(R.id.checkoutProdMainImage)
+            prodName = itemView.findViewById(R.id.checkoutProdName)
+            realPrice = itemView.findViewById(R.id.checkoutProdRealPrice)
+            discount = itemView.findViewById(R.id.checkoutProdQuantity)
+            discountedPrice = itemView.findViewById(R.id.checkoutProdDiscountedPrice)
+            rating = itemView.findViewById(R.id.checkoutProdRatingBar)
+            ratingCount = itemView.findViewById(R.id.checkoutProdRatingCounts)
 
             skeleton = itemView.findViewById(R.id.skeletonLayout)
 

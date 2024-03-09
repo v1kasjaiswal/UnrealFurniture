@@ -68,14 +68,14 @@ class SplashActivity : AppCompatActivity() {
         }
         else if (user !=null && user.isEmailVerified || account != null){
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                val intent = Intent(this@SplashActivity, CheckoutActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 1500)
         }
         else{
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this@SplashActivity, SignInActivity::class.java)
+                val intent = Intent(this@SplashActivity, CheckoutActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 1500)
