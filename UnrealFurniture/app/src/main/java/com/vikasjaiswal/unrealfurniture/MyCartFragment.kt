@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,6 +17,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyCartFragment : Fragment() {
 
@@ -35,6 +41,9 @@ class MyCartFragment : Fragment() {
     lateinit var checkOutCart : Button
 
     private lateinit var skeleton : SkeletonLayout
+
+    var db = FirebaseFirestore.getInstance()
+    var auth = FirebaseAuth.getInstance()
 
     lateinit var emptyCart : ImageView
     override fun onCreateView(
@@ -121,8 +130,8 @@ class MyCartFragment : Fragment() {
             myCartAnimation.visibility = View.GONE
             emptyCartTextView.visibility = View.GONE
 
-            myCartRealPrice.text = myCartAdapter!!.overAllRealPrice.toString()
-            myCartDiscountedPrice.text = myCartAdapter!!.overAllDiscountedPrice.toString()
+            myCartRealPrice.text = "₹"+myCartAdapter!!.overAllRealPrice.toString()
+            myCartDiscountedPrice.text = "₹"+myCartAdapter!!.overAllDiscountedPrice.toString()
             myCartDiscount.text = myCartAdapter!!.overAllDiscount.toString()+"% off"
         }
     }
@@ -133,7 +142,7 @@ class MyCartFragment : Fragment() {
                 .setTitle("Check Out")
                 .setMessage("Are you sure you want to check out?")
                 .setPositiveButton("Yes") { dialog, which ->
-                    myCartAdapter!!.checkOutProducts()
+                    proceedToCheckOut()
                 }
                 .setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
@@ -148,6 +157,59 @@ class MyCartFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .show()
+        }
+    }
+
+    private fun proceedToCheckOut(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = db.collection("users")
+                .document(auth.currentUser?.uid.toString())
+                .collection("addresses")
+                .get()
+                .addOnSuccessListener { documents ->
+                    if (documents.isEmpty){
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Check Out")
+                            .setMessage("You need to add an address to check out!")
+                            .setPositiveButton("Ok") { dialog, which ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                    }
+                    else{
+                        if (myCartAdapter!!.overAllQuantity > 0 && myCartAdapter!!.overAllQuantity <= 10){
+
+                            myCartAdapter!!.clearCart()
+
+                            val intent = Intent(context, CheckoutActivity::class.java)
+                            intent.putExtra("prodIds", ArrayList(myCartAdapter!!.prodIds))
+                            intent.putExtra("prodImages", ArrayList(myCartAdapter!!.mainImages))
+                            intent.putExtra("prodNames", ArrayList(myCartAdapter!!.names))
+                            intent.putExtra("prodPrices", ArrayList(myCartAdapter!!.prices))
+                            intent.putExtra("prodDiscounts", ArrayList(myCartAdapter!!.discounts))
+                            intent.putExtra("prodDiscountedPrices", ArrayList(myCartAdapter!!.discountedPrice))
+                            intent.putExtra("prodQuantities", ArrayList(myCartAdapter!!.quantity))
+                            intent.putExtra("prodRatings", ArrayList(myCartAdapter!!.ratings))
+                            intent.putExtra("prodRatingCounts", ArrayList(myCartAdapter!!.ratingCounts))
+                            Log.d("OverAllRealPrice", myCartAdapter!!.overAllRealPrice.toString())
+                            Log.d("OverAllDiscountedPrice", myCartAdapter!!.overAllDiscountedPrice.toString())
+                            Log.d("OverAllDiscount", myCartAdapter!!.overAllDiscount.toString())
+                            intent.putExtra("overAllRealPrice", myCartAdapter!!.overAllRealPrice)
+                            intent.putExtra("overAllDiscountedPrice", myCartAdapter!!.overAllDiscountedPrice)
+                            intent.putExtra("overAllDiscount", myCartAdapter!!.overAllDiscount)
+                            startActivity(intent)
+                        }
+                        else{
+                            MaterialAlertDialogBuilder(requireContext())
+                                .setTitle("Check Out")
+                                .setMessage("You can only check out 1-10 products at a time!")
+                                .setPositiveButton("Ok") { dialog, which ->
+                                    dialog.dismiss()
+                                }
+                                .show()
+                        }
+                    }
+                }
         }
     }
 }

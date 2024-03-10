@@ -229,7 +229,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/productRealPrice" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView32"
+                android:id="@+id/overAllDiscount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -250,7 +250,7 @@
                 android:src="@drawable/blank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView32" />
+                app:layout_constraintTop_toBottomOf="@+id/overAllDiscount" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/productDimenImageEdit"
@@ -388,7 +388,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView36" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView38"
+                android:id="@+id/grandTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/satoshibold"
@@ -410,7 +410,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView38" />
+                app:layout_constraintTop_toBottomOf="@+id/grandTotal" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         </com.faltenreich.skeletonlayout.SkeletonLayout>

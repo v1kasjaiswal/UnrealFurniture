@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -134,6 +135,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         holder.removeCart.setOnClickListener {
             removeCart(position)
         }
+
+
     }
 
     private fun updateData(){
@@ -245,61 +248,16 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         }
     }
 
-    public fun checkOutProducts(){
-        CoroutineScope(Dispatchers.IO).launch {
-            val user = auth.currentUser
-            if (user != null) {
-                val userRef = db.collection("users").document(user.uid)
-                userRef.get().addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val cartList = document.get("cartList") as? List<String> ?: emptyList()
-                        if (cartList.isNotEmpty()) {
-                            val orderRef = db.collection("orders")
-                            val order = hashMapOf(
-                                "userId" to user.uid,
-                                "userName" to name,
-                                "orderPhone" to phone,
-                                "userEmail" to email,
-                                "orderAddress" to address,
-                                "orderList" to cartList,
-                                "orderListPrice" to prices,
-                                "orderListDiscountedPrice" to discountedPrice,
-                                "orderListDiscount" to discounts,
-                                "orderQuantity" to quantity,
-                                "orderRealPrice" to overAllRealPrice.toString(),
-                                "orderDiscountedPrice" to overAllDiscountedPrice.toString(),
-                                "orderDiscount" to overAllDiscount.toString(),
-                                "orderDate" to DateFormat.getDateTimeInstance().format(System.currentTimeMillis()),
-                                "orderStatus" to "Order Placed",
-                                "expectedDelivery" to "3-5 days"
-                            )
-                            orderRef.add(order)
-                                .addOnSuccessListener {
-                                    userRef.update("cartList", emptyList<String>())
-                                        .addOnSuccessListener {
-                                            // Clear the local wish list and notify the adapter
-                                            prodIds = emptyList()
-                                            mainImages = emptyList()
-                                            names = emptyList()
-                                            prices = emptyList()
-                                            discounts = emptyList()
-                                            discountedPrice = emptyList()
-                                            quantity = mutableListOf<String>()
-                                            calculateCartPrice()
-                                            notifyDataSetChanged()
-                                            onDataChanged.invoke()
-                                        }
-                                        .addOnFailureListener { e ->
-                                            Log.d("CartListActivity", "Error deleting wishes: ${e.message}")
-                                        }
-                                }
-                                .addOnFailureListener {
-                                    Log.d("MyCartRecAdapter", "Error: Order not placed")
-                                }
-                        }
-                    }
-                }
-            }
-        }
+    public fun clearCart(){
+        prodIds = emptyList()
+        mainImages = emptyList()
+        names = emptyList()
+        prices = emptyList()
+        discounts = emptyList()
+        discountedPrice = emptyList()
+        quantity = mutableListOf<String>()
+        calculateCartPrice()
+        notifyDataSetChanged()
+        onDataChanged.invoke()
     }
 }

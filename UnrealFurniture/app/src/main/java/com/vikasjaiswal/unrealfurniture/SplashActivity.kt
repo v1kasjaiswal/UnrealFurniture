@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
@@ -68,18 +69,18 @@ class SplashActivity : AppCompatActivity() {
         }
         else if (user !=null && user.isEmailVerified || account != null){
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this@SplashActivity, CheckoutActivity::class.java)
-                startActivity(intent)
-                finish()
-            }, 1500)
-        }
-        else{
-            Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this@SplashActivity, CheckoutActivity::class.java)
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 1500)
 
+        }
+        else{
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this@SplashActivity, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 1500)
         }
     }
 }

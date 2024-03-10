@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".CheckoutActivity">
 
     <com.google.android.material.textview.MaterialTextView
@@ -74,16 +75,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:id="@+id/view7"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/dark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView27" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/checkoutAddressRecyclerView"
                     android:layout_width="match_parent"
@@ -91,38 +82,38 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view7" />
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView27" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/materialTextView28"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/satoshibold"
                     android:text="Product Details"
                     android:textColor="@color/dark"
                     android:textSize="20sp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/checkoutAddressRecyclerView" />
+                    app:layout_constraintTop_toBottomOf="@+id/view8" />
 
                 <View
                     android:id="@+id/view8"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
                     android:background="@color/dark"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView28" />
+                    app:layout_constraintTop_toBottomOf="@+id/checkoutAddressRecyclerView" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/checkoutProductRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="3dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view8" />
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView28" />
 
                 <View
                     android:id="@+id/view9"
@@ -159,11 +150,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView29" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/overAllRealPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/satoshibold"
                     android:text="₹45000"
-                    android:textColor="@color/dark"
+                    android:textColor="@color/light"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/materialTextView30" />
@@ -181,7 +173,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView30" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/materialTextView32"
+                    android:id="@+id/overAllDiscount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/satoshibold"
@@ -204,7 +196,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView31" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/materialTextView34"
+                    android:id="@+id/overAllDiscountedPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/satoshibold"
@@ -260,7 +252,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/view10" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/materialTextView38"
+                    android:id="@+id/grandTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/satoshibold"
@@ -305,6 +297,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView39">
 
                     <AutoCompleteTextView
+                        android:id="@+id/paymentMethod"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:drawableStart="@drawable/price"
