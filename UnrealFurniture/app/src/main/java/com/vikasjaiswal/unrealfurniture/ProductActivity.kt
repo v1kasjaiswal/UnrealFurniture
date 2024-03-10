@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -127,9 +128,13 @@ class ProductActivity : AppCompatActivity() {
             }
         })
 
-        addToCard.setOnClickListener { Toast.makeText(this, "Added to Cart", Toast.LENGTH_SHORT).show() }
+        addToCard.setOnClickListener {
+            addToCart()
+        }
 
-        buyNow.setOnClickListener { Toast.makeText(this, "Buying Now", Toast.LENGTH_SHORT).show() }
+        buyNow.setOnClickListener {
+            buyNow()
+        }
     }
 
     private fun loadProductData(productId: String) {
@@ -274,6 +279,41 @@ class ProductActivity : AppCompatActivity() {
                         val wishList = document.get("wishList") as? List<String> ?: emptyList()
                         if (wishList.contains(intent.extras?.getString("productId"))) {
                             addToWishList.isChecked = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun buyNow(){
+        var prodid = intent.extras?.getString("productId")
+
+        val intent = Intent(this@ProductActivity, CheckoutActivity::class.java)
+        intent.putExtra("type", "buyNow")
+        intent.putExtra("productId", prodid)
+        startActivity(intent)
+    }
+
+    private fun addToCart(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = auth.currentUser
+            if (user != null) {
+                val userRef = db.collection("users").document(user.uid)
+                userRef.get().addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val cart = document.get("cartList") as? List<String> ?: emptyList()
+                        if (cart.contains(intent.extras?.getString("productId"))) {
+                            Toast.makeText(this@ProductActivity, "Already in Cart", Toast.LENGTH_SHORT).show()
+                        } else {
+                            userRef.update("cartList", cart.plus(intent.extras?.getString("productId")))
+                                .addOnSuccessListener {
+                                    Toast.makeText(this@ProductActivity, "Added to Cart", Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener {
+                                    Log.d("ProductActivity", "Error: ${it.message}")
+                                    Toast.makeText(this@ProductActivity, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+                                }
                         }
                     }
                 }

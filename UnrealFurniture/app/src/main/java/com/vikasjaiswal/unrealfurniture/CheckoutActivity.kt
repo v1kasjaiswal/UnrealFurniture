@@ -92,31 +92,87 @@ class CheckoutActivity : AppCompatActivity() {
             finish()
         }
 
-        val prodIds = intent.getStringArrayListExtra("prodIds") ?: ArrayList()
-        val prodImages = intent.getStringArrayListExtra("prodImages") ?: ArrayList()
-        val prodNames = intent.getStringArrayListExtra("prodNames") ?: ArrayList()
-        val prodPrices = intent.getStringArrayListExtra("prodPrices") ?: ArrayList()
-        val prodDiscounts = intent.getStringArrayListExtra("prodDiscounts") ?: ArrayList()
-        val prodDiscountedPrices = intent.getStringArrayListExtra("prodDiscountedPrices") ?: ArrayList()
-        val prodQuantities = intent.getStringArrayListExtra("prodQuantities") ?: ArrayList()
-        val prodRatings = intent.getStringArrayListExtra("prodRatings") ?: ArrayList()
-        val prodRatingCounts = intent.getStringArrayListExtra("prodRatingCounts") ?: ArrayList()
-        val overAllRealPrice = intent.getIntExtra("overAllRealPrice", 0)
-        val overAllDiscountedPrice = intent.getIntExtra("overAllDiscountedPrice", 0)
-        val overAllDiscount = intent.getFloatExtra("overAllDiscount", 0f)
+        var type = intent.getStringExtra("type")
+        var prodId = intent.extras?.getString("productId")
 
-        checkoutProductAdapter?.setData(prodIds, prodImages, prodNames, prodPrices, prodDiscounts, prodDiscountedPrices, prodQuantities, prodRatings, prodRatingCounts)
+        Log.d("TAXG", "$prodId  onCreate: $type")
 
-        this.overAllRealPrice = findViewById(R.id.overAllRealPrice)
-        this.overAllDiscountedPrice = findViewById(R.id.overAllDiscountedPrice)
-        this.overAllDiscount = findViewById(R.id.overAllDiscount)
-        this.grandTotal = findViewById(R.id.grandTotal)
+        Log.d("TAXG", "onCreate: $type")
+        if (type == "buyNow" && prodId!= null){
+            CoroutineScope(Dispatchers.IO).launch {
+                db.collection("products").document(prodId)
+                    .get()
+                    .addOnSuccessListener { document ->
+                        if (document != null) {
+                            var prodIds = ArrayList<String>()
+                            var prodImages = ArrayList<String>()
+                            var prodNames = ArrayList<String>()
+                            var prodPrices = ArrayList<String>()
+                            var prodDiscounts = ArrayList<String>()
+                            var prodDiscountedPrices = ArrayList<String>()
+                            var prodQuantities = ArrayList<String>()
+                            var prodRatings = ArrayList<String>()
+                            var prodRatingCounts = ArrayList<String>()
 
-        this.overAllRealPrice.text = "₹$overAllRealPrice"
-        this.overAllDiscountedPrice.text = "₹$overAllDiscountedPrice"
-        this.overAllDiscount.text = "$overAllDiscount% off"
-        var total = overAllDiscountedPrice + 500
-        this.grandTotal.text = "₹$total"
+                            prodIds.add(document.id)
+                            prodImages.add(document.data?.get("prodMainImage").toString())
+                            prodNames.add(document.data?.get("productName").toString())
+                            prodPrices.add(document.data?.get("productPrice").toString())
+                            prodDiscounts.add(document.data?.get("productDiscount").toString())
+                            prodDiscountedPrices.add(document.data?.get("productDiscountedPrice").toString())
+                            prodQuantities.add("1")
+                            prodRatings.add(document.data?.get("productRating").toString())
+                            prodRatingCounts.add(document.data?.get("productRatingCount").toString())
+
+                            checkoutProductAdapter?.setData(prodIds, prodImages, prodNames, prodPrices, prodDiscounts, prodDiscountedPrices, prodQuantities, prodRatings, prodRatingCounts)
+
+                            overAllRealPrice = findViewById(R.id.overAllRealPrice)
+                            overAllDiscountedPrice = findViewById(R.id.overAllDiscountedPrice)
+                            overAllDiscount = findViewById(R.id.overAllDiscount)
+                            grandTotal = findViewById(R.id.grandTotal)
+
+                            overAllRealPrice.text = "₹${prodPrices[0]}"
+                            overAllDiscountedPrice.text = "₹${prodDiscountedPrices[0]}"
+                            overAllDiscount.text = "${prodDiscounts[0]}% ↓"
+                            var total = prodDiscountedPrices[0].toInt() + 500
+                            grandTotal.text = "₹$total"
+                        } else {
+                            Log.d("TAG", "No such document")
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.d("TAG", "get failed with ", exception)
+                    }
+            }
+        }
+        else if (type == "cart"){
+
+            val prodIds = intent.getStringArrayListExtra("prodIds") ?: ArrayList()
+            val prodImages = intent.getStringArrayListExtra("prodImages") ?: ArrayList()
+            val prodNames = intent.getStringArrayListExtra("prodNames") ?: ArrayList()
+            val prodPrices = intent.getStringArrayListExtra("prodPrices") ?: ArrayList()
+            val prodDiscounts = intent.getStringArrayListExtra("prodDiscounts") ?: ArrayList()
+            val prodDiscountedPrices = intent.getStringArrayListExtra("prodDiscountedPrices") ?: ArrayList()
+            val prodQuantities = intent.getStringArrayListExtra("prodQuantities") ?: ArrayList()
+            val prodRatings = intent.getStringArrayListExtra("prodRatings") ?: ArrayList()
+            val prodRatingCounts = intent.getStringArrayListExtra("prodRatingCounts") ?: ArrayList()
+            val overAllRealPrice = intent.getIntExtra("overAllRealPrice", 0)
+            val overAllDiscountedPrice = intent.getIntExtra("overAllDiscountedPrice", 0)
+            val overAllDiscount = intent.getFloatExtra("overAllDiscount", 0f)
+
+            checkoutProductAdapter?.setData(prodIds, prodImages, prodNames, prodPrices, prodDiscounts, prodDiscountedPrices, prodQuantities, prodRatings, prodRatingCounts)
+
+            this.overAllRealPrice = findViewById(R.id.overAllRealPrice)
+            this.overAllDiscountedPrice = findViewById(R.id.overAllDiscountedPrice)
+            this.overAllDiscount = findViewById(R.id.overAllDiscount)
+            this.grandTotal = findViewById(R.id.grandTotal)
+
+            this.overAllRealPrice.text = "₹$overAllRealPrice"
+            this.overAllDiscountedPrice.text = "₹$overAllDiscountedPrice"
+            this.overAllDiscount.text = "$overAllDiscount% ↓"
+            var total = overAllDiscountedPrice + 500
+            this.grandTotal.text = "₹$total"
+        }
 
         confirmOrder.setOnClickListener {
             MaterialAlertDialogBuilder(this)

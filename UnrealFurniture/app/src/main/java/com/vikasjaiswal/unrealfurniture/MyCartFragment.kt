@@ -182,6 +182,7 @@ class MyCartFragment : Fragment() {
                             myCartAdapter!!.clearCart()
 
                             val intent = Intent(context, CheckoutActivity::class.java)
+                            intent.putExtra("type", "cart")
                             intent.putExtra("prodIds", ArrayList(myCartAdapter!!.prodIds))
                             intent.putExtra("prodImages", ArrayList(myCartAdapter!!.mainImages))
                             intent.putExtra("prodNames", ArrayList(myCartAdapter!!.names))
