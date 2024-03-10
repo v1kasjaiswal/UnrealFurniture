@@ -46,7 +46,15 @@ class MyOrdersActivity : AppCompatActivity() {
 
         myOrderRecyclerView.layoutManager = myOrderLayoutManager
 
-        myOrderAdapter = MyOrdersRecAdapter()
+        myOrderAdapter = MyOrdersRecAdapter{
+            if (myOrderAdapter!!.itemCount == 0) {
+                myOrderAnimation.visibility = View.VISIBLE
+                emptyOrderTextView.visibility = View.VISIBLE
+            } else {
+                myOrderAnimation.visibility = View.GONE
+                emptyOrderTextView.visibility = View.GONE
+            }
+        }
 
 
         myOrderRecyclerView.adapter = myOrderAdapter

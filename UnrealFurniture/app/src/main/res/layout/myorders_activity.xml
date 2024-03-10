@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MyOrdersActivity">
 
     <com.google.android.material.textview.MaterialTextView
@@ -38,17 +39,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.faltenreich.skeletonlayout.SkeletonLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:maskCornerRadius="10dp"
-        app:shimmerAngle="15"
-        android:id="@+id/skeletonLayout">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/myOrderAnimation"
         android:layout_width="300dp"
@@ -75,22 +65,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myOrderAnimation" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myOrderRecyclerView"
+    <com.faltenreich.skeletonlayout.SkeletonLayout
+        android:id="@+id/skeletonLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="70dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView15" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:maskCornerRadius="10dp"
+        app:shimmerAngle="15">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myOrderRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_bias="0.0" />
     </com.faltenreich.skeletonlayout.SkeletonLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,7 @@ import co.ankurg.expressview.ExpressView
 import com.bumptech.glide.Glide
 import co.ankurg.expressview.OnCheckListener
 import com.faltenreich.skeletonlayout.SkeletonLayout
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -287,12 +288,24 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun buyNow(){
-        var prodid = intent.extras?.getString("productId")
+        db.collection("users").document(auth.currentUser?.uid.toString()).collection("addresses").get().addOnSuccessListener { documents ->
+            if (documents.isEmpty) {
+                MaterialAlertDialogBuilder(this@ProductActivity)
+                    .setTitle("No Address Found")
+                    .setMessage("Please add an address to continue")
+                    .setNeutralButton("Ok") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            } else {
+                val prodid = intent.extras?.getString("productId")
 
-        val intent = Intent(this@ProductActivity, CheckoutActivity::class.java)
-        intent.putExtra("type", "buyNow")
-        intent.putExtra("productId", prodid)
-        startActivity(intent)
+                val intent = Intent(this@ProductActivity, CheckoutActivity::class.java)
+                intent.putExtra("type", "buyNow")
+                intent.putExtra("productId", prodid)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun addToCart(){

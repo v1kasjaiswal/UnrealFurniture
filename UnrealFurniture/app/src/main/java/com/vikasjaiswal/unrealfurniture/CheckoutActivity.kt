@@ -23,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class CheckoutActivity : AppCompatActivity() {
 
@@ -203,6 +204,7 @@ class CheckoutActivity : AppCompatActivity() {
                 var paymentMethod = paymentMethod.text.toString()
                 var prodIds = checkoutProductAdapter!!.prodIds
                 var prodNames = checkoutProductAdapter!!.prodNames
+                var prodImages = checkoutProductAdapter!!.prodImages
                 var prodPrices = checkoutProductAdapter!!.prodPrices
                 var prodDiscounts = checkoutProductAdapter!!.prodDiscounts
                 var prodDiscountedPrices = checkoutProductAdapter!!.prodDiscountedPrices
@@ -212,8 +214,8 @@ class CheckoutActivity : AppCompatActivity() {
                 var overAllDiscount = overAllDiscount.text.toString().replace("% ↓", "")
                 var grandTotal = grandTotal.text.toString().replace("₹","")
                 var orderStatus = "Order Placed"
-                var orderDate = DateFormat.getDateTimeInstance().format(System.currentTimeMillis())
-                var expectedDeliveryDate = DateFormat.getDateTimeInstance().format(System.currentTimeMillis() + 604800000)
+                var orderDate = SimpleDateFormat("dd/MM/yyyy HH:mm").format(System.currentTimeMillis())
+                var expectedDeliveryDate = SimpleDateFormat("dd/MM/yyyy HH:mm").format(System.currentTimeMillis() + 604800000)
 
                 if (paymentMethod == "" || paymentMethod.isBlank()){
                     withContext(Dispatchers.Main){
@@ -238,6 +240,7 @@ class CheckoutActivity : AppCompatActivity() {
                     "paymentMethod" to paymentMethod,
                     "prodIds" to prodIds,
                     "prodNames" to prodNames,
+                    "prodImages" to prodImages,
                     "prodPrices" to prodPrices,
                     "prodDiscounts" to prodDiscounts,
                     "prodDiscountedPrices" to prodDiscountedPrices,

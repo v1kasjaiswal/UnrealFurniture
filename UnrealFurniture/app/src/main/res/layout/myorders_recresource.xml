@@ -16,90 +16,91 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/blank"/>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/boxes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/orderDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/orderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:text="22.22% ↓"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/satoshibold"
-                android:textColor="@color/darker"
-                android:textSize="10dp" />
+                android:text="Order ID: #123456789987654321"
+                android:textColor="@color/light"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/orderDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshibold"
+                android:text="Order Date: 12/12/2021"
+                android:textColor="@color/dark"
+                android:textSize="13sp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="@+id/orderId"
+                app:layout_constraintTop_toBottomOf="@+id/orderId" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order ID: #123456789987654321"
-            android:textSize="13sp"
-            android:textColor="@color/light"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="110dp"
-            android:fontFamily="@font/satoshibold"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/orderExpectedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshibold"
+                android:text="Expected Delivery: 12/12/2021"
+                android:textColor="@color/dark"
+                android:textSize="13sp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="@+id/orderDate"
+                app:layout_constraintTop_toBottomOf="@+id/orderDate" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bed and Sofa Set, Decor Light, Head Lamp, "
-            android:layout_marginRight="20dp"
-            android:singleLine="true"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:ellipsize="marquee"
-            android:textSize="15sp"
-            android:textColor="@color/dark"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="110dp"
-            android:fontFamily="@font/satoshibold"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/orderStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="Status: Delivered"
+                android:textColor="@color/dark"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/orderExpectedDate"
+                app:layout_constraintTop_toBottomOf="@+id/orderExpectedDate" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/myOrderStrikeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="₹45600"
-            android:layout_marginRight="20dp"
-            android:singleLine="true"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:ellipsize="marquee"
-            android:textSize="14sp"
-            android:textColor="@color/light"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="110dp"
-            android:fontFamily="@font/satoshibold"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/orderTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="Total: ₹17,958"
+                android:textColor="@color/dark"
+                android:textSize="13sp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/orderStatus"
+                app:layout_constraintTop_toBottomOf="@+id/orderStatus" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="₹40000"
-            android:layout_marginRight="20dp"
-            android:textSize="14sp"
-            android:textColor="@color/dark"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="180dp"
-            android:fontFamily="@font/satoshibold"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order Status: In-Progress"
-            android:layout_marginRight="20dp"
-            android:textSize="15sp"
-            android:textColor="@color/dark"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="110dp"
-            android:fontFamily="@font/satoshibold"/>
-
-        </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/more"
+                android:layout_marginRight="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
