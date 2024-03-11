@@ -27,11 +27,11 @@ import java.text.SimpleDateFormat
 
 class CheckoutActivity : AppCompatActivity() {
 
-    private lateinit var checkoutAddressLayoutManager: LinearLayoutManager
-    private lateinit var checkoutProductLayoutManager: GridLayoutManager
+        private lateinit var checkoutAddressLayoutManager: LinearLayoutManager
+        private lateinit var checkoutProductLayoutManager: GridLayoutManager
 
-    private var checkoutAddressAdapter: CheckoutAddressRecAdapter? = null
-    private var checkoutProductAdapter: CheckoutProductRecAdapter? = null
+        private var checkoutAddressAdapter: CheckoutAddressRecAdapter? = null
+        private var checkoutProductAdapter: CheckoutProductRecAdapter? = null
 
     private lateinit var checkoutAddressRecyclerView: RecyclerView
     private lateinit var checkoutProductRecyclerView: RecyclerView
@@ -146,7 +146,10 @@ class CheckoutActivity : AppCompatActivity() {
                     }
             }
         }
-        else if (type == "cart"){
+
+        Log.d("TAXGGG", "onCreate: $type")
+
+        if (type == "cart"){
 
             val prodIds = intent.getStringArrayListExtra("prodIds") ?: ArrayList()
             val prodImages = intent.getStringArrayListExtra("prodImages") ?: ArrayList()
@@ -160,6 +163,9 @@ class CheckoutActivity : AppCompatActivity() {
             val overAllRealPrice = intent.getIntExtra("overAllRealPrice", 0)
             val overAllDiscountedPrice = intent.getIntExtra("overAllDiscountedPrice", 0)
             val overAllDiscount = intent.getFloatExtra("overAllDiscount", 0f)
+
+            Log.d("TAXGGG", "onCreate: $prodIds")
+            Log.d("TAXGGG", "onCreate: $prodImages")
 
             checkoutProductAdapter?.setData(prodIds, prodImages, prodNames, prodPrices, prodDiscounts, prodDiscountedPrices, prodQuantities, prodRatings, prodRatingCounts)
 

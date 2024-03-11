@@ -179,8 +179,6 @@ class MyCartFragment : Fragment() {
                     else{
                         if (myCartAdapter!!.overAllQuantity > 0 && myCartAdapter!!.overAllQuantity <= 10){
 
-                            myCartAdapter!!.clearCart()
-
                             val intent = Intent(context, CheckoutActivity::class.java)
                             intent.putExtra("type", "cart")
                             intent.putExtra("prodIds", ArrayList(myCartAdapter!!.prodIds))
@@ -199,6 +197,8 @@ class MyCartFragment : Fragment() {
                             intent.putExtra("overAllDiscountedPrice", myCartAdapter!!.overAllDiscountedPrice)
                             intent.putExtra("overAllDiscount", myCartAdapter!!.overAllDiscount)
                             startActivity(intent)
+
+                            myCartAdapter!!.clearCart()
                         }
                         else{
                             MaterialAlertDialogBuilder(requireContext())
