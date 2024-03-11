@@ -11,4 +11,17 @@
         <item>Cash on Delivery</item>
         <item>Online Payment</item>
     </string-array>
+
+    <string-array name="product_categories">
+        <item>Sofas</item>
+        <item>Beds</item>
+        <item>Tables</item>
+        <item>Chairs</item>
+        <item>Bookshelves</item>
+        <item>Wardrobes</item>
+        <item>Others</item>
+    </string-array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

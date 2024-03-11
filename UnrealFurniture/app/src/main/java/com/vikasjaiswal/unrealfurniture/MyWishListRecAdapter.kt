@@ -85,8 +85,8 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
         holder.wishPrice.text = "₹" + prices[position]
         holder.wishDiscount.text = discounts[position] + "% off"
         holder.wishDiscountedPrice.text = "₹" + discountedPrice[position]
-//        holder.wishRating.rating = ratings[position].toFloat()
-//        holder.wishRatingCount.text = ratingCounts[position]
+        holder.wishRating.rating = ratings[position].toFloat()
+        holder.wishRatingCount.text = ratingCounts[position]
 
         Picasso.get().load(mainImages[position]).into(holder.wishMainImage)
 
@@ -111,6 +111,8 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                                     names = names.minus(names[position])
                                     prices = prices.minus(prices[position])
                                     discounts = discounts.minus(discounts[position])
+                                    ratings = ratings.minus(ratings[position])
+                                    ratingCounts = ratingCounts.minus(ratingCounts[position])
                                     discountedPrice = discountedPrice.minus(discountedPrice[position])
                                     notifyDataSetChanged()
                                     onDataChanged.invoke()
@@ -153,8 +155,8 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                                         discountedPrice = discountedPrice.plus(
                                             document.get("productDiscountedPrice").toString()
                                         )
-//                                        ratings = ratings.plus(document.get("rating").toString())
-//                                        ratingCounts = ratingCounts.plus(document.get("ratingCount").toString())
+                                        ratings = ratings.plus(document.get("prodRating").toString())
+                                        ratingCounts = ratingCounts.plus(document.get("prodRatingCount").toString())
                                     }
                                     notifyDataSetChanged()
                                     onDataChanged.invoke()
@@ -179,6 +181,8 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                         names = emptyList()
                         prices = emptyList()
                         discounts = emptyList()
+                        ratings = emptyList()
+                        ratingCounts = emptyList()
                         discountedPrice = emptyList()
                         notifyDataSetChanged()
                         onDataChanged.invoke()
@@ -219,6 +223,8 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
                                                 names = emptyList()
                                                 prices = emptyList()
                                                 discounts = emptyList()
+                                                ratings = emptyList()
+                                                ratingCounts = emptyList()
                                                 discountedPrice = emptyList()
                                                 notifyDataSetChanged()
                                                 onDataChanged.invoke()

@@ -25,6 +25,7 @@
         tools:targetApi="31">
         <activity
             android:name=".OrderDetailsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".CheckoutActivity"

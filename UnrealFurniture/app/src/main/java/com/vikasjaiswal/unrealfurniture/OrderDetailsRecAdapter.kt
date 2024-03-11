@@ -94,8 +94,8 @@ class OrderDetailsRecAdapter(private val onDataChanged: () -> Unit) : RecyclerVi
         holder.checkoutProdDiscount.text = prodDiscounts[position]+"% off"
         holder.checkoutProdDiscountedPrice.text = "₹"+prodDiscountedPrices[position].toInt()*prodQuantities[position].toInt()
         holder.checkoutProdQuantity.text = "Quantity: "+prodQuantities[position]
-        holder.checkoutProdRating.rating = prodRatings[position].toFloat() ?: 0f
-        holder.checkoutProdRatingCount.text = "("+prodRatingCounts[position]+")" ?: "(0)"
+        holder.checkoutProdRating.rating = prodRatings[position].toFloat()
+        holder.checkoutProdRatingCount.text = "("+prodRatingCounts[position]+")"
 
         Picasso.get().load(prodImages[position]).into(holder.checkoutProdMainImage)
     }

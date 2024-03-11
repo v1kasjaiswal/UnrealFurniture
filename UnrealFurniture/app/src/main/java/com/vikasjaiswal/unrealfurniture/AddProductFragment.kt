@@ -15,6 +15,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -80,6 +82,7 @@ class AddProductFragment : Fragment() {
     lateinit var delete3DModelFile : ImageView
     lateinit var deleteDimenFile : ImageView
 
+    lateinit var productCategory : AutoCompleteTextView
     lateinit var productName : EditText
     lateinit var productDescription : EditText
     lateinit var productPrice : EditText
@@ -143,6 +146,7 @@ class AddProductFragment : Fragment() {
         delete3DModelFile = view.findViewById(R.id.delete3DModelFile)
         deleteDimenFile = view.findViewById(R.id.deleteDimenFile)
 
+        productCategory = view.findViewById(R.id.productCategory)
         productName = view.findViewById(R.id.productedit)
         productDescription = view.findViewById(R.id.productDescription)
         productPrice = view.findViewById(R.id.prodpriceedit)
@@ -210,6 +214,14 @@ class AddProductFragment : Fragment() {
             addProductToFirebase()
         }
 
+        productCategory.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                resources.getStringArray(R.array.product_categories)
+            )
+        )
+
         return view
     }
 
@@ -270,44 +282,58 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
+                if (productCategory.text.toString().isBlank()) {
+                    withContext(Dispatchers.Main){
+                        productCategory.error = "Please select category"
+                        productCategory.requestFocus()
+                    }
+                    return@launch
+                }
+
                 if (productName.text.toString().isBlank() && !Pattern.matches("^(?!\\s)[a-zA-Z0-9\\s]{2,}$", productName.text.toString())) {
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Please enter valid name", Toast.LENGTH_SHORT).show()
+                        productName.error = "Please enter valid product name"
+                        productName.requestFocus()
                     }
                     return@launch
                 }
 
                 if (productDescription.text.toString().isBlank() && productDescription.text.toString().length < 100)  {
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(),    "Please enter valid descriptioin", Toast.LENGTH_SHORT).show()
+                        productDescription.error = "Please enter valid description"
+                        productDescription.requestFocus()
                     }
                     return@launch
                 }
 
                 if (productPrice.text.toString().isEmpty()){
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Please enter valid price", Toast.LENGTH_SHORT).show()
+                        productPrice.error = "Please enter valid price"
+                        productPrice.requestFocus()
                     }
                     return@launch
                 }
 
                 if (productPrice.text.toString().toInt() <= 0){
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Please enter valid price", Toast.LENGTH_SHORT).show()
+                        productPrice.error = "Please enter valid price"
+                        productPrice.requestFocus()
                     }
                     return@launch
                 }
 
                 if (productDiscount.text.toString().isEmpty()){
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Please enter valid discount", Toast.LENGTH_SHORT).show()
+                        productDiscount.error = "Please enter valid discount"
+                        productDiscount.requestFocus()
                     }
                     return@launch
                 }
 
                 if (productDiscount.text.toString().toInt() <= 0 && productDiscount.text.toString().toInt() >= 100){
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Please enter valid discount", Toast.LENGTH_SHORT).show()
+                        productDiscount.error = "Please enter valid discount"
+                        productDiscount.requestFocus()
                     }
                     return@launch
                 }
@@ -315,14 +341,16 @@ class AddProductFragment : Fragment() {
 
                 if (productStock.text.toString().isEmpty()){
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Please enter valid stock", Toast.LENGTH_SHORT).show()
+                        productStock.error = "Please enter valid stock"
+                        productStock.requestFocus()
                     }
                     return@launch
                 }
 
                 if (productStock.text.toString().toInt() <= 0){
                     withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Please enter valid stock", Toast.LENGTH_SHORT).show()
+                        productStock.error = "Please enter valid stock"
+                        productStock.requestFocus()
                     }
                     return@launch
                 }
@@ -349,6 +377,7 @@ class AddProductFragment : Fragment() {
 
                     // Create the product data
                     val product = hashMapOf(
+                        "productCategory" to productCategory.text.toString(),
                         "productName" to productName.text.toString(),
                         "productDescription" to productDescription.text.toString(),
                         "productPrice" to productPrice.text.toString().toInt(),
@@ -359,10 +388,11 @@ class AddProductFragment : Fragment() {
                         "prodLookImage" to prodLookImageDownloadUrl,
                         "prodDimenImage" to prodDimenImageDownloadUrl,
                         "prod3DModel" to prod3DModelDownloadUrl,
-                        "prodDimensions" to dimensionsMap
+                        "prodDimensions" to dimensionsMap,
+                        "prodRating" to 0.0,
+                        "prodRatingCount" to 0
                     )
 
-                    // Upload product data to Firestore
                     db.collection("products").add(product).await()
                 }
 

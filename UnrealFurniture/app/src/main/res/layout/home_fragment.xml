@@ -293,7 +293,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/drawer"
+                            android:src="@drawable/wardrobe"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -302,7 +302,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Drawers"
+                            android:text="Wardrobes"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 
@@ -329,7 +329,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="45dp"
-                            android:src="@drawable/wardrobe"
+                            android:src="@drawable/drawer"
                             android:scaleType="centerCrop" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -338,7 +338,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="23dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Wardrobes"
+                            android:text="Others"
                             android:textColor="@color/dark"
                             android:textSize="15sp" />
 

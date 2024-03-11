@@ -47,7 +47,6 @@ class AdminActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { handleNavigation(it.itemId) }
         bottomNav.setOnItemReselectedListener { handleNavigation(it.itemId) }
 
-
         signOut.setOnClickListener {
             try {
                 auth.signOut()
@@ -73,6 +72,7 @@ class AdminActivity : AppCompatActivity() {
     private fun handleNavigation(itemId: Int): Boolean {
         val fragment = when (itemId) {
             R.id.analytics -> AnalyticsFragment()
+            R.id.updateproducts -> UpdateProductsFragment()
             R.id.addproduct -> AddProductFragment()
             R.id.transactions -> TransactionsFragment()
             else -> return false

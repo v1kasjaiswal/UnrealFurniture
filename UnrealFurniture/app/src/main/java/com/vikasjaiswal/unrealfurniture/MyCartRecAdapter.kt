@@ -105,7 +105,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         holder.prodPrice.text = "₹"+prices[position]
         holder.prodDiscount.text = discounts[position]+"% ↓"
         holder.prodDiscountedPrice.text = "₹"+discountedPrice[position]
-
+        holder.prodRating.rating = ratings[position].toFloat()
+        holder.prodRatingCount.text = ratingCounts[position]
         holder.prodQuantity.text = quantity[position]
 
         holder.incrementQuantity.setOnClickListener {
@@ -159,9 +160,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
                                         discounts = discounts.plus(document.get("productDiscount").toString())
                                         discountedPrice = discountedPrice.plus(document.get("productDiscountedPrice").toString())
                                         quantity.add("1")
-
-//                                        ratings = ratings.plus(document.get("rating").toString())
-//                                        ratingCounts = ratingCounts.plus(document.get("ratingCount").toString())
+                                        ratings = ratings.plus(document.get("prodRating").toString())
+                                        ratingCounts = ratingCounts.plus(document.get("prodRatingCount").toString())
                                     }
                                     calculateCartPrice()
                                     notifyDataSetChanged()
@@ -192,6 +192,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
                                     prices = prices.minus(prices[position])
                                     discounts = discounts.minus(discounts[position])
                                     discountedPrice = discountedPrice.minus(discountedPrice[position])
+                                    ratings = ratings.minus(ratings[position])
+                                    ratingCounts = ratingCounts.minus(ratingCounts[position])
                                     quantity.removeAt(position)
                                     calculateCartPrice()
                                     notifyDataSetChanged()
@@ -222,6 +224,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
                         prices = emptyList()
                         discounts = emptyList()
                         discountedPrice = emptyList()
+                        ratings = emptyList()
+                        ratingCounts = emptyList()
                         quantity = mutableListOf<String>()
                         calculateCartPrice()
                         notifyDataSetChanged()
@@ -255,6 +259,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         prices = emptyList()
         discounts = emptyList()
         discountedPrice = emptyList()
+        ratings = emptyList()
+        ratingCounts = emptyList()
         quantity = mutableListOf<String>()
         calculateCartPrice()
         notifyDataSetChanged()

@@ -88,8 +88,8 @@ class CheckoutProductRecAdapter(private val onDataChanged: () -> Unit) : Recycle
         holder.checkoutProdDiscount.text = prodDiscounts[position]+"% ↓"
         holder.checkoutProdDiscountedPrice.text = "₹"+(prodDiscountedPrices[position].toInt()*prodQuantities[position].toInt()).toString()
         holder.checkoutProdQuantity.text = "Qty: "+prodQuantities[position]
-//        holder.checkoutProdRating.rating = prodRatings[position].toFloat()
-//        holder.checkoutProdRatingCount.text = prodRatingCounts[position]
+        holder.checkoutProdRating.rating = prodRatings[position].toFloat()
+        holder.checkoutProdRatingCount.text = prodRatingCounts[position]
 
         Picasso.get().load(prodImages[position]).into(holder.checkoutProdMainImage)
     }

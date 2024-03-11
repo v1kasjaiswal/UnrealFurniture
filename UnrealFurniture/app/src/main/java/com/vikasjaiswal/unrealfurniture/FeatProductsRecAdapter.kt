@@ -33,7 +33,6 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
     var productRatings = listOf<String>()
     var productRatingCounts = listOf<String>()
 
-
     var db = FirebaseFirestore.getInstance()
 
     var auth = FirebaseAuth.getInstance()
@@ -105,8 +104,8 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
         holder.realPrice.text = "₹${productRealPrices[position]}"
         holder.discount.text = "${productDiscounts[position]}% ↓"
         holder.discountedPrice.text = "₹${productDiscountedPrices[position]}"
-//        holder.rating.rating = productRatings[position].toFloat()
-//        holder.ratingCount.text = "(${productRatingCounts[position]})"
+        holder.rating.rating = productRatings[position].toFloat()
+        holder.ratingCount.text = "(${productRatingCounts[position]})"
 
         holder.selectedProductCard.setOnClickListener {
             val intent = Intent(holder.itemView.context, ProductActivity::class.java)
@@ -120,8 +119,6 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
             try{
             val result = db.collection("products").get().await()
 
-                Log.d("TAG111", "updateData: ${result.documents}")
-
             for (document in result) {
                 productIds += document.id
                 Log.d("TAG111", "updateData: ${document.id}")
@@ -131,6 +128,8 @@ class FeatProductsRecAdapter : RecyclerView.Adapter<FeatProductsRecAdapter.ViewH
                 productRealPrices += document.getLong("productPrice")?.toString()?: "0"
                 productDiscounts += document.getLong("productDiscount")?.toString()?:"0"
                 productDiscountedPrices += document.getLong("productDiscountedPrice")?.toString()?:"0"
+                productRatings += document.getDouble("prodRating")?.toString()?:"0"
+                productRatingCounts += document.getLong("prodRatingCount")?.toString()?:"0"
             }
 
             withContext(Dispatchers.Main){

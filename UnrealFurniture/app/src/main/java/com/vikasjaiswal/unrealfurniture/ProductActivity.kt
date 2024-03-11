@@ -154,10 +154,12 @@ class ProductActivity : AppCompatActivity() {
                     }
 
                     productName.text = result.getString("productName").toString()
-//                    productDescription.text = result.getString("prodDescription").toString()
+                    productDescription.text = result.getString("prodDescription").toString()
                     productRealPrice.text = "₹${result.getLong("productPrice").toString()}"
                     prodcutDiscount.text = "${result.getLong("productDiscount").toString()}% ↓"
                     productDiscountedPrice.text = "₹${result.getLong("productDiscountedPrice").toString()}"
+                    productRatingBar.rating = result.getDouble("prodRating")!!.toFloat()
+                    productRatingCount.text = "("+result.getLong("prodRatingCount").toString()+")"
 
                     lifecycleScope.launchWhenCreated {
                         Picasso
@@ -203,8 +205,8 @@ class ProductActivity : AppCompatActivity() {
                         productDimensions.addView(row)
                     }
 
-//                    productRatingBar.rating = result.getString("prodRating").toString().toFloat()
-//                    productRatingCount.text = "(${result.getString("prodRatingCount").toString()})"
+                    productRatingBar.rating = result.getString("prodRating").toString().toFloat()
+                    productRatingCount.text = "(${result.getString("prodRatingCount").toString()})"
 
 //                    val ratingReviews = result.get("prodRatingReviews") as List<*>
 //                    ratingReviewsAdapter?.setData(ratingReviews)

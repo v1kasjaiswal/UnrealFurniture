@@ -257,16 +257,43 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout9"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/arrow"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:hint="Select Product Category"
+                app:layout_constraintEnd_toEndOf="@+id/prodDimenFileCard"
+                app:layout_constraintStart_toStartOf="@+id/prod3DModelCard"
+                app:layout_constraintTop_toBottomOf="@+id/prod3DModelCard">
+
+                <AutoCompleteTextView
+                    android:id="@+id/productCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableStart="@drawable/price"
+                    android:drawablePadding="15dp"
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/darker"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/productname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/prod3DModelCard"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout9"
                 app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toStartOf="@+id/prod3DModelCard"
-                app:layout_constraintTop_toBottomOf="@+id/prod3DModelCard"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout9"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9"
                 app:startIconDrawable="@drawable/boxes">
 
                 <com.google.android.material.textfield.TextInputEditText

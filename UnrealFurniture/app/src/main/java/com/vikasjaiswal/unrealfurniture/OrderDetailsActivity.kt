@@ -63,7 +63,6 @@ class OrderDetailsActivity : AppCompatActivity() {
 
     private var orderDetailsAdapter: OrderDetailsRecAdapter? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.orderdetails_activity)

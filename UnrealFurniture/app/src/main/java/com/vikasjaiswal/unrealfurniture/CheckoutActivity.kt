@@ -27,11 +27,11 @@ import java.text.SimpleDateFormat
 
 class CheckoutActivity : AppCompatActivity() {
 
-        private lateinit var checkoutAddressLayoutManager: LinearLayoutManager
-        private lateinit var checkoutProductLayoutManager: GridLayoutManager
+    private lateinit var checkoutAddressLayoutManager: LinearLayoutManager
+    private lateinit var checkoutProductLayoutManager: GridLayoutManager
 
-        private var checkoutAddressAdapter: CheckoutAddressRecAdapter? = null
-        private var checkoutProductAdapter: CheckoutProductRecAdapter? = null
+    private var checkoutAddressAdapter: CheckoutAddressRecAdapter? = null
+    private var checkoutProductAdapter: CheckoutProductRecAdapter? = null
 
     private lateinit var checkoutAddressRecyclerView: RecyclerView
     private lateinit var checkoutProductRecyclerView: RecyclerView
@@ -122,8 +122,8 @@ class CheckoutActivity : AppCompatActivity() {
                             prodDiscounts.add(document.data?.get("productDiscount").toString())
                             prodDiscountedPrices.add(document.data?.get("productDiscountedPrice").toString())
                             prodQuantities.add("1")
-                            prodRatings.add(document.data?.get("productRating").toString())
-                            prodRatingCounts.add(document.data?.get("productRatingCount").toString())
+                            prodRatings.add(document.data?.get("prodRating").toString())
+                            prodRatingCounts.add(document.data?.get("prodRatingCount").toString())
 
                             checkoutProductAdapter?.setData(prodIds, prodImages, prodNames, prodPrices, prodDiscounts, prodDiscountedPrices, prodQuantities, prodRatings, prodRatingCounts)
 
