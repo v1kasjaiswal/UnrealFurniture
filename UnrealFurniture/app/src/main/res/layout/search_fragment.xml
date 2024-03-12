@@ -4,96 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".SearchFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView8"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/searchbar_scrolling_view_behavior"></androidx.core.widget.NestedScrollView>
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:hint="Find Your Dream Furniture!"
+            app:iconifiedByDefault="false"
+            app:defaultQueryHint="Search when clicked"
+            app:queryHint="Find Your Dream Furniture!" />
+    </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.appbar.AppBarLayout
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView8">
+
+        <com.google.android.material.chip.ChipGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:chipSpacing="10dp"
+            app:singleLine="true">
 
-            <com.google.android.material.search.SearchBar
-                android:id="@+id/searchBar"
-                android:layout_width="match_parent"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sortBy"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshibold"
+                android:text="Sort By"
+                android:textColor="@color/dark"
+                app:chipIcon="@drawable/sort" />
 
-                app:menu="@menu/search_menu"
-                android:hint="Find your Dream Furniture!" />
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <com.google.android.material.search.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Find your Dream Furniture!"
-            android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
-            app:layout_anchor="@id/searchBar">
-
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="match_parent"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filterBy"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                app:chipSpacing="10dp"
-                app:singleLine="true">
+                android:fontFamily="@font/satoshibold"
+                android:text="Filter By"
+                android:textColor="@color/dark"
+                app:chipIcon="@drawable/filter" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/table"
-                    app:chipIcon="@drawable/cart"
-                    android:fontFamily="@font/satoshibold"
-                    style="@style/Widget.Material3.Chip.Suggestion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Table" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/selectCategory"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshibold"
+                android:text="Categories"
+                android:textColor="@color/dark"
+                app:chipIcon="@drawable/category" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chair"
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/satoshibold"
-                    style="@style/Widget.Material3.Chip.Suggestion"
-                    android:layout_height="wrap_content"
-                    android:text="Chair"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/outOfStock"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshibold"
+                android:text="Include Out of Stock"
+                android:textColor="@color/dark"
+                app:chipIcon="@drawable/stock" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/sofa"
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/satoshibold"
-                    style="@style/Widget.Material3.Chip.Suggestion"
-                    android:textSize="15sp"
-                    android:layout_height="wrap_content"
-                    android:text="Sofa"/>
+        </com.google.android.material.chip.ChipGroup>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/bed"
-                    android:layout_width="wrap_content"
-                    style="@style/Widget.Material3.Chip.Suggestion"
-                    android:fontFamily="@font/satoshibold"
-                    android:textSize="15sp"
-                    android:layout_height="wrap_content"
-                    android:text="Bed"/>
+    </HorizontalScrollView>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/other"
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/satoshibold"
-                    android:textSize="15sp"
-                    style="@style/Widget.Material3.Chip.Suggestion"
-                    android:layout_height="wrap_content"
-                    android:text="Other"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView2"
+        app:layout_constraintStart_toStartOf="@+id/horizontalScrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
 
-            </com.google.android.material.chip.ChipGroup>
-
-        </com.google.android.material.search.SearchView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

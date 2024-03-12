@@ -19,6 +19,7 @@ import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -184,7 +185,10 @@ class PopProductsRecAdapter : RecyclerView.Adapter<PopProductsRecAdapter.ViewHol
     private fun updateData(){
         CoroutineScope(Dispatchers.IO).launch {
             try{
-            val result = db.collection("products").get().await()
+            val result = db.collection("products")
+                .orderBy("prodRating", Query.Direction.DESCENDING)
+                .orderBy("prodRatingCount", Query.Direction.DESCENDING)
+                .get().await()
 
             for (document in result) {
                 productIds += document.id

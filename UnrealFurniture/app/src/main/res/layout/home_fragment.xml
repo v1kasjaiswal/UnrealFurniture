@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".HomeFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -47,17 +48,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView15">
 
-    <com.faltenreich.skeletonlayout.SkeletonLayout
-        android:id="@+id/skeletonLayout"
-        android:layout_width="match_parent"
-        app:maskCornerRadius="10dp"
-        app:shimmerAngle="15"
-        android:layout_height="match_parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.faltenreich.skeletonlayout.SkeletonLayout
+            android:id="@+id/skeletonLayout"
             android:layout_width="match_parent"
+            app:maskCornerRadius="10dp"
+            app:shimmerAngle="15"
             android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
@@ -67,14 +67,14 @@
                 android:layout_marginRight="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/bannerImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/baner"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baner" />
 
             </com.google.android.material.card.MaterialCardView>
 
