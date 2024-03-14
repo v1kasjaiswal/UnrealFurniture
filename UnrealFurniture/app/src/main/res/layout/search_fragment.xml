@@ -46,16 +46,6 @@
             app:singleLine="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/sortBy"
-                style="@style/Widget.Material3.Chip.Assist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/satoshibold"
-                android:text="Sort By"
-                android:textColor="@color/dark"
-                app:chipIcon="@drawable/sort" />
-
-            <com.google.android.material.chip.Chip
                 android:id="@+id/filterBy"
                 style="@style/Widget.Material3.Chip.Assist"
                 android:layout_width="wrap_content"
