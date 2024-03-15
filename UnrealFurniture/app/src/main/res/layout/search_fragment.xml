@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/satoshibold"
-                android:text="Include Out of Stock"
+                android:text="Show Out of Stock"
                 android:textColor="@color/dark"
                 app:chipIcon="@drawable/stock" />
 

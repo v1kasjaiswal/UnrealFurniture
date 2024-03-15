@@ -1,6 +1,7 @@
 package com.vikasjaiswal.unrealfurniture
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,7 +50,9 @@ class SearchFragment : Fragment() {
 
         searchLayoutManager = GridLayoutManager(context, 2)
 
-        searchAdapter = SearchRecAdapter()
+        searchAdapter = SearchRecAdapter{
+            Log.d("SearchFragment", "Updated Fragment")
+        }
 
         searchRecyclerView.layoutManager = searchLayoutManager
 
@@ -96,6 +99,36 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
+
+        outOfStock.setOnCheckedChangeListener { buttonView, isChecked ->
+            val category = when(categoryRadioGroup.checkedRadioButtonId){
+                R.id.filterSofas -> "Sofas"
+                R.id.filterBeds -> "Beds"
+                R.id.filterTables -> "Tables"
+                R.id.filterChairs -> "Chairs"
+                R.id.filterBookshelves -> "Bookshelves"
+                R.id.filterWardrobes -> "Wardrobes"
+                R.id.filterOthers -> "Others"
+                else -> "All"
+            }
+
+            val sortBy = when(filterRadioGroup.checkedRadioButtonId){
+                R.id.priceLowToHigh -> "PriceLowToHigh"
+                R.id.priceHighToLow -> "PriceHighToLow"
+                R.id.ratingLowToHigh -> "RatingLowToHigh"
+                R.id.ratingHighToLow -> "RatingHighToLow"
+                R.id.discountLowToHigh -> "DiscountLowToHigh"
+                R.id.discountHighToLow -> "DiscountHighToLow"
+                else -> "PriceLowToHigh"
+            }
+
+            if (categoryRadioGroup.checkedRadioButtonId == R.id.allCategories){
+                searchAdapter?.updateData(sortBy, isChecked)
+            }
+            else{
+                searchAdapter?.updateData(sortBy, category, isChecked)
+            }
+        }
 
         return view
     }

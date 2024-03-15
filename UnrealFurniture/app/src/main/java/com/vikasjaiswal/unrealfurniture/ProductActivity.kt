@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.ankurg.expressview.ExpressView
 import com.bumptech.glide.Glide
 import co.ankurg.expressview.OnCheckListener
+import com.colormoon.readmoretextview.ReadMoreTextView
 import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textview.MaterialTextView
@@ -29,6 +30,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import org.w3c.dom.Text
 
 class ProductActivity : AppCompatActivity() {
 
@@ -42,7 +44,7 @@ class ProductActivity : AppCompatActivity() {
 
     private lateinit var productMainImage: ImageView
     private lateinit var productName: TextView
-    private lateinit var productDescription: TextView
+    private lateinit var productDescription: ReadMoreTextView
     private lateinit var prodcutDiscount: TextView
     private lateinit var productRealPrice: TextView
     private lateinit var productDiscountedPrice: TextView
@@ -52,6 +54,8 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var productDimensions: TableLayout
     private lateinit var productRatingBar: RatingBar
     private lateinit var productRatingCount: TextView
+
+    private lateinit var productRatingReviewEdit : TextView
 
     lateinit var addToWishList : ExpressView
 
@@ -100,6 +104,8 @@ class ProductActivity : AppCompatActivity() {
         productDimensions = findViewById(R.id.dimenTableLayout)
         productRatingBar = findViewById(R.id.productRatingBarEdit)
         productRatingCount = findViewById(R.id.productRatingCountEdit)
+
+        productRatingReviewEdit = findViewById(R.id.productRatingReviewsEdit)
 
         productRealPrice.paint.isStrikeThruText = true
 
@@ -154,12 +160,14 @@ class ProductActivity : AppCompatActivity() {
                     }
 
                     productName.text = result.getString("productName").toString()
-                    productDescription.text = result.getString("prodDescription").toString()
+                    productDescription.text = result.getString("productDescription").toString()
                     productRealPrice.text = "₹${result.getLong("productPrice").toString()}"
                     prodcutDiscount.text = "${result.getLong("productDiscount").toString()}% ↓"
                     productDiscountedPrice.text = "₹${result.getLong("productDiscountedPrice").toString()}"
                     productRatingBar.rating = result.getDouble("prodRating")!!.toFloat()
                     productRatingCount.text = "("+result.getLong("prodRatingCount").toString()+")"
+
+                    productRatingReviewEdit.text = "${result.getDouble("prodRating")!!.toFloat()} ★ (${result.getLong("prodRatingCount").toString()})"
 
                     lifecycleScope.launchWhenCreated {
                         Picasso
@@ -205,13 +213,11 @@ class ProductActivity : AppCompatActivity() {
                         productDimensions.addView(row)
                     }
 
-                    productRatingBar.rating = result.getString("prodRating").toString().toFloat()
-                    productRatingCount.text = "(${result.getString("prodRatingCount").toString()})"
-
 //                    val ratingReviews = result.get("prodRatingReviews") as List<*>
 //                    ratingReviewsAdapter?.setData(ratingReviews)
                 }
             } catch (e: Exception) {
+                Log.d("ProductActivity", "Error: ${e.toString()}")
                 Log.d("ProductActivity", "Error: ${e.message}")
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@ProductActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()

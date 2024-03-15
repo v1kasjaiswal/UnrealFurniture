@@ -104,10 +104,8 @@
 
                 <co.ankurg.expressview.ExpressView
                     android:id="@+id/addToWishList"
-                    app:burstColor="@color/dark"
                     android:outlineSpotShadowColor="@color/darker"
                     android:layout_width="wrap_content"
-                    app:checkedIconTint="@color/dark"
                     android:layout_height="match_parent"
                     android:layout_gravity="end" />
 

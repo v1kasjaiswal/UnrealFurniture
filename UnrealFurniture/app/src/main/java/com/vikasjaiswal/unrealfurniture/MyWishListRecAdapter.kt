@@ -86,7 +86,7 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
         holder.wishDiscount.text = discounts[position] + "% off"
         holder.wishDiscountedPrice.text = "₹" + discountedPrice[position]
         holder.wishRating.rating = ratings[position].toFloat()
-        holder.wishRatingCount.text = ratingCounts[position]
+        holder.wishRatingCount.text = "("+ratingCounts[position]+")"
 
         Picasso.get().load(mainImages[position]).into(holder.wishMainImage)
 
