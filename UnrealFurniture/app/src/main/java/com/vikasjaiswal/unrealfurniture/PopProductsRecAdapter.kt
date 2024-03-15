@@ -119,6 +119,25 @@ class PopProductsRecAdapter : RecyclerView.Adapter<PopProductsRecAdapter.ViewHol
             holder.itemView.context.startActivity(intent)
         }
 
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = auth.currentUser
+            if (user != null) {
+                val userRef = db.collection("users").document(user.uid)
+                userRef.get().addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val wishList = document.get("wishList") as? List<String> ?: emptyList()
+                        if (wishList.contains(productIds[position])) {
+                            holder.addToWishList.isChecked = true
+                        }
+                        else {
+                            holder.addToWishList.isChecked = false
+                        }
+                    }
+                }
+            }
+        }
+
+
         holder.addToWishList.setOnCheckListener (object : OnCheckListener {
             override fun onChecked(view: ExpressView?) {
                 addToWishList(position)
@@ -129,7 +148,7 @@ class PopProductsRecAdapter : RecyclerView.Adapter<PopProductsRecAdapter.ViewHol
             }
         })
     }
-
+    
     private fun addToWishList(position: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val user = auth.currentUser
