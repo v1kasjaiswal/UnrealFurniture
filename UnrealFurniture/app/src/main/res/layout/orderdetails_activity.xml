@@ -20,6 +20,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -509,17 +510,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/selectedProductCard" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderUpdateLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:drawableEnd="@drawable/arrow"
+                android:hint="Select Order Udpate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cancelOrder">
+
+                <AutoCompleteTextView
+                    android:id="@+id/orderUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableStart="@drawable/stock"
+                    android:drawablePadding="15dp"
+                    android:editable="false"
+                    android:fontFamily="@font/satoshibold"
+                    android:textColor="@color/darker"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView53"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/satoshibold"
                 android:text="Rating: "
+                android:layout_marginTop="10dp"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/cancelOrder"
-                app:layout_constraintTop_toBottomOf="@+id/cancelOrder" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orderUpdateLayout" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView9"

@@ -46,23 +46,18 @@ class TransactionsFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> {
-                        Toast.makeText(requireContext(), "0", Toast.LENGTH_SHORT).show()
                         transactionAdapter!!.updateData("Order Placed")
                     }
                     1 -> {
-                        Toast.makeText(requireContext(), "1", Toast.LENGTH_SHORT).show()
                         transactionAdapter!!.updateData("Order Shipped")
                     }
                     2 -> {
-                        Toast.makeText(requireContext(), "2", Toast.LENGTH_SHORT).show()
                         transactionAdapter!!.updateData("Order Out for Delivery")
                     }
                     3 -> {
-                        Toast.makeText(requireContext(), "3", Toast.LENGTH_SHORT).show()
                         transactionAdapter!!.updateData("Order Delivered")
                     }
                     4 -> {
-                        Toast.makeText(requireContext(), "4", Toast.LENGTH_SHORT).show()
                         transactionAdapter!!.updateData("Order Cancelled")
                     }
                 }

@@ -3,6 +3,9 @@ package com.vikasjaiswal.unrealfurniture
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
@@ -14,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -53,6 +57,9 @@ class OrderDetailsActivity : AppCompatActivity() {
 
     lateinit var detailRatingBar : RatingBar
     lateinit var orderReview : TextView
+
+    lateinit var orderUpdateLayout : TextInputLayout
+    lateinit var orderUpdate : AutoCompleteTextView
 
     lateinit var ratingReviewSubmit : Button
 
@@ -114,6 +121,39 @@ class OrderDetailsActivity : AppCompatActivity() {
         }
 
         orderDetailsRecyclerView.adapter = orderDetailsAdapter
+
+        orderUpdateLayout = findViewById(R.id.orderUpdateLayout)
+        orderUpdate = findViewById(R.id.orderUpdate)
+
+        if (auth.currentUser?.email == "unrealadmin@gmail.com"){
+            cancelOrder.visibility = View.GONE
+            ratingReviewSubmit.visibility = View.GONE
+            orderUpdateLayout.visibility = View.VISIBLE
+        }
+        else{
+            cancelOrder.visibility = View.VISIBLE
+            ratingReviewSubmit.visibility = View.VISIBLE
+            orderUpdateLayout.visibility = View.GONE
+        }
+
+        orderUpdate.setAdapter(
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                resources.getStringArray(R.array.order_status)
+            )
+        )
+        
+        orderUpdate.setOnItemClickListener { parent, view, position, id ->
+            CoroutineScope(Dispatchers.IO).launch {
+                db.collection("orders").document(orderId!!).update("orderStatus", orderUpdate.text.toString()).addOnSuccessListener {
+                    runOnUiThread {
+                        Toast.makeText(this@OrderDetailsActivity, "Order Status Updated", Toast.LENGTH_SHORT).show()
+                    }
+                    finish()
+                }
+            }
+        }
 
         CoroutineScope(Dispatchers.IO).launch {
             db.collection("orders").document(orderId!!).get().addOnSuccessListener {

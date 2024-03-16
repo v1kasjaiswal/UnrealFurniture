@@ -274,8 +274,9 @@
                     android:id="@+id/productCategory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableStart="@drawable/price"
+                    android:drawableStart="@drawable/category"
                     android:drawablePadding="15dp"
+                    android:editable="false"
                     android:fontFamily="@font/satoshibold"
                     android:textColor="@color/darker"
                     android:textSize="15sp" />
