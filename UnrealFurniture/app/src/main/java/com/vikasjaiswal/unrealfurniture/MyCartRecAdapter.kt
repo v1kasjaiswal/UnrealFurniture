@@ -28,18 +28,18 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
     var prodIds = listOf<String>()
     var mainImages = listOf<String>()
     var names = listOf<String>()
-    var prices = listOf<String>()
-    var discounts = listOf<String>()
-    var discountedPrice = listOf<String>()
-    var ratings = listOf<String>()
-    var quantity = mutableListOf<String>()
+    var prices = listOf<Int>()
+    var discounts = listOf<Int>()
+    var discountedPrice = listOf<Int>()
+    var ratings = listOf<Float>()
+    var quantity = mutableListOf<Int>()
 
-    var ratingCounts = listOf<String>()
+    var ratingCounts = listOf<Int>()
 
     var overAllRealPrice = 0
     var overAllDiscountedPrice = 0
     var overAllQuantity = 0
-    var overAllDiscount = 0f
+    var overAllDiscount = 0
 
     var name = ""
     var phone = ""
@@ -103,18 +103,18 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         Picasso.get().load(mainImages[position]).placeholder(R.drawable.blank).into(holder.prodMainImage)
         holder.prodName.text = names[position]
         holder.prodPrice.text = "₹"+prices[position]
-        holder.prodDiscount.text = discounts[position]+"% ↓"
+        holder.prodDiscount.text = discounts[position].toString()+"% ↓"
         holder.prodDiscountedPrice.text = "₹"+discountedPrice[position]
         holder.prodRating.rating = ratings[position].toFloat()
-        holder.prodRatingCount.text = ratingCounts[position]
-        holder.prodQuantity.text = quantity[position]
+        holder.prodRatingCount.text = ratingCounts[position].toString()
+        holder.prodQuantity.text = quantity[position].toString()
 
         holder.incrementQuantity.setOnClickListener {
             var pquantity = holder.prodQuantity.text.toString().toInt()
             if (pquantity <= 9){
                 pquantity++
             }
-            quantity[position] = pquantity.toString()
+            quantity[position] = pquantity
             calculateCartPrice()
             notifyDataSetChanged()
             onDataChanged.invoke()
@@ -126,7 +126,7 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
             if (pquantity > 1) {
                 pquantity--
             }
-            quantity[position] = pquantity.toString()
+            quantity[position] = pquantity
             calculateCartPrice()
             notifyDataSetChanged()
             onDataChanged.invoke()
@@ -156,12 +156,12 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
                                     if (document.exists()) {
                                         mainImages = mainImages.plus(document.get("prodMainImage").toString())
                                         names = names.plus(document.get("productName").toString())
-                                        prices = prices.plus(document.get("productPrice").toString())
-                                        discounts = discounts.plus(document.get("productDiscount").toString())
-                                        discountedPrice = discountedPrice.plus(document.get("productDiscountedPrice").toString())
-                                        quantity.add("1")
-                                        ratings = ratings.plus(document.get("prodRating").toString())
-                                        ratingCounts = ratingCounts.plus(document.get("prodRatingCount").toString())
+                                        prices = prices.plus(document.get("productPrice").toString().toInt())
+                                        discounts = discounts.plus(document.get("productDiscount").toString().toInt())
+                                        discountedPrice = discountedPrice.plus(document.get("productDiscountedPrice").toString().toInt())
+                                        quantity.add(1)
+                                        ratings = ratings.plus(document.get("prodRating").toString().toFloat())
+                                        ratingCounts = ratingCounts.plus(document.get("prodRatingCount").toString().toInt())
                                     }
                                     calculateCartPrice()
                                     notifyDataSetChanged()
@@ -218,18 +218,7 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
                 userRef.update("cartList", emptyList<String>())
                     .addOnSuccessListener {
                         // Clear the local wish list and notify the adapter
-                        prodIds = emptyList()
-                        mainImages = emptyList()
-                        names = emptyList()
-                        prices = emptyList()
-                        discounts = emptyList()
-                        discountedPrice = emptyList()
-                        ratings = emptyList()
-                        ratingCounts = emptyList()
-                        quantity = mutableListOf<String>()
-                        calculateCartPrice()
-                        notifyDataSetChanged()
-                        onDataChanged.invoke()
+                        clearCart()
                     }
                     .addOnFailureListener { e ->
                         Log.d("CartListActivity", "Error deleting wishes: ${e.message}")
@@ -248,7 +237,7 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
             overAllRealPrice = prices[i].toInt() * quantity[i].toInt()
             overAllDiscountedPrice = discountedPrice[i].toInt() * quantity[i].toInt()
             overAllQuantity = quantity[i].toInt()
-            overAllDiscount = ((overAllRealPrice - overAllDiscountedPrice).toFloat() / overAllRealPrice.toFloat()) * 100
+            overAllDiscount = ((overAllRealPrice - overAllDiscountedPrice) / overAllRealPrice) * 100
         }
     }
 
@@ -261,7 +250,7 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         discountedPrice = emptyList()
         ratings = emptyList()
         ratingCounts = emptyList()
-        quantity = mutableListOf<String>()
+        quantity = mutableListOf<Int>()
         calculateCartPrice()
         notifyDataSetChanged()
         onDataChanged.invoke()

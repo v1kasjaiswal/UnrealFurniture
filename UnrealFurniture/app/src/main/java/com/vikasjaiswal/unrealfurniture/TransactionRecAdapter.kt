@@ -1,26 +1,24 @@
 package com.vikasjaiswal.unrealfurniture
 
 import android.content.Intent
-import android.media.Rating
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MyOrdersRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Adapter<MyOrdersRecAdapter.ViewHolder>() {
+class TransactionRecAdapter(private val onDataChanged: () -> Unit)  : RecyclerView.Adapter<TransactionRecAdapter.ViewHolder>() {
 
-    var db = FirebaseFirestore.getInstance()
     var auth = FirebaseAuth.getInstance()
+    var db = FirebaseFirestore.getInstance()
 
     var orderIds = listOf<String>()
     var orderStatus = listOf<String>()
@@ -29,7 +27,7 @@ class MyOrdersRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.A
     var orderGrandTotals = listOf<String>()
 
     init {
-        updateData()
+        updateData("Order Placed")
     }
 
     fun setData(data : List<String>) {
@@ -83,26 +81,26 @@ class MyOrdersRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.A
         }
     }
 
-    private fun updateData(){
+    public fun updateData(status: String){
         CoroutineScope(Dispatchers.IO).launch {
-            val userId = auth.currentUser?.uid
-            val orderRef = db.collection("orders")
-            val query = orderRef.whereEqualTo("userId", userId)
-            query.get().addOnSuccessListener { documents ->
-                if (documents != null) {
-                    Log.d("TAG", "DocumentSnapshot data: ${documents.documents}")
+            db.collection("orders")
+                .whereEqualTo("orderStatus", status)
+                .get()
+                .addOnSuccessListener { documents ->
                     for (document in documents) {
                         orderIds += document.id
-                        orderStatus += document.getString("orderStatus").toString()
-                        orderDates += document.getString("orderDate").toString()
-                        orderExpectedDates += document.getString("expectedDeliveryDate").toString()
-                            .toString()
-                        orderGrandTotals += document.getString("grandTotal").toString()
+                        orderStatus += document.data["orderStatus"].toString()
+                        orderDates += document.data["orderDate"].toString()
+                        orderExpectedDates += document.data["orderExpectedDate"].toString()
+                        orderGrandTotals += document.data["orderGrandTotal"].toString()
                     }
+                    setData(orderIds)
                     notifyDataSetChanged()
                     onDataChanged.invoke()
                 }
-            }
+                .addOnFailureListener {
+                    Log.d("TransactionRecAdapter", "Error getting documents: ", it)
+                }
         }
     }
 }
