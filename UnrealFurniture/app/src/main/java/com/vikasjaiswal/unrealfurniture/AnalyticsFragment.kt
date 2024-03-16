@@ -72,4 +72,5 @@ class AnalyticsFragment : Fragment() {
         lineChart.invalidate()
     }
 
+
 }

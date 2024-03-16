@@ -72,7 +72,7 @@ class AdminActivity : AppCompatActivity() {
     private fun handleNavigation(itemId: Int): Boolean {
         val fragment = when (itemId) {
             R.id.analytics -> AnalyticsFragment()
-            R.id.updateproducts -> UpdateProductsFragment()
+            R.id.updateproducts -> SearchFragment()
             R.id.addproduct -> AddProductFragment()
             R.id.transactions -> TransactionsFragment()
             else -> return false

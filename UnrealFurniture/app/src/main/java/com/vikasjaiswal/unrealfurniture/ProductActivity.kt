@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide
 import co.ankurg.expressview.OnCheckListener
 import com.colormoon.readmoretextview.ReadMoreTextView
 import com.faltenreich.skeletonlayout.SkeletonLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +33,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import org.w3c.dom.Text
+import java.util.regex.Pattern
 
 class ProductActivity : AppCompatActivity() {
 
@@ -57,10 +60,14 @@ class ProductActivity : AppCompatActivity() {
 
     private lateinit var productRatingReviewEdit : TextView
 
+    private lateinit var editProductDetails : CardView
+
     lateinit var addToWishList : ExpressView
 
     private lateinit var addToCard: TextView
     private lateinit var buyNow: TextView
+
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private lateinit var ratingReviewsLayoutManager: GridLayoutManager
     private var ratingReviewsAdapter: RatingReviewsRecAdapter? = null
@@ -107,6 +114,8 @@ class ProductActivity : AppCompatActivity() {
 
         productRatingReviewEdit = findViewById(R.id.productRatingReviewsEdit)
 
+        editProductDetails = findViewById(R.id.editProductDetails)
+
         productRealPrice.paint.isStrikeThruText = true
 
         addToCard = findViewById(R.id.addToCart)
@@ -120,6 +129,17 @@ class ProductActivity : AppCompatActivity() {
 
         ratingReviewsAdapter = RatingReviewsRecAdapter()
         ratingReviewsRecyclerView.adapter = ratingReviewsAdapter
+
+        if (auth.currentUser?.email == "unrealadmin@gmail.com"){
+            addToCard.isEnabled = false
+            buyNow.isEnabled = false
+            addToWishList.isEnabled = false
+            editProductDetails.visibility = View.VISIBLE
+        }
+
+        bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetView = layoutInflater.inflate(R.layout.editproductdetails_bottomresource, null)
+        bottomSheetDialog.setContentView(bottomSheetView)
     }
 
     private fun setClickListeners() {
@@ -141,6 +161,115 @@ class ProductActivity : AppCompatActivity() {
 
         buyNow.setOnClickListener {
             buyNow()
+        }
+
+        editProductDetails.setOnClickListener {
+            bottomSheetDialog.show()
+
+            val editProductCategory = bottomSheetDialog.findViewById<AutoCompleteTextView>(R.id.editProductCategory)
+            editProductCategory?.setAdapter(
+                ArrayAdapter(
+                    this@ProductActivity,
+                    android.R.layout.simple_list_item_1,
+                    resources.getStringArray(R.array.product_categories)
+                )
+            )
+
+            val editProductName = bottomSheetDialog.findViewById<EditText>(R.id.editProductName)
+            val editProductDescription = bottomSheetDialog.findViewById<EditText>(R.id.editProductDescription)
+            val editProductPrice = bottomSheetDialog.findViewById<EditText>(R.id.editProductPrice)
+            val editProductDiscount = bottomSheetDialog.findViewById<EditText>(R.id.editProductDiscount)
+            val editProductStock = bottomSheetDialog.findViewById<EditText>(R.id.editProductStock)
+
+            val updateProduct = bottomSheetDialog.findViewById<Button>(R.id.updateProduct)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = db.collection("products").document(intent.extras?.getString("productId").toString()).get().await()
+                withContext(Dispatchers.Main) {
+                    editProductCategory?.setText(result.getString("productCategory"))
+                    editProductName?.setText(result.getString("productName"))
+                    editProductDescription?.setText(result.getString("productDescription"))
+                    editProductPrice?.setText(result.getLong("productPrice").toString())
+                    editProductDiscount?.setText(result.getLong("productDiscount").toString())
+                    editProductStock?.setText(result.getLong("productStock").toString())
+                }
+            }
+
+            updateProduct?.setOnClickListener {
+                val productCategory = editProductCategory?.text.toString()
+                val productName = editProductName?.text.toString()
+                val productDescription = editProductDescription?.text.toString()
+                val productPrice = editProductPrice?.text.toString()
+                val productDiscount = editProductDiscount?.text.toString()
+                val productStock = editProductStock?.text.toString()
+
+                if (productCategory.isBlank()){
+                    editProductCategory?.error = "Category Required"
+                    editProductCategory?.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (productName.isBlank() || !Pattern.matches("^(?!\\s)[a-zA-Z0-9\\s]{2,}$", productName)){
+                    editProductName?.error = "Name Required"
+                    editProductName?.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (productDescription.isBlank() || productDescription.length < 10){
+                    editProductDescription?.error = "Description Required"
+                    editProductDescription?.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (productPrice.isBlank() || productPrice.toInt() <= 0){
+                    editProductPrice?.error = "Price Required"
+                    editProductPrice?.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (productDiscount.isBlank() || productDiscount.toInt() <= 0 || productDiscount.toInt() >= 100){
+                    editProductDiscount?.error = "Discount Required"
+                    editProductDiscount?.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (productStock.isBlank() || productStock.toInt() <= 0){
+                    editProductStock?.error = "Stock Required"
+                    editProductStock?.requestFocus()
+                    return@setOnClickListener
+                }
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val result = db.collection("products").document(intent.extras?.getString("productId").toString()).get().await()
+                        db.collection("products").document(intent.extras?.getString("productId").toString()).update(
+                            mapOf(
+                                "productCategory" to productCategory,
+                                "productName" to productName,
+                                "productDescription" to productDescription,
+                                "productPrice" to productPrice.toInt(),
+                                "productDiscount" to productDiscount.toInt(),
+                                "productStock" to productStock.toInt()
+                            )
+                        ).addOnSuccessListener {
+                            runOnUiThread {
+                                Toast.makeText(this@ProductActivity, "Product Updated", Toast.LENGTH_SHORT).show()
+                                bottomSheetDialog.dismiss()
+                            }
+                        }.addOnFailureListener {
+                            runOnUiThread {
+                                Toast.makeText(this@ProductActivity, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        runOnUiThread {
+                            Log.d("ProductActivity", "Error: ${e.message}")
+                            Toast.makeText(this@ProductActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+            }
         }
     }
 

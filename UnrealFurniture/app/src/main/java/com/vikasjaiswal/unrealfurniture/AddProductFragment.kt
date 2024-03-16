@@ -290,7 +290,7 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
-                if (productName.text.toString().isBlank() && !Pattern.matches("^(?!\\s)[a-zA-Z0-9\\s]{2,}$", productName.text.toString())) {
+                if (productName.text.toString().isBlank() || !Pattern.matches("^(?!\\s)[a-zA-Z0-9\\s]{2,}$", productName.text.toString())) {
                     withContext(Dispatchers.Main){
                         productName.error = "Please enter valid product name"
                         productName.requestFocus()
@@ -298,7 +298,7 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
-                if (productDescription.text.toString().isBlank() && productDescription.text.toString().length < 100)  {
+                if (productDescription.text.toString().isBlank() || productDescription.text.toString().length < 10)  {
                     withContext(Dispatchers.Main){
                         productDescription.error = "Please enter valid description"
                         productDescription.requestFocus()
@@ -330,7 +330,7 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
-                if (productDiscount.text.toString().toInt() <= 0 && productDiscount.text.toString().toInt() >= 100){
+                if (productDiscount.text.toString().toInt() <= 0 || productDiscount.text.toString().toInt() >= 100){
                     withContext(Dispatchers.Main){
                         productDiscount.error = "Please enter valid discount"
                         productDiscount.requestFocus()
