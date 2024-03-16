@@ -28,7 +28,6 @@ class OrderDetailsActivity : AppCompatActivity() {
     var db = FirebaseFirestore.getInstance()
     var auth = FirebaseAuth.getInstance()
 
-
     lateinit var detailOrderId : TextView
     lateinit var detailOrderDate : TextView
     lateinit var detailOrderDeliveryDate : TextView
@@ -119,8 +118,8 @@ class OrderDetailsActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             db.collection("orders").document(orderId!!).get().addOnSuccessListener {
                 detailOrderId.text = "Order ID: #"+it.id
-                detailOrderDate.text = "Order Date: "+it.getString("orderDate")?.substring(0, 17)
-                detailOrderDeliveryDate.text = "Delivery Date: "+it.getString("expectedDeliveryDate")?.substring(0, 12)
+                detailOrderDate.text = "Order Date: "+it.getString("orderDate")
+                detailOrderDeliveryDate.text = "Delivery Date: "+it.getString("expectedDeliveryDate")?.substring(0, 10)
                 detailOrderStatus.text = "Order Status: "+it.getString("orderStatus")
 
                 detailUserName.text = "Name: "+it.getString("userName")
@@ -143,7 +142,7 @@ class OrderDetailsActivity : AppCompatActivity() {
                     cancelOrder.isEnabled = false
                 }
 
-                if (it.getString("orderStatus") == "Delivered") {
+                if (it.getString("orderStatus") == "Order Delivered") {
                     detailRatingBar.isEnabled = true
                     orderReview.isEnabled = true
                     ratingReviewSubmit.isEnabled = true
@@ -159,12 +158,12 @@ class OrderDetailsActivity : AppCompatActivity() {
                 val prodIds = it.get("prodIds") as ArrayList<String>
                 val prodImages = it.get("prodImages") as ArrayList<String>
                 val prodNames = it.get("prodNames") as ArrayList<String>
-                val prodPrices = it.get("prodPrices") as  ArrayList<String>
-                val prodDiscounts = it.get("prodDiscounts") as ArrayList<String>
-                val prodDiscountedPrices = it.get("prodDiscountedPrices") as ArrayList<String>
-                val prodQuantities = it.get("prodQuantities") as ArrayList<String>
+                val prodPrices = it.get("prodPrices") as  ArrayList<Int>
+                val prodDiscounts = it.get("prodDiscounts") as ArrayList<Int>
+                val prodDiscountedPrices = it.get("prodDiscountedPrices") as ArrayList<Int>
+                val prodQuantities = it.get("prodQuantities") as ArrayList<Int>
                 val prodRatings = it.get("prodRatings") as ArrayList<String>
-                val prodRatingCounts = it.get("prodRatingCounts") as ArrayList<String>
+                val prodRatingCounts = it.get("prodRatingCounts") as ArrayList<Int>
 
                 orderDetailsAdapter!!.setData(
                     prodIds,
@@ -182,7 +181,7 @@ class OrderDetailsActivity : AppCompatActivity() {
 
         cancelOrder.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.collection("orders").document(orderId!!).update("orderStatus", "Cancelled").addOnSuccessListener {
+                db.collection("orders").document(orderId!!).update("orderStatus", "Order Cancelled").addOnSuccessListener {
                     finish()
                 }
             }

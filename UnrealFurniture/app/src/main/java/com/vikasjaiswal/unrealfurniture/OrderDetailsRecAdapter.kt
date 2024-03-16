@@ -22,24 +22,24 @@ class OrderDetailsRecAdapter(private val onDataChanged: () -> Unit) : RecyclerVi
     var prodIds = ArrayList<String>()
     var prodImages = ArrayList<String>()
     var prodNames = ArrayList<String>()
-    var prodPrices = ArrayList<String>()
-    var prodDiscounts = ArrayList<String>()
-    var prodDiscountedPrices = ArrayList<String>()
-    var prodQuantities = ArrayList<String>()
+    var prodPrices = ArrayList<Int>()
+    var prodDiscounts = ArrayList<Int>()
+    var prodDiscountedPrices = ArrayList<Int>()
+    var prodQuantities = ArrayList<Int>()
     var prodRatings = ArrayList<String>()
-    var prodRatingCounts = ArrayList<String>()
+    var prodRatingCounts = ArrayList<Int>()
 
 
     fun setData(
         prodIds: ArrayList<String>,
         prodImages: ArrayList<String>,
         prodNames: ArrayList<String>,
-        prodPrices: ArrayList<String>,
-        prodDiscounts: ArrayList<String>,
-        prodDiscountedPrices: ArrayList<String>,
-        prodQuantities: ArrayList<String>,
+        prodPrices: ArrayList<Int>,
+        prodDiscounts: ArrayList<Int>,
+        prodDiscountedPrices: ArrayList<Int>,
+        prodQuantities: ArrayList<Int>,
         prodRatings: ArrayList<String>,
-        prodRatingCounts: ArrayList<String>
+        prodRatingCounts: ArrayList<Int>
     ) {
         this.prodIds = prodIds
         this.prodImages = prodImages
@@ -91,7 +91,7 @@ class OrderDetailsRecAdapter(private val onDataChanged: () -> Unit) : RecyclerVi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.checkoutProdName.text = prodNames[position]
         holder.checkoutProdPrice.text = "₹"+prodPrices[position].toInt()*prodQuantities[position].toInt()
-        holder.checkoutProdDiscount.text = prodDiscounts[position]+"% off"
+        holder.checkoutProdDiscount.text = prodDiscounts[position].toString()+"% off"
         holder.checkoutProdDiscountedPrice.text = "₹"+prodDiscountedPrices[position].toInt()*prodQuantities[position].toInt()
         holder.checkoutProdQuantity.text = "Quantity: "+prodQuantities[position]
         holder.checkoutProdRating.rating = prodRatings[position].toFloat()

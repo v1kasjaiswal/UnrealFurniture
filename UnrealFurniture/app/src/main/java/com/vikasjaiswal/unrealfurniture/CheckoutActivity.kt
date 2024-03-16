@@ -215,6 +215,8 @@ class CheckoutActivity : AppCompatActivity() {
                 var prodDiscounts = checkoutProductAdapter!!.prodDiscounts
                 var prodDiscountedPrices = checkoutProductAdapter!!.prodDiscountedPrices
                 var prodQuantities = checkoutProductAdapter!!.prodQuantities
+                var prodRatings = checkoutProductAdapter!!.prodRatings
+                var prodRatingCounts = checkoutProductAdapter!!.prodRatingCounts
                 var overAllPrice = overAllRealPrice.text.toString().replace("₹","")
                 var overAllDiscountedPrice = overAllDiscountedPrice.text.toString().replace("₹","")
                 var overAllDiscount = overAllDiscount.text.toString().replace("% ↓", "")
@@ -251,6 +253,8 @@ class CheckoutActivity : AppCompatActivity() {
                     "prodDiscounts" to prodDiscounts,
                     "prodDiscountedPrices" to prodDiscountedPrices,
                     "prodQuantities" to prodQuantities,
+                    "prodRatings" to prodRatings,
+                    "prodRatingCounts" to prodRatingCounts,
                     "overAllPrice" to overAllPrice,
                     "overAllDiscountedPrice" to overAllDiscountedPrice,
                     "overAllDiscount" to overAllDiscount,

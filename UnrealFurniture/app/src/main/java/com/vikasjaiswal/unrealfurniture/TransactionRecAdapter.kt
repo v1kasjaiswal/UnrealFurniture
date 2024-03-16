@@ -11,11 +11,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.firebase.firestore.ListenerRegistration
 
-class TransactionRecAdapter(private val onDataChanged: () -> Unit)  : RecyclerView.Adapter<TransactionRecAdapter.ViewHolder>() {
+class TransactionRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Adapter<TransactionRecAdapter.ViewHolder>() {
 
     var auth = FirebaseAuth.getInstance()
     var db = FirebaseFirestore.getInstance()
@@ -26,24 +24,27 @@ class TransactionRecAdapter(private val onDataChanged: () -> Unit)  : RecyclerVi
     var orderExpectedDates = listOf<String>()
     var orderGrandTotals = listOf<String>()
 
+    private var listener: ListenerRegistration? = null
+
     init {
+        // Initially load data
         updateData("Order Placed")
     }
 
-    fun setData(data : List<String>) {
+    fun setData(data: List<String>) {
         orderIds = data
         notifyDataSetChanged()
         onDataChanged.invoke()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        lateinit var orderId : TextView
-        lateinit var orderDate : TextView
-        lateinit var orderExpectedDate : TextView
-        lateinit var orderStatus : TextView
-        lateinit var orderTotal : TextView
+        lateinit var orderId: TextView
+        lateinit var orderDate: TextView
+        lateinit var orderExpectedDate: TextView
+        lateinit var orderStatus: TextView
+        lateinit var orderTotal: TextView
 
-        lateinit var myOrderCardView : CardView
+        lateinit var myOrderCardView: CardView
 
         init {
             orderId = itemView.findViewById(R.id.orderId)
@@ -68,11 +69,11 @@ class TransactionRecAdapter(private val onDataChanged: () -> Unit)  : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.orderId.text = "Order ID: #"+orderIds[position]
-        holder.orderDate.text = "Order Date: "+orderDates[position]
-        holder.orderExpectedDate.text = "Delivery Date: "+orderExpectedDates[position]
-        holder.orderStatus.text = "Order Status: "+orderStatus[position]
-        holder.orderTotal.text = "Order Price: ₹"+orderGrandTotals[position]
+        holder.orderId.text = "Order ID: #${orderIds[position]}"
+        holder.orderDate.text = "Order Date: ${orderDates[position]}"
+        holder.orderExpectedDate.text = "Delivery Date: ${orderExpectedDates[position]}"
+        holder.orderStatus.text = "Order Status: ${orderStatus[position]}"
+        holder.orderTotal.text = "Order Price: ₹${orderGrandTotals[position]}"
 
         holder.myOrderCardView.setOnClickListener {
             val intent = Intent(holder.itemView.context, OrderDetailsActivity::class.java)
@@ -81,26 +82,34 @@ class TransactionRecAdapter(private val onDataChanged: () -> Unit)  : RecyclerVi
         }
     }
 
-    public fun updateData(status: String){
-        CoroutineScope(Dispatchers.IO).launch {
-            db.collection("orders")
-                .whereEqualTo("orderStatus", status)
-                .get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        orderIds += document.id
-                        orderStatus += document.data["orderStatus"].toString()
-                        orderDates += document.data["orderDate"].toString()
-                        orderExpectedDates += document.data["orderExpectedDate"].toString()
-                        orderGrandTotals += document.data["orderGrandTotal"].toString()
-                    }
-                    setData(orderIds)
+    fun updateData(status: String) {
+        // Ensure to stop listening before starting again
+        stopListening()
+        // Start listening for changes in orders collection where orderStatus is equal to status
+        listener = db.collection("orders")
+            .whereEqualTo("orderStatus", status)
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Log.w("TransactionRecAdapter", "Listen failed", e)
+                    return@addSnapshotListener
+                }
+
+                if (snapshots != null) {
+                    orderIds = snapshots.documents.map { it.id }
+                    orderStatus = snapshots.documents.map { it.getString("orderStatus") ?: "" }
+                    orderDates = snapshots.documents.map { it.getString("orderDate") ?: "" }
+                    orderExpectedDates = snapshots.documents.map { it.getString("expectedDeliveryDate")?.substring(0, 10) ?: "" }
+                    orderGrandTotals = snapshots.documents.map { it.getString("grandTotal")?.toString() ?: "" }
+
                     notifyDataSetChanged()
                     onDataChanged.invoke()
+                } else {
+                    Log.d("TransactionRecAdapter", "Current data: null")
                 }
-                .addOnFailureListener {
-                    Log.d("TransactionRecAdapter", "Error getting documents: ", it)
-                }
-        }
+            }
+    }
+
+    fun stopListening() {
+        listener?.remove()
     }
 }
