@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.faltenreich.skeletonlayout.Skeleton
+import com.google.android.material.tabs.TabLayout
 
 class MyOrdersActivity : AppCompatActivity() {
 
@@ -23,6 +24,8 @@ class MyOrdersActivity : AppCompatActivity() {
 
     private lateinit var myOrderAnimation : LottieAnimationView
     private lateinit var emptyOrderTextView: TextView
+
+    private lateinit var myOrdersTabLayout: TabLayout
 
     private lateinit var goBack : CardView
 
@@ -66,6 +69,30 @@ class MyOrdersActivity : AppCompatActivity() {
 
         myOrderAnimation = findViewById(R.id.myOrderAnimation)
         emptyOrderTextView = findViewById(R.id.emptyOrderTextView)
+
+        myOrdersTabLayout = findViewById(R.id.myOrdersTabLayout)
+
+        myOrdersTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> {
+                        myOrderAdapter!!.updateData("Order Placed")
+                    }
+                    1 -> {
+                        myOrderAdapter!!.updateData("Order Delivered")
+                    }
+                    2 -> {
+                        myOrderAdapter!!.updateData("Order Cancelled")
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
 
         if (myOrderAdapter!!.itemCount == 0) {
             myOrderAnimation.visibility = View.VISIBLE

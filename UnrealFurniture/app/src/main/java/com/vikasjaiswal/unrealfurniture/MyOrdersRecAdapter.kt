@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class MyOrdersRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.A
     private var listener: ListenerRegistration? = null
 
     init {
-        updateData()
+        updateData("Order Placed")
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -63,10 +64,20 @@ class MyOrdersRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.A
         }
     }
 
-    private fun updateData() {
+    fun updateData(status: String) {
         val userId = auth.currentUser?.uid
         val orderRef = db.collection("orders")
-        val query = orderRef.whereEqualTo("userId", userId)
+
+        var query : Query
+
+        if (status.equals("Order Placed")){
+            query = orderRef.whereEqualTo("userId", userId).whereEqualTo("orderStatus", "Order Placed")
+                .whereEqualTo("orderStatus", "Order Shipped").whereEqualTo("orderStatus", "Order Out for Delivery")
+        }
+        else{
+            query = orderRef.whereEqualTo("userId", userId).whereEqualTo("orderStatus", status)
+        }
+
         listener = query.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 Log.w("MyOrdersRecAdapter", "Listen failed", exception)
