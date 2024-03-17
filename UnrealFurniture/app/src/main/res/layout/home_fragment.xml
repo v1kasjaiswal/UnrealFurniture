@@ -108,6 +108,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/sofasSection"
                         android:layout_width="110dp"
                         android:layout_height="130dp">
 

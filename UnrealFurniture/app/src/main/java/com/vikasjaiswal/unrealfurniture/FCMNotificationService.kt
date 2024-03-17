@@ -27,12 +27,12 @@ class FCMNotificationService : FirebaseMessagingService() {
 
         Notify.defaultConfig {
             header {
-                color = resources.getColor(R.color.darker)
-                icon = R.drawable.myorders
+                color = resources.getColor(R.color.dark)
+                icon = R.drawable.cart
                 showTimestamp = true
             }
             alerting(Notify.CHANNEL_DEFAULT_KEY) {
-                lightColor = resources.getColor(R.color.darker)
+                lightColor = resources.getColor(R.color.dark)
                 Log.d("FCM", Notify.IMPORTANCE_MAX.toString())
                 channelImportance = Notify.IMPORTANCE_MAX
             }

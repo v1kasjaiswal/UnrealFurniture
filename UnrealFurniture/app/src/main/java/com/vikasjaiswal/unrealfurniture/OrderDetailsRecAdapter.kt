@@ -1,11 +1,13 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -64,6 +66,8 @@ class OrderDetailsRecAdapter(private val onDataChanged: () -> Unit) : RecyclerVi
         lateinit var checkoutProdRating : RatingBar
         lateinit var checkoutProdRatingCount : TextView
 
+        lateinit var checkoutProdCard : CardView
+
         init {
             checkoutProdName = itemView.findViewById(R.id.checkoutProdName)
             checkoutProdMainImage = itemView.findViewById(R.id.checkoutProdMainImage)
@@ -75,6 +79,8 @@ class OrderDetailsRecAdapter(private val onDataChanged: () -> Unit) : RecyclerVi
             checkoutProdRatingCount = itemView.findViewById(R.id.checkoutProdRatingCounts)
 
             checkoutProdPrice.paint.isStrikeThruText = true
+
+            checkoutProdCard = itemView.findViewById(R.id.checkoutProdCard)
         }
     }
 
@@ -93,10 +99,16 @@ class OrderDetailsRecAdapter(private val onDataChanged: () -> Unit) : RecyclerVi
         holder.checkoutProdPrice.text = "₹"+prodPrices[position].toInt()*prodQuantities[position].toInt()
         holder.checkoutProdDiscount.text = prodDiscounts[position].toString()+"% off"
         holder.checkoutProdDiscountedPrice.text = "₹"+prodDiscountedPrices[position].toInt()*prodQuantities[position].toInt()
-        holder.checkoutProdQuantity.text = "Quantity: "+prodQuantities[position]
+        holder.checkoutProdQuantity.text = "Qnty: "+prodQuantities[position]
         holder.checkoutProdRating.rating = prodRatings[position].toFloat()
         holder.checkoutProdRatingCount.text = "("+prodRatingCounts[position]+")"
 
         Picasso.get().load(prodImages[position]).into(holder.checkoutProdMainImage)
+
+        holder.checkoutProdCard.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ProductActivity::class.java)
+            intent.putExtra("productId", prodIds[position])
+            holder.itemView.context.startActivity(intent)
+        }
     }
 }

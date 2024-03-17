@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager

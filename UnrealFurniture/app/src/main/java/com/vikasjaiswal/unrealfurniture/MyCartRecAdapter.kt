@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.google.firebase.auth.FirebaseAuth
@@ -71,6 +72,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
 
         lateinit var removeCart : ImageView
 
+        lateinit var cartCardView : CardView
+
         init {
             prodMainImage = itemView.findViewById(R.id.cartProdMainImage)
             prodName = itemView.findViewById(R.id.cartProdName)
@@ -80,11 +83,15 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
             prodRating = itemView.findViewById(R.id.cartProdRating)
             prodRatingCount = itemView.findViewById(R.id.cartProdRatingCount)
 
+            prodPrice.paint.isStrikeThruText = true
+
             incrementQuantity = itemView.findViewById(R.id.incrementQuantity)
             decrementQuantity = itemView.findViewById(R.id.decrementQuantity)
             prodQuantity = itemView.findViewById(R.id.prodQuantity)
 
             removeCart = itemView.findViewById(R.id.removeCart)
+
+            cartCardView = itemView.findViewById(R.id.cartCardView)
         }
     }
 
@@ -105,7 +112,7 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         holder.prodDiscount.text = discounts[position].toString()+"% ↓"
         holder.prodDiscountedPrice.text = "₹"+discountedPrice[position]
         holder.prodRating.rating = ratings[position].toFloat()
-        holder.prodRatingCount.text = ratingCounts[position].toString()
+        holder.prodRatingCount.text = "("+ratingCounts[position].toString()+")"
         holder.prodQuantity.text = quantity[position].toString()
 
         Picasso.get().load(mainImages[position]).placeholder(R.drawable.blank).into(holder.prodMainImage)
@@ -138,7 +145,11 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
             removeCart(position)
         }
 
-
+        holder.cartCardView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ProductActivity::class.java)
+            intent.putExtra("productId", prodIds[position])
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     private fun updateData(){

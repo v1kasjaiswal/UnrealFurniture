@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -56,6 +58,8 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
 
         lateinit var removeWish: ImageView
 
+        lateinit var wishCardView : CardView
+
         init {
             wishMainImage = itemView.findViewById(R.id.wishMainImage)
             wishName = itemView.findViewById(R.id.wishName)
@@ -65,7 +69,11 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
             wishRating = itemView.findViewById(R.id.wishRating)
             wishRatingCount = itemView.findViewById(R.id.wishRatingCount)
 
+            wishPrice.paint.isStrikeThruText = true
+
             removeWish = itemView.findViewById(R.id.wishRemove)
+
+            wishCardView = itemView.findViewById(R.id.wishCardView)
         }
     }
 
@@ -92,6 +100,12 @@ class MyWishListRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView
 
         holder.removeWish.setOnClickListener {
             removeWish(position)
+        }
+
+        holder.wishCardView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ProductActivity::class.java)
+            intent.putExtra("productId", prodIds[position])
+            holder.itemView.context.startActivity(intent)
         }
     }
 

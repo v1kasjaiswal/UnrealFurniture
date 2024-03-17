@@ -250,22 +250,26 @@ class SearchRecAdapter(private val onDataChanged: () -> Unit)  : RecyclerView.Ad
                         result.documents
                     }
                 }
-                .map { it.id }
+                    .map { it.id }
 
-                if (outOfStock) {
-                    sortedProductIds.filter { id -> result.documents.first { it.id == id }.getLong("productStock")?.toInt() == 0 }
+                val filteredProductIds = if (outOfStock) {
+                    sortedProductIds.filter { id ->
+                        result.documents.first { it.id == id }.getLong("productStock")?.toInt()!! <= 0
+                    }
+                } else {
+                    sortedProductIds
                 }
 
-                productIds = sortedProductIds
-                productNames = sortedProductIds.map { id -> result.documents.first { it.id == id }.getString("productName").toString() }
-                productMainImages = sortedProductIds.map { id -> result.documents.first { it.id == id }.getString("prodMainImage").toString() }
-                productCategories = sortedProductIds.map { id -> result.documents.first { it.id == id }.getString("productCategory").toString() }
-                productRealPrices = sortedProductIds.map { id -> result.documents.first { it.id == id }.getLong("productPrice")?.toInt() ?: 0 }
-                productDiscounts = sortedProductIds.map { id -> result.documents.first { it.id == id }.getLong("productDiscount")?.toInt() ?: 0 }
-                productDiscountedPrices = sortedProductIds.map { id -> result.documents.first { it.id == id }.getLong("productDiscountedPrice")?.toInt() ?: 0 }
-                productRatings = sortedProductIds.map { id -> result.documents.first { it.id == id }.getDouble("prodRating")?.toFloat() ?: 0f }
-                productRatingCounts = sortedProductIds.map { id -> result.documents.first { it.id == id }.getLong("prodRatingCount")?.toInt() ?: 0 }
-                productStocks = sortedProductIds.map { id -> result.documents.first { it.id == id }.getLong("productStock")?.toInt() ?: 0 }
+                productIds = filteredProductIds
+                productNames = filteredProductIds.map { id -> result.documents.first { it.id == id }.getString("productName").toString() }
+                productMainImages = filteredProductIds.map { id -> result.documents.first { it.id == id }.getString("prodMainImage").toString() }
+                productCategories = filteredProductIds.map { id -> result.documents.first { it.id == id }.getString("productCategory").toString() }
+                productRealPrices = filteredProductIds.map { id -> result.documents.first { it.id == id }.getLong("productPrice")?.toInt() ?: 0 }
+                productDiscounts = filteredProductIds.map { id -> result.documents.first { it.id == id }.getLong("productDiscount")?.toInt() ?: 0 }
+                productDiscountedPrices = filteredProductIds.map { id -> result.documents.first { it.id == id }.getLong("productDiscountedPrice")?.toInt() ?: 0 }
+                productRatings = filteredProductIds.map { id -> result.documents.first { it.id == id }.getDouble("prodRating")?.toFloat() ?: 0f }
+                productRatingCounts = filteredProductIds.map { id -> result.documents.first { it.id == id }.getLong("prodRatingCount")?.toInt() ?: 0 }
+                productStocks = filteredProductIds.map { id -> result.documents.first { it.id == id }.getLong("productStock")?.toInt() ?: 0 }
 
                 withContext(Dispatchers.Main) {
                     Log.d("TAG111", "updateData: $productIds")
@@ -302,7 +306,7 @@ class SearchRecAdapter(private val onDataChanged: () -> Unit)  : RecyclerView.Ad
                 }
 
                 val finalProducts = if (outOfStock) {
-                    sortedProducts.filter { it.getLong("productStock") == 0L }
+                    sortedProducts.filter { it.getLong("productStock")!! <= 0L }
                 } else {
                     sortedProducts
                 }

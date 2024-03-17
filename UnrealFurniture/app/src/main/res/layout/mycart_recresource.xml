@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cartCardView"
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="8dp"
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:scaleType="centerCrop"
+                android:padding="5dp"
                 android:src="@drawable/delete"
                 android:layout_marginRight="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"

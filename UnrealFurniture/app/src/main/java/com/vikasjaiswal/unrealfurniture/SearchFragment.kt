@@ -39,6 +39,8 @@ class SearchFragment : Fragment() {
 
     lateinit var searchView : SearchView
 
+    var filter = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,6 +85,7 @@ class SearchFragment : Fragment() {
         filterBy.setOnClickListener {
             openFilterByBottomSheet()
         }
+
 
         selectCategory.setOnClickListener {
             openSelectCategoryBottomSheet()

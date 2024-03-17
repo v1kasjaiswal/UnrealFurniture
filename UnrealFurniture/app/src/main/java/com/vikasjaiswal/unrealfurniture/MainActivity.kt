@@ -1,5 +1,8 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
@@ -53,6 +56,32 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnItemReselectedListener {  }
 
         checkAndRequestPermissions()
+
+        // Register the broadcast receiver
+        registerReceiver(switchFragmentReceiver, IntentFilter("SWITCH_FRAGMENT"))
+
+    }
+
+    private val switchFragmentReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == "SWITCH_FRAGMENT" && intent.hasExtra("filter")) {
+                val filter = intent.getStringExtra("filter")
+                if (filter != null) {
+                    setupFragment(SearchFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("filter", filter)
+                        }
+                    })
+                    bottomNav.selectedItemId = R.id.search
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Unregister the broadcast receiver
+        unregisterReceiver(switchFragmentReceiver)
     }
 
     private fun setupFragment(fragment: Fragment) {

@@ -153,7 +153,12 @@ class OrderDetailsActivity : AppCompatActivity() {
         
         orderUpdate.setOnItemClickListener { parent, view, position, id ->
             CoroutineScope(Dispatchers.IO).launch {
-                db.collection("orders").document(orderId!!).update("orderStatus", orderUpdate.text.toString()).addOnSuccessListener {
+                db.collection("orders").document(orderId!!).update(
+                    mapOf(
+                        "orderStatus" to orderUpdate.text.toString(),
+                        "paymentStatus" to "Paid"
+                    )
+                ).addOnSuccessListener {
 
                     var token = ""
                     var userName = ""
