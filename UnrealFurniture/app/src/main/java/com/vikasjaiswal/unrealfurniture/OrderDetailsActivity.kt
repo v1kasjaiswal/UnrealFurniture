@@ -227,6 +227,7 @@ class OrderDetailsActivity : AppCompatActivity() {
                     orderReview.isEnabled = false
                     ratingReviewSubmit.isEnabled = false
                     orderUpdate.isEnabled = false
+                    paymentStatus.text = "Not Applicable"
                 }
                 else {
                     detailRatingBar.isEnabled = false
@@ -267,6 +268,29 @@ class OrderDetailsActivity : AppCompatActivity() {
                     )
                 ).addOnSuccessListener {
                     CoroutineScope(Dispatchers.Main).launch {
+
+                        for (i in 0 until orderDetailsAdapter!!.itemCount) {
+                            db.collection("products").document(orderDetailsAdapter!!.prodIds[i]).get()
+                                .addOnSuccessListener {
+                                    var quantity = it.get("productStock").toString().toInt() + orderDetailsAdapter!!.prodQuantities[i]
+                                    db.collection("products").document(orderDetailsAdapter!!.prodIds[i])
+                                        .update("productStock", quantity)
+                                        .addOnSuccessListener {
+                                            Log.d(
+                                                "TAG",
+                                                "DocumentSnapshot successfully written!"
+                                            )
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.w("TAG", "Error writing document", e)
+                                        }
+                                    Log.d("TAG", "DocumentSnapshot successfully written!")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.w("TAG", "Error writing document", e)
+                                }
+                        }
+
                         var user = auth.currentUser
                         var token = db.collection("users").document(user!!.uid).get().await().get("token").toString()
                         Toast.makeText(this@OrderDetailsActivity, "Order Cancelled", Toast.LENGTH_SHORT).show()

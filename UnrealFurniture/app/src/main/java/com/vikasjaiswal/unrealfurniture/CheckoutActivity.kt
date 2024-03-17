@@ -247,6 +247,29 @@ class CheckoutActivity : AppCompatActivity() {
                     return@launch
                 }
 
+                for (i in 0 until prodIds.size) {
+                    db.collection("products").document(prodIds[i]).get()
+                        .addOnSuccessListener {
+                            var quantity = it.get("productStock").toString().toInt()
+                            if (prodQuantities[i] > quantity) {
+                                runOnUiThread {
+                                    MaterialAlertDialogBuilder(this@CheckoutActivity)
+                                        .setTitle("Out of Stock")
+                                        .setMessage("Sorry! ${prodNames[i]} is out of stock!")
+                                        .setPositiveButton("Ok") { dialog, which ->
+                                            dialog.dismiss()
+                                        }
+                                        .show()
+                                }
+
+                                return@addOnSuccessListener
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("TAG", "Error writing document", e)
+                        }
+                }
+
                 var order = hashMapOf(
                     "userId" to user?.uid,
                     "userName" to userName,
@@ -276,9 +299,32 @@ class CheckoutActivity : AppCompatActivity() {
                 db.collection("orders")
                     .add(order)
                     .addOnSuccessListener {
-                        db.collection("users").document(user!!.uid).update("cartList", emptyList<String>())
+                        db.collection("users").document(user!!.uid)
+                            .update("cartList", emptyList<String>())
                             .addOnSuccessListener {
                                 Log.d("TAG", "DocumentSnapshot successfully written!")
+
+                                for (i in 0 until prodIds.size) {
+                                    db.collection("products").document(prodIds[i]).get()
+                                        .addOnSuccessListener {
+                                            var quantity = it.get("productStock").toString().toInt() - prodQuantities[i]
+                                            db.collection("products").document(prodIds[i])
+                                                .update("productStock", quantity)
+                                                .addOnSuccessListener {
+                                                    Log.d(
+                                                        "TAG",
+                                                        "DocumentSnapshot successfully written!"
+                                                    )
+                                                }
+                                                .addOnFailureListener { e ->
+                                                    Log.w("TAG", "Error writing document", e)
+                                                }
+                                            Log.d("TAG", "DocumentSnapshot successfully written!")
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.w("TAG", "Error writing document", e)
+                                        }
+                                }
 
                                 orderPlacedNotification()
 
