@@ -22,6 +22,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.firestore
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,8 +96,42 @@ class SignInActivity : AppCompatActivity() {
 
                                         if (user!=null && emailtxt=="unrealadmin@gmail.com"){
                                             if (passtxt=="Admin@2048"){
-
                                                 Log.d("Admin", "Admin Logged In")
+
+                                                CoroutineScope(Dispatchers.IO).launch {
+                                                    FirebaseMessaging.getInstance().token
+                                                        .addOnCompleteListener { task ->
+                                                            if (task.isSuccessful) {
+                                                                var token = task.result.toString()
+                                                                db.collection("users")
+                                                                    .document(user.uid)
+                                                                    .update("token", token)
+                                                                    .addOnSuccessListener {
+                                                                        Log.d(
+                                                                            "SignInActivity",
+                                                                            "Token Updated"
+                                                                        )
+                                                                    }
+                                                                    .addOnFailureListener {
+                                                                        Log.d(
+                                                                            "SignInActivity",
+                                                                            "Token Not Updated"
+                                                                        )
+                                                                    }
+                                                            } else {
+                                                                Log.d(
+                                                                    "SignInActivity",
+                                                                    "Token Not Found"
+                                                                )
+                                                            }
+                                                        }
+                                                        .addOnFailureListener {
+                                                            Log.d(
+                                                                "SignInActivity",
+                                                                "Token Not Found"
+                                                            )
+                                                        }
+                                                }
 
                                                 val intent = Intent(
                                                     this@SignInActivity,
@@ -112,6 +147,41 @@ class SignInActivity : AppCompatActivity() {
                                         }
                                         else if (user != null && user.isEmailVerified) {
                                             if (task.isSuccessful) {
+
+                                                CoroutineScope(Dispatchers.IO).launch {
+                                                    FirebaseMessaging.getInstance().token
+                                                        .addOnCompleteListener { task ->
+                                                            if (task.isSuccessful) {
+                                                                var token = task.result.toString()
+                                                                db.collection("users")
+                                                                    .document(user.uid)
+                                                                    .update("token", token)
+                                                                    .addOnSuccessListener {
+                                                                        Log.d(
+                                                                            "SignInActivity",
+                                                                            "Token Updated"
+                                                                        )
+                                                                    }
+                                                                    .addOnFailureListener {
+                                                                        Log.d(
+                                                                            "SignInActivity",
+                                                                            "Token Not Updated"
+                                                                        )
+                                                                    }
+                                                            } else {
+                                                                Log.d(
+                                                                    "SignInActivity",
+                                                                    "Token Not Found"
+                                                                )
+                                                            }
+                                                        }
+                                                        .addOnFailureListener {
+                                                            Log.d(
+                                                                "SignInActivity",
+                                                                "Token Not Found"
+                                                            )
+                                                        }
+                                                }
                                                 val intent = Intent(
                                                     this@SignInActivity,
                                                     MainActivity::class.java
@@ -212,6 +282,40 @@ class SignInActivity : AppCompatActivity() {
                                                         db.collection("users").document(user.uid)
                                                             .set(userMap)
                                                             .addOnSuccessListener {
+
+                                                                FirebaseMessaging.getInstance().token
+                                                                    .addOnCompleteListener { task ->
+                                                                        if (task.isSuccessful) {
+                                                                            var token = task.result.toString()
+                                                                            db.collection("users")
+                                                                                .document(user.uid)
+                                                                                .update("token", token)
+                                                                                .addOnSuccessListener {
+                                                                                    Log.d(
+                                                                                        "SignInActivity",
+                                                                                        "Token Updated"
+                                                                                    )
+                                                                                }
+                                                                                .addOnFailureListener {
+                                                                                    Log.d(
+                                                                                        "SignInActivity",
+                                                                                        "Token Not Updated"
+                                                                                    )
+                                                                                }
+                                                                        } else {
+                                                                            Log.d(
+                                                                                "SignInActivity",
+                                                                                "Token Not Found"
+                                                                            )
+                                                                        }
+                                                                    }
+                                                                    .addOnFailureListener {
+                                                                        Log.d(
+                                                                            "SignInActivity",
+                                                                            "Token Not Found"
+                                                                        )
+                                                                    }
+
                                                                 runOnUiThread {
                                                                     val intent = Intent(
                                                                         this@SignInActivity,

@@ -31,7 +31,7 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
     var prices = listOf<Int>()
     var discounts = listOf<Int>()
     var discountedPrice = listOf<Int>()
-    var ratings = listOf<Float>()
+    var ratings = listOf<String>()
     var quantity = mutableListOf<Int>()
 
     var ratingCounts = listOf<Int>()
@@ -100,7 +100,6 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Picasso.get().load(mainImages[position]).placeholder(R.drawable.blank).into(holder.prodMainImage)
         holder.prodName.text = names[position]
         holder.prodPrice.text = "₹"+prices[position]
         holder.prodDiscount.text = discounts[position].toString()+"% ↓"
@@ -108,6 +107,8 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         holder.prodRating.rating = ratings[position].toFloat()
         holder.prodRatingCount.text = ratingCounts[position].toString()
         holder.prodQuantity.text = quantity[position].toString()
+
+        Picasso.get().load(mainImages[position]).placeholder(R.drawable.blank).into(holder.prodMainImage)
 
         holder.incrementQuantity.setOnClickListener {
             var pquantity = holder.prodQuantity.text.toString().toInt()
@@ -149,20 +150,30 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
                     if (document.exists()) {
                         val cartList = document.get("cartList") as? List<String> ?: emptyList()
                         if (cartList.isNotEmpty()) {
-                            prodIds = cartList
                             for (i in cartList) {
                                 val prodRef = db.collection("products").document(i)
                                 prodRef.get().addOnSuccessListener { document ->
                                     if (document.exists()) {
+                                        prodIds = prodIds.plus(document.id)
                                         mainImages = mainImages.plus(document.get("prodMainImage").toString())
                                         names = names.plus(document.get("productName").toString())
                                         prices = prices.plus(document.get("productPrice").toString().toInt())
                                         discounts = discounts.plus(document.get("productDiscount").toString().toInt())
                                         discountedPrice = discountedPrice.plus(document.get("productDiscountedPrice").toString().toInt())
                                         quantity.add(1)
-                                        ratings = ratings.plus(document.get("prodRating").toString().toFloat())
+                                        ratings = ratings.plus(document.get("prodRating").toString())
                                         ratingCounts = ratingCounts.plus(document.get("prodRatingCount").toString().toInt())
                                     }
+
+                                    Log.d("MAInIMage", mainImages.toString())
+                                    Log.d("Names", names.toString())
+                                    Log.d("Prices", prices.toString())
+                                    Log.d("Discounts", discounts.toString())
+                                    Log.d("DiscountedPrices", discountedPrice.toString())
+                                    Log.d("Ratings", ratings.toString())
+                                    Log.d("RatingCounts", ratingCounts.toString())
+                                    Log.d("Quantity", quantity.toString())
+
                                     calculateCartPrice()
                                     notifyDataSetChanged()
                                     onDataChanged.invoke()
@@ -229,16 +240,36 @@ class MyCartRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.Ada
         }
     }
 
-    public fun calculateCartPrice(){
-        for (i in 0 until prodIds.size){
+    public fun calculateCartPrice() {
+        var totalRealPrice = 0
+        var totalDiscountedPrice = 0
+        var totalQuantity = 0
 
-            Log.d("MyCartRecAdapter", "calculateCartPrice: ${prices[i]} * ${quantity[i]} = ${prices[i].toInt() * quantity[i].toInt()}")
+        for (i in prodIds.indices) {
+            val realPrice = prices[i].toInt() * quantity[i].toInt()
+            val discountedPrice = discountedPrice[i].toInt() * quantity[i].toInt()
 
-            overAllRealPrice = prices[i].toInt() * quantity[i].toInt()
-            overAllDiscountedPrice = discountedPrice[i].toInt() * quantity[i].toInt()
-            overAllQuantity = quantity[i].toInt()
-            overAllDiscount = ((overAllRealPrice - overAllDiscountedPrice) / overAllRealPrice) * 100
+            totalRealPrice += realPrice
+            totalDiscountedPrice += discountedPrice
+            totalQuantity += quantity[i].toInt()
+
+            Log.d("Product $i Real Price", realPrice.toString())
+            Log.d("Product $i Discounted Price", discountedPrice.toString())
         }
+
+        val totalDiscount = if (totalRealPrice != 0) {
+            ((totalRealPrice - totalDiscountedPrice) / totalRealPrice.toFloat()) * 100
+        } else {
+            0
+        }
+
+        overAllRealPrice = totalRealPrice
+        overAllDiscountedPrice = totalDiscountedPrice
+        overAllQuantity = totalQuantity
+        overAllDiscount = totalDiscount.toInt()
+
+
+        onDataChanged.invoke()
     }
 
     public fun clearCart(){

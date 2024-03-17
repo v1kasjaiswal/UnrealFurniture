@@ -23,7 +23,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import org.json.JSONObject
+import java.io.IOException
 import java.time.LocalDate
 import java.util.regex.Pattern
 
@@ -147,6 +154,28 @@ class OrderDetailsActivity : AppCompatActivity() {
         orderUpdate.setOnItemClickListener { parent, view, position, id ->
             CoroutineScope(Dispatchers.IO).launch {
                 db.collection("orders").document(orderId!!).update("orderStatus", orderUpdate.text.toString()).addOnSuccessListener {
+
+                    var token = ""
+                    var userName = ""
+                    db.collection("orders").document(orderId).get().addOnSuccessListener {
+                        var userId = it.getString("userId")
+                        userName = it.getString("userName")!!
+                        db.collection("users").document(userId!!).get().addOnSuccessListener {
+                            token = it.get("token").toString()
+                        }
+                    }
+
+                    var jsonObject = JSONObject()
+                    var jsonObjectData = JSONObject()
+
+                    jsonObjectData.put("title", "Order Status Updated")
+                    jsonObjectData.put("body", "Hey! $userName your order status has been updated to ${orderUpdate.text.toString()} for order ID: $orderId")
+
+                    jsonObject.put("to", token)
+                    jsonObject.put("data", jsonObjectData)
+
+                    processNotification(jsonObject)
+
                     runOnUiThread {
                         Toast.makeText(this@OrderDetailsActivity, "Order Status Updated", Toast.LENGTH_SHORT).show()
                     }
@@ -176,6 +205,9 @@ class OrderDetailsActivity : AppCompatActivity() {
                 detailPaymentMethod.text = it.getString("paymentMethod")
                 paymentStatus.text = it.getString("paymentStatus") ?: "Pending"
 
+                detailRatingBar.rating = it.getString("orderRating")?.toFloat() ?: 0f
+                orderReview.text = it.getString("orderReview")
+
                 if (it.getString("orderStatus") == "Order Placed") {
                     cancelOrder.isEnabled = true
                 } else {
@@ -189,7 +221,14 @@ class OrderDetailsActivity : AppCompatActivity() {
 
                     detailRatingBar.rating = it.getString("orderRating")?.toFloat() ?: 0f
                     orderReview.setText(it.getString("orderReview"))
-                } else {
+                }
+                else if (it.getString("orderStatus") == "Order Cancelled") {
+                    detailRatingBar.isEnabled = false
+                    orderReview.isEnabled = false
+                    ratingReviewSubmit.isEnabled = false
+                    orderUpdate.isEnabled = false
+                }
+                else {
                     detailRatingBar.isEnabled = false
                     orderReview.isEnabled = false
                     ratingReviewSubmit.isEnabled = false
@@ -221,7 +260,30 @@ class OrderDetailsActivity : AppCompatActivity() {
 
         cancelOrder.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.collection("orders").document(orderId!!).update("orderStatus", "Order Cancelled").addOnSuccessListener {
+                db.collection("orders").document(orderId!!).update(
+                    mapOf(
+                        "orderStatus" to "Order Cancelled",
+                        "paymentStatus" to "Not Applicable"
+                    )
+                ).addOnSuccessListener {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        var user = auth.currentUser
+                        var token = db.collection("users").document(user!!.uid).get().await().get("token").toString()
+                        Toast.makeText(this@OrderDetailsActivity, "Order Cancelled", Toast.LENGTH_SHORT).show()
+
+                        var jsonObject = JSONObject()
+                        var jsonObjectData = JSONObject()
+
+                        jsonObjectData.put("title", "Order Cancelled")
+                        jsonObjectData.put("body", "Hey! ${auth.currentUser?.displayName} your order has been cancelled with ID: $orderId")
+
+                        jsonObject.put("to", token)
+                        jsonObject.put("data", jsonObjectData)
+
+                        processNotification(jsonObject)
+
+                        sendNotificationToAdmin("Order Cancelled", "Hey! ${auth.currentUser?.displayName} has cancelled the order with ID: $orderId")
+                    }
                     finish()
                 }
             }
@@ -236,10 +298,31 @@ class OrderDetailsActivity : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         db.collection("orders").document(orderId!!).update("orderRating", rating.toString()).addOnSuccessListener {
                             db.collection("orders").document(orderId).update("orderReview", review).addOnSuccessListener {
-                                finish()
+
+                                var user = auth.currentUser
+                                var token = ""
+                                db.collection("users").document(user!!.uid).get().addOnSuccessListener {
+                                    token = it.get("token").toString()
+                                }
+
+                                var jsonObject = JSONObject()
+                                var jsonObjectData = JSONObject()
+
+                                jsonObjectData.put("title", "Review Submitted")
+                                jsonObjectData.put("body", "Hey! ${auth.currentUser?.displayName} your review has been submitted.")
+
+                                jsonObject.put("to", token)
+                                jsonObject.put("data", jsonObjectData)
+
+                                processNotification(jsonObject)
+
+                                sendNotificationToAdmin("New Review", "Hey! ${auth.currentUser?.displayName} has submitted a review for order ID: $orderId")
+
                                 runOnUiThread {
                                     Toast.makeText(this@OrderDetailsActivity, "Review Submitted", Toast.LENGTH_SHORT).show()
                                 }
+
+                                finish()
                             }
                         }
                     }
@@ -250,6 +333,52 @@ class OrderDetailsActivity : AppCompatActivity() {
             }
             else{
                 Toast.makeText(this@OrderDetailsActivity,  "Minimum 1 Star is required to Submit Review", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun sendNotificationToAdmin(title: String, body: String) {
+        var token = ""
+        db.collection("users").whereEqualTo("useremail", "unrealadmin@gmail.com").get().addOnSuccessListener {
+            token = it.documents[0].get("token").toString()
+        }
+
+        var jsonObject = JSONObject()
+        var jsonObjectData = JSONObject()
+
+        jsonObjectData.put("title", title)
+        jsonObjectData.put("body", body)
+
+        jsonObject.put("to", token)
+        jsonObject.put("data", jsonObjectData)
+
+        processNotification(jsonObject)
+    }
+
+    private fun processNotification(jsonObject: JSONObject) {
+        val mediaType = MediaType.parse("application/json; charset=utf-8")
+        val client = OkHttpClient()
+        val url = "https://fcm.googleapis.com/fcm/send"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val body = RequestBody.create(mediaType, jsonObject.toString())
+                val request = Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .addHeader("Authorization", "Bearer ${getString(R.string.fcm_servertoken)}")
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+
+                val response = client.newCall(request).execute()
+                if (response.isSuccessful) {
+                    Log.d("TAG", "processNotification: Notification sent successfully")
+                } else {
+                    Log.d("TAG", "processNotification: Failed to send notification ${response.toString()}")
+                }
+
+            } catch (e: IOException) {
+                Log.e("TAG", "processNotification: ${e.message}", e)
             }
         }
     }

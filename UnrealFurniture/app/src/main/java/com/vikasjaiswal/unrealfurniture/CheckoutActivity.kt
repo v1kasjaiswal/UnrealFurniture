@@ -20,8 +20,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import org.json.JSONObject
+import java.io.IOException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -159,6 +167,7 @@ class CheckoutActivity : AppCompatActivity() {
             val prodDiscountedPrices = intent.getIntegerArrayListExtra("prodDiscountedPrices") ?: ArrayList()
             val prodQuantities = intent.getIntegerArrayListExtra("prodQuantities") ?: ArrayList()
             val prodRatings = intent.getStringArrayListExtra("prodRatings") ?: ArrayList()
+            Log.d("TAXGGGtyt", "onCreate: $prodRatings")
             val prodRatingCounts = intent.getIntegerArrayListExtra("prodRatingCounts") ?: ArrayList()
             val overAllRealPrice = intent.getIntExtra("overAllRealPrice", 0)
             val overAllDiscountedPrice = intent.getIntExtra("overAllDiscountedPrice", 0)
@@ -271,6 +280,8 @@ class CheckoutActivity : AppCompatActivity() {
                             .addOnSuccessListener {
                                 Log.d("TAG", "DocumentSnapshot successfully written!")
 
+                                orderPlacedNotification()
+
                                 MaterialAlertDialogBuilder(this@CheckoutActivity)
                                     .setView(R.layout.orderconfirm_dialog)
                                     .setTitle("Order Placed")
@@ -295,6 +306,74 @@ class CheckoutActivity : AppCompatActivity() {
                             }
                             .show()
                     }
+            }
+        }
+    }
+
+    private fun orderReceivedNotification(){
+        CoroutineScope(Dispatchers.IO).launch {
+            var token = db.collection("users")
+                .whereEqualTo("useremail", "unrealadmin@gmail.com")
+                .get()
+                .await()
+                .documents[0]
+                .get("token").toString()
+
+            var jsonObject = JSONObject()
+            var jsonObjectData = JSONObject()
+
+            jsonObjectData.put("title", "Order Received")
+            jsonObjectData.put("body", "Hey! Admin a new order has been received successfully!")
+            jsonObjectData.put("notificationType", "orderReceived")
+
+            jsonObject.put("to", token)
+            jsonObject.put("data", jsonObjectData)
+
+            processNotification(jsonObject)
+        }
+    }
+
+    private fun orderPlacedNotification(){
+        CoroutineScope(Dispatchers.IO).launch {
+            var token = db.collection("users").document(user!!.uid).get().await().get("token").toString()
+
+            var jsonObject = JSONObject()
+            var jsonObjectData = JSONObject()
+
+            jsonObjectData.put("title", "Order Placed!")
+            jsonObjectData.put("body", "Hey! ${auth.currentUser?.displayName} your order has been placed successfully!")
+
+            jsonObject.put("to", token)
+            jsonObject.put("data", jsonObjectData)
+
+            processNotification(jsonObject)
+        }
+    }
+
+    private fun processNotification(jsonObject: JSONObject) {
+        val mediaType = MediaType.parse("application/json; charset=utf-8")
+        val client = OkHttpClient()
+        val url = "https://fcm.googleapis.com/fcm/send"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val body = RequestBody.create(mediaType, jsonObject.toString())
+                val request = Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .addHeader("Authorization", "Bearer ${getString(R.string.fcm_servertoken)}")
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+
+                val response = client.newCall(request).execute()
+                if (response.isSuccessful) {
+                    Log.d("TAG", "processNotification: Notification sent successfully")
+                } else {
+                    Log.d("TAG", "processNotification: Failed to send notification ${response.toString()}")
+                }
+
+            } catch (e: IOException) {
+                Log.e("TAG", "processNotification: ${e.message}", e)
             }
         }
     }

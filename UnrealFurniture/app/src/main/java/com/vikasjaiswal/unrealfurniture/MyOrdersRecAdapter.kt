@@ -71,8 +71,8 @@ class MyOrdersRecAdapter(private val onDataChanged: () -> Unit) : RecyclerView.A
         var query : Query
 
         if (status.equals("Order Placed")){
-            query = orderRef.whereEqualTo("userId", userId).whereEqualTo("orderStatus", "Order Placed")
-                .whereEqualTo("orderStatus", "Order Shipped").whereEqualTo("orderStatus", "Order Out for Delivery")
+            query = orderRef.whereEqualTo("userId", userId)
+                .whereIn("orderStatus", listOf("Order Placed", "Order Shipped", "Order Out for Delivery"))
         }
         else{
             query = orderRef.whereEqualTo("userId", userId).whereEqualTo("orderStatus", status)
