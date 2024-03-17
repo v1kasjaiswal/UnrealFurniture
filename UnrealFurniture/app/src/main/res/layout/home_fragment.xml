@@ -134,7 +134,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 40% Off"
+                            android:text="Upto 40% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -170,7 +170,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 45% Off"
+                            android:text="Upto 45% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -206,7 +206,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 35% Off"
+                            android:text="Upto 35% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
@@ -241,7 +241,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 20% Off"
+                            android:text="Upto 20% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -277,7 +277,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 30% Off"
+                            android:text="Upto 30% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
@@ -312,7 +312,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 40% Off"
+                            android:text="Upto 40% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 
@@ -348,7 +348,7 @@
                             android:layout_gravity="bottom |center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/satoshibold"
-                            android:text="Min. 25% Off"
+                            android:text="Upto 25% Off"
                             android:textColor="@color/light"
                             android:textSize="12sp" />
 

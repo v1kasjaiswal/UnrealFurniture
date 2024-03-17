@@ -195,13 +195,54 @@ class CheckoutActivity : AppCompatActivity() {
                 .setTitle("Confirm Order")
                 .setMessage("Are you sure you want to confirm the order?")
                 .setPositiveButton("Yes") { dialog, which ->
-                    confirmOrder()
+
+                    val prodIds = checkoutProductAdapter?.prodIds ?: emptyList()
+                    val prodQuantities = checkoutProductAdapter?.prodQuantities ?: emptyList()
+
+                    var outOfStockProducts = mutableListOf<String>()
+
+                    var count = 0 // Counter to track number of products checked
+
+                    for (i in prodIds.indices) {
+                        db.collection("products").document(prodIds[i]).get()
+                            .addOnSuccessListener { document ->
+                                val quantity = document.get("productStock") as? Long ?: 0
+                                val requestedQuantity = prodQuantities.getOrNull(i) ?: 0
+
+                                if (requestedQuantity > quantity.toInt()) {
+                                    outOfStockProducts.add(prodIds[i])
+                                }
+
+                                count++ // Increment counter
+
+                                // Check if all products have been checked
+                                if (count == prodIds.size) {
+                                    if (outOfStockProducts.isNotEmpty()) {
+                                        // Show alert for out of stock products
+                                        MaterialAlertDialogBuilder(this)
+                                            .setTitle("Out of Stock")
+                                            .setMessage("Some of the products are out of stock!")
+                                            .setPositiveButton("Ok") { dialog, which ->
+                                                dialog.dismiss()
+                                            }
+                                            .show()
+                                    } else {
+                                        // All products are in stock, proceed with order confirmation
+                                        confirmOrder()
+                                    }
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("TAG", "Error checking product stock", e)
+                            }
+                    }
                 }
                 .setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
                 }
                 .show()
         }
+
     }
 
     private fun updateEmptyViewVisibility() {
@@ -245,29 +286,6 @@ class CheckoutActivity : AppCompatActivity() {
                             .show()
                     }
                     return@launch
-                }
-
-                for (i in 0 until prodIds.size) {
-                    db.collection("products").document(prodIds[i]).get()
-                        .addOnSuccessListener {
-                            var quantity = it.get("productStock").toString().toInt()
-                            if (prodQuantities[i] > quantity) {
-                                runOnUiThread {
-                                    MaterialAlertDialogBuilder(this@CheckoutActivity)
-                                        .setTitle("Out of Stock")
-                                        .setMessage("Sorry! ${prodNames[i]} is out of stock!")
-                                        .setPositiveButton("Ok") { dialog, which ->
-                                            dialog.dismiss()
-                                        }
-                                        .show()
-                                }
-
-                                return@addOnSuccessListener
-                            }
-                        }
-                        .addOnFailureListener { e ->
-                            Log.w("TAG", "Error writing document", e)
-                        }
                 }
 
                 var order = hashMapOf(
