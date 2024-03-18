@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -35,6 +36,9 @@ import java.time.LocalDate
 import java.util.regex.Pattern
 
 class OrderDetailsActivity : AppCompatActivity() {
+
+
+    lateinit var networkReceiver : CheckConnectivity
 
     var db = FirebaseFirestore.getInstance()
     var auth = FirebaseAuth.getInstance()
@@ -82,6 +86,8 @@ class OrderDetailsActivity : AppCompatActivity() {
 
         val orderId = intent.getStringExtra("orderId")
 
+        networkReceiver = CheckConnectivity()
+
         Log.d("OrderDetailsActivity", "Order ID: $orderId")
 
         detailOrderId = findViewById(R.id.detailOrderId)
@@ -110,6 +116,11 @@ class OrderDetailsActivity : AppCompatActivity() {
 
         detailRatingBar = findViewById(R.id.detailRatingBar)
         orderReview = findViewById(R.id.orderReview)
+
+        db.collection("orders").document(orderId!!).get().addOnSuccessListener {
+            detailRatingBar.rating = it.getString("orderRating")?.toFloat() ?: 0f
+            orderReview.text = it.getString("orderReview")
+        }
 
         ratingReviewSubmit = findViewById(R.id.ratingReviewSubmit)
 
@@ -195,6 +206,8 @@ class OrderDetailsActivity : AppCompatActivity() {
                 detailOrderDate.text = "Order Date: "+it.getString("orderDate")
                 detailOrderDeliveryDate.text = "Delivery Date: "+it.getString("expectedDeliveryDate")?.substring(0, 10)
                 detailOrderStatus.text = "Order Status: "+it.getString("orderStatus")
+
+                orderDetailsAdapter!!.setOrderStatus(it.getString("orderStatus")!!)
 
                 detailUserName.text = "Name: "+it.getString("userName")
                 detailUserContact.text = "Contact: "+it.getString("selectedPhone")
@@ -323,7 +336,7 @@ class OrderDetailsActivity : AppCompatActivity() {
             val review = orderReview.text.toString()
 
             if (rating >= 1f ){
-                if (Pattern.matches("^[a-zA-Z0-9]*$", review)) {
+                if (review.isNotEmpty() && review.length >= 10) {
                     CoroutineScope(Dispatchers.IO).launch {
                         db.collection("orders").document(orderId!!).update("orderRating", rating.toString()).addOnSuccessListener {
                             db.collection("orders").document(orderId).update("orderReview", review).addOnSuccessListener {
@@ -410,5 +423,16 @@ class OrderDetailsActivity : AppCompatActivity() {
                 Log.e("TAG", "processNotification: ${e.message}", e)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+        registerReceiver(networkReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(networkReceiver)
     }
 }

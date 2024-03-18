@@ -132,7 +132,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-//        loadBannerImagesLoop()
+        loadBannerImagesLoop()
     }
 
     private fun startSliding() {

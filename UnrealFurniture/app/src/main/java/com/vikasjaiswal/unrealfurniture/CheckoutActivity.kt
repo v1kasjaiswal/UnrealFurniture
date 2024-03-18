@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -35,6 +36,8 @@ import java.text.SimpleDateFormat
 
 class CheckoutActivity : AppCompatActivity() {
 
+    lateinit var networkReceiver : CheckConnectivity
+
     private lateinit var checkoutAddressLayoutManager: LinearLayoutManager
     private lateinit var checkoutProductLayoutManager: GridLayoutManager
 
@@ -63,6 +66,8 @@ class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.checkout_activity)
+
+        networkReceiver = CheckConnectivity()
 
         checkoutAddressRecyclerView = findViewById(R.id.checkoutAddressRecyclerView)
         checkoutProductRecyclerView = findViewById(R.id.checkoutProductRecyclerView)
@@ -440,5 +445,16 @@ class CheckoutActivity : AppCompatActivity() {
                 Log.e("TAG", "processNotification: ${e.message}", e)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+        registerReceiver(networkReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(networkReceiver)
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -14,70 +15,90 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView17"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ratingReviewImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blank" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ratingReviewName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:fontFamily="@font/satoshibold"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="This is Name of the User"
+                android:textColor="@color/dark"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/materialCardView17"
+                app:layout_constraintTop_toTopOf="@+id/materialCardView17" />
+
+            <RatingBar
+                android:id="@+id/ratingReviewRatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:rating="4.5"
+                android:stepSize="0.5"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="@+id/ratingReviewName"
+                app:layout_constraintTop_toBottomOf="@+id/ratingReviewName" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ratingReviewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/satoshibold"
+                android:text="29th May 2021"
+                android:textColor="@color/light"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@+id/ratingReviewName"
+                app:layout_constraintTop_toBottomOf="@+id/ratingReviewName" />
+
+            <com.colormoon.readmoretextview.ReadMoreTextView
+                android:id="@+id/ratingReviewText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/blank"
-                android:scaleType="centerCrop" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/satoshibold"
+                android:layout_marginBottom="10dp"
+                android:text="Lorem ipsum dolor sit amet. Et quas recusandae ut odio ipsam est consequuntur voluptate. Et laudantium perspiciatis id unde voluptatem vel quas veniam aut rerum nesciunt quo natus dignissimos eum perspiciatis dicta."
+                android:textColor="@color/dark"
+                android:textSize="15sp"
+                app:colorClickableText="@color/darker"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView17" />
 
-        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:ellipsize="marquee"
-            android:fontFamily="@font/satoshibold"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:text="This is Name of the User"
-            android:textColor="@color/dark"
-            android:textSize="15sp" />
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="35dp"
-            android:rating="4.5"
-            android:stepSize="0.5" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="29th May 2021"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="35dp"
-            android:fontFamily="@font/satoshibold"
-            android:textColor="@color/light"
-            android:textSize="13sp" />
-
-        <com.colormoon.readmoretextview.ReadMoreTextView
-            android:id="@+id/readMoreTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="60dp"
-            app:colorClickableText="@color/darker"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/satoshibold"
-            android:textColor="@color/dark"
-            android:textSize="15sp"
-            android:text="Lorem ipsum dolor sit amet. Et quas recusandae ut odio ipsam est consequuntur voluptate. Et laudantium perspiciatis id unde voluptatem vel quas veniam aut rerum nesciunt quo natus dignissimos eum perspiciatis dicta."/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

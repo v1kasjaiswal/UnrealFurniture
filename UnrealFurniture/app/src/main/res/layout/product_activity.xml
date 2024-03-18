@@ -130,6 +130,24 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom |left"
+                    android:layout_margin="15dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/inStock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshibold"
+                        android:padding="10dp"
+                        android:text="In Stock"
+                        android:textColor="@color/dark"
+                        android:textSize="13sp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/open3DARView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -355,30 +373,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/productRatingCountEdit" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/satoshibold"
-                android:text="View More"
-                android:textColor="@color/dark"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/ratingReviewsRecyclerView"
-                app:layout_constraintStart_toStartOf="@+id/ratingReviewsRecyclerView"
-                app:layout_constraintTop_toBottomOf="@+id/ratingReviewsRecyclerView" />
-
             <View
                 android:id="@+id/view5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:background="@color/light"
                 android:backgroundTint="@color/light"
                 app:layout_constraintEnd_toEndOf="@+id/ratingReviewsRecyclerView"
                 app:layout_constraintStart_toStartOf="@+id/ratingReviewsRecyclerView"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView35" />
+                app:layout_constraintTop_toBottomOf="@+id/ratingReviewsRecyclerView" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView36"

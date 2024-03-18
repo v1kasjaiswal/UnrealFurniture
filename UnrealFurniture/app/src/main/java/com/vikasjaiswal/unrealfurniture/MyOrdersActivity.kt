@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -15,6 +16,7 @@ import com.google.android.material.tabs.TabLayout
 
 class MyOrdersActivity : AppCompatActivity() {
 
+    lateinit var networkReceiver : CheckConnectivity
 
     private lateinit var myOrderLayoutManager: GridLayoutManager
 
@@ -34,6 +36,8 @@ class MyOrdersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.myorders_activity)
+
+        networkReceiver = CheckConnectivity()
 
         myOrderRecyclerView = findViewById(R.id.myOrderRecyclerView)
 
@@ -102,4 +106,16 @@ class MyOrdersActivity : AppCompatActivity() {
             emptyOrderTextView.visibility = View.GONE
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+        registerReceiver(networkReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(networkReceiver)
+    }
+
 }

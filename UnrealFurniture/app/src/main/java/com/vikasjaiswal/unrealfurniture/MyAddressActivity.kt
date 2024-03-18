@@ -1,5 +1,6 @@
 package com.vikasjaiswal.unrealfurniture
 
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -17,6 +18,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MyAddressActivity : AppCompatActivity()    {
+
+    lateinit var networkReceiver : CheckConnectivity
 
     private lateinit var myAddressLayoutManager: GridLayoutManager
 
@@ -38,6 +41,8 @@ class MyAddressActivity : AppCompatActivity()    {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.myaddress_activity)
+
+        networkReceiver = CheckConnectivity()
 
         myAddressRecyclerView = findViewById(R.id.myAddressRecyclerView)
 
@@ -94,5 +99,16 @@ class MyAddressActivity : AppCompatActivity()    {
             myAddressAnimation.visibility = LottieAnimationView.GONE
             emptyAddressTextView.visibility = TextView.GONE
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+        registerReceiver(networkReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(networkReceiver)
     }
 }

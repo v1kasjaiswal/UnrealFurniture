@@ -1,6 +1,7 @@
 package com.vikasjaiswal.unrealfurniture
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -37,6 +38,8 @@ import java.util.regex.Pattern
 
 class ProductActivity : AppCompatActivity() {
 
+    lateinit var networkReceiver : CheckConnectivity
+
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
@@ -53,6 +56,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var productDiscountedPrice: TextView
     private lateinit var productLookImage: ImageView
     private lateinit var productDimenImage: ImageView
+    private lateinit var productStock : TextView
 
     private lateinit var productDimensions: TableLayout
     private lateinit var productRatingBar: RatingBar
@@ -77,6 +81,8 @@ class ProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.product_activity)
+
+        networkReceiver = CheckConnectivity()
 
         initializeViews()
         setClickListeners()
@@ -111,6 +117,7 @@ class ProductActivity : AppCompatActivity() {
         productDimensions = findViewById(R.id.dimenTableLayout)
         productRatingBar = findViewById(R.id.productRatingBarEdit)
         productRatingCount = findViewById(R.id.productRatingCountEdit)
+        productStock = findViewById(R.id.inStock)
 
         productRatingReviewEdit = findViewById(R.id.productRatingReviewsEdit)
 
@@ -127,8 +134,13 @@ class ProductActivity : AppCompatActivity() {
         ratingReviewsLayoutManager = GridLayoutManager(this, 1)
         ratingReviewsRecyclerView.layoutManager = ratingReviewsLayoutManager
 
-        ratingReviewsAdapter = RatingReviewsRecAdapter()
+        ratingReviewsAdapter = RatingReviewsRecAdapter{
+
+        }
+
         ratingReviewsRecyclerView.adapter = ratingReviewsAdapter
+
+        ratingReviewsAdapter?.updateData(intent.extras?.getString("productId").toString())
 
         if (auth.currentUser?.email == "unrealadmin@gmail.com"){
             addToCard.isEnabled = false
@@ -295,6 +307,14 @@ class ProductActivity : AppCompatActivity() {
                     productDiscountedPrice.text = "₹${result.getLong("productDiscountedPrice").toString()}"
                     productRatingBar.rating = result.getDouble("prodRating")!!.toFloat()
                     productRatingCount.text = "("+result.getLong("prodRatingCount").toString()+")"
+
+                    if (result.getLong("productStock")!! <= 0L){
+                        productStock.text = "Out of Stock"
+                        productStock.setTextColor(ContextCompat.getColor(this@ProductActivity, R.color.red))
+                    }else{
+                        productStock.text = "In Stock"
+                        productStock.setTextColor(ContextCompat.getColor(this@ProductActivity, R.color.dark))
+                    }
 
                     productRatingReviewEdit.text = "${result.getDouble("prodRating")!!.toFloat()} ★ (${result.getLong("prodRatingCount").toString()})"
 
@@ -469,6 +489,17 @@ class ProductActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+        registerReceiver(networkReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(networkReceiver)
     }
 }
 
