@@ -47,6 +47,7 @@ class ProductActivity : AppCompatActivity() {
 
     private lateinit var goBack: CardView
     private lateinit var open3DView: CardView
+    private lateinit var ModelUrl : String
 
     private lateinit var productMainImage: ImageView
     private lateinit var productName: TextView
@@ -174,6 +175,13 @@ class ProductActivity : AppCompatActivity() {
         buyNow.setOnClickListener {
             buyNow()
         }
+
+        open3DView.setOnClickListener {
+            val intent = Intent(this@ProductActivity, AR3DActivity::class.java)
+            intent.putExtra("ModelUrl", ModelUrl)
+            startActivity(intent)
+        }
+
 
         editProductDetails.setOnClickListener {
             bottomSheetDialog.show()
@@ -307,6 +315,8 @@ class ProductActivity : AppCompatActivity() {
                     productDiscountedPrice.text = "₹${result.getLong("productDiscountedPrice").toString()}"
                     productRatingBar.rating = result.getDouble("prodRating")!!.toFloat()
                     productRatingCount.text = "("+result.getLong("prodRatingCount").toString()+")"
+
+                    ModelUrl = result.getString("prod3DModel").toString()
 
                     if (result.getLong("productStock")!! <= 0L){
                         productStock.text = "Out of Stock"

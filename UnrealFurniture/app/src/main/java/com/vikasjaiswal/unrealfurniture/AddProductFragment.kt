@@ -32,6 +32,7 @@ import androidx.loader.content.CursorLoader
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -49,6 +50,7 @@ class AddProductFragment : Fragment() {
 
     private val AR_FILE_PICKER_CODE = 100
     private val DIMEN_FILE_PICKER_CODE = 101
+    private val DESCRIPTION_CODE = 102
 
     private lateinit var prodMainImageCard: CardView
     private lateinit var prodLookImageCard: CardView
@@ -64,7 +66,10 @@ class AddProductFragment : Fragment() {
 
     private var selected3DModelUri: Uri? = null
     private var selected3DModelFile : File? = null
+    private var selectedFIleContent : String = ""
     private var selectedDimenFileUri: Uri? = null
+
+    lateinit var productDescriptionLayout : TextInputLayout
 
     private lateinit var prodMainImage : ImageView
     private lateinit var prodLookImage : ImageView
@@ -222,6 +227,15 @@ class AddProductFragment : Fragment() {
             )
         )
 
+        productDescriptionLayout = view.findViewById(R.id.productDescriptionLayout)
+
+        productDescriptionLayout.setOnLongClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "*/*"
+            startActivityForResult(intent, DESCRIPTION_CODE)
+            true
+        }
+
         return view
     }
 
@@ -268,7 +282,7 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
-                if (selected3DModelUri == null || selected3DModelUri.toString().isEmpty()) {
+                if (selectedFIleContent.isEmpty()) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), "Please select 3D model file", Toast.LENGTH_SHORT).show()
                     }
@@ -362,16 +376,14 @@ class AddProductFragment : Fragment() {
                 val prodLookImageRef = storageReference.child("productImages/${selectedLookImageUri?.lastPathSegment}")
                 val prodDimenImageRef = storageReference.child("productImages/${selectedDimenImageUri?.lastPathSegment}")
 
-                val prod3DModelRef = storageReference.child("product3DModels/${selected3DModelFile?.name}")
 
                 val prodMainImageDownloadUrl = uploadImageAndGetDownloadUrl(prodMainImageRef, selectedMainImageUri!!)
                 val prodLookImageDownloadUrl = uploadImageAndGetDownloadUrl(prodLookImageRef, selectedLookImageUri!!)
                 val prodDimenImageDownloadUrl = uploadImageAndGetDownloadUrl(prodDimenImageRef, selectedDimenImageUri!!)
-                val prod3DModelDownloadUrl = uploadImageAndGetDownloadUrl(prod3DModelRef, selected3DModelUri!!)
 
-                // Check if all download URLs are obtained successfully
+                    // Check if all download URLs are obtained successfully
                 if (prodMainImageDownloadUrl.isNotEmpty() && prodLookImageDownloadUrl.isNotEmpty() &&
-                    prodDimenImageDownloadUrl.isNotEmpty() && prod3DModelDownloadUrl.isNotEmpty()) {
+                    prodDimenImageDownloadUrl.isNotEmpty() && selectedFIleContent.isNotEmpty()) {
 
                     var discountedPrice = productPrice.text.toString().toInt() - (productPrice.text.toString().toInt() * productDiscount.text.toString().toInt() / 100)
 
@@ -387,7 +399,7 @@ class AddProductFragment : Fragment() {
                         "prodMainImage" to prodMainImageDownloadUrl,
                         "prodLookImage" to prodLookImageDownloadUrl,
                         "prodDimenImage" to prodDimenImageDownloadUrl,
-                        "prod3DModel" to prod3DModelDownloadUrl,
+                        "prod3DModel" to selectedFIleContent,
                         "prodDimensions" to dimensionsMap,
                         "prodRating" to 0.0,
                         "prodRatingCount" to 0
@@ -472,6 +484,9 @@ class AddProductFragment : Fragment() {
         else if (requestCode == DIMEN_FILE_PICKER_CODE && resultCode == Activity.RESULT_OK){
             handleDimenFilePickerResult(data)
         }
+        else if (requestCode == DESCRIPTION_CODE && resultCode == Activity.RESULT_OK){
+            handleDescriptionFilePickerResult(data)
+        }
         else {
             Toast.makeText(context, "Unrecognized request code", Toast.LENGTH_SHORT).show()
         }
@@ -507,38 +522,50 @@ class AddProductFragment : Fragment() {
         data?.data?.let { uri ->
             val fileName = getFileNameFromUri(uri).lowercase()
 
-            if (fileName.endsWith(".glb") || fileName.endsWith(".gltf") || fileName.endsWith(".usdz") || fileName.endsWith(".obj") || fileName.endsWith(".fbx")) {
-
+            if (fileName.endsWith(".txt")) {
                 selected3DModelUri = uri
-
-                selected3DModelUri?.let {uri ->
-                    val inputStream: InputStream = requireContext().contentResolver.openInputStream(uri)!!
-                    try{
-                        selected3DModelFile = fileName.let { File(requireContext().cacheDir, it) }
-                        val outputStream = FileOutputStream(selected3DModelFile)
-                        inputStream.copyTo(outputStream)
-                        outputStream.close()
-                    }
-                    catch (e: Exception) {
+                selected3DModelUri?.let { uri ->
+                    try {
+                        val inputStream: InputStream = requireContext().contentResolver.openInputStream(uri)!!
+                        val fileContent = inputStream.use { it.bufferedReader().readText() }
+                        selectedFIleContent = fileContent.toString()
+                    } catch (e: Exception) {
                         Log.e("Error", e.toString())
+                        return
                     }
-                    finally {
-                        inputStream.close()
-                    }
-
                 }
-
-                Log.d("3D MODEL File", selected3DModelFile.toString())
 
                 prod3DModelText.text = fileName
                 prod3DModelImage.setImageResource(R.drawable.cube)
                 delete3DModelFile.visibility = View.VISIBLE
-
             } else {
                 Toast.makeText(context, "Invalid file selected", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    private fun handleDescriptionFilePickerResult(data: Intent?) {
+        data?.data?.let { uri ->
+            val fileName = getFileNameFromUri(uri).lowercase()
+
+            if (fileName.endsWith(".txt")) {
+                selected3DModelUri = uri
+                selected3DModelUri?.let { uri ->
+                    try {
+                        val inputStream: InputStream = requireContext().contentResolver.openInputStream(uri)!!
+                        val fileContent = inputStream.use { it.bufferedReader().readText() }
+                        productDescription.setText(fileContent.toString())
+                    } catch (e: Exception) {
+                        Log.e("Error", e.toString())
+                        return
+                    }
+                }
+            } else {
+                Toast.makeText(context, "Invalid file selected", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun readJSONDimenFile(uri: Uri) {
         val inputStream = requireContext().contentResolver.openInputStream(uri)
         val jsonFile = inputStream?.bufferedReader().use { it?.readText() }
