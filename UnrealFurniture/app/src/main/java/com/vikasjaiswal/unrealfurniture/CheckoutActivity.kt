@@ -256,6 +256,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     private fun confirmOrder(){
         CoroutineScope(Dispatchers.IO).launch {
+
             if (checkoutAddressAdapter!!.itemCount!=0){
                 var userName = user?.displayName
                 var selectedEmail = user?.email
@@ -350,6 +351,7 @@ class CheckoutActivity : AppCompatActivity() {
                                 }
 
                                 orderPlacedNotification()
+                                orderReceivedNotification()
 
                                 MaterialAlertDialogBuilder(this@CheckoutActivity)
                                     .setView(R.layout.orderconfirm_dialog)
@@ -391,6 +393,7 @@ class CheckoutActivity : AppCompatActivity() {
             var jsonObject = JSONObject()
             var jsonObjectData = JSONObject()
 
+
             jsonObjectData.put("title", "Order Received")
             jsonObjectData.put("body", "Hey! Admin a new order has been received successfully!")
             jsonObjectData.put("notificationType", "orderReceived")
@@ -410,7 +413,7 @@ class CheckoutActivity : AppCompatActivity() {
             var jsonObjectData = JSONObject()
 
             jsonObjectData.put("title", "Order Placed!")
-            jsonObjectData.put("body", "Hey! ${auth.currentUser?.displayName} your order has been placed successfully!")
+            jsonObjectData.put("body", "Hey! ${checkoutAddressAdapter!!.selectedName} your order has been placed successfully!")
 
             jsonObject.put("to", token)
             jsonObject.put("data", jsonObjectData)

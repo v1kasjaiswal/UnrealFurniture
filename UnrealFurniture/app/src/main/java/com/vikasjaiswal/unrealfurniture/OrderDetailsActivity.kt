@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +33,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import org.json.JSONObject
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.regex.Pattern
 
@@ -75,6 +77,8 @@ class OrderDetailsActivity : AppCompatActivity() {
     lateinit var ratingReviewSubmit : Button
 
     lateinit var orderDetailsRecyclerView: RecyclerView
+
+    lateinit var goBack : CardView
 
     private lateinit var orderDetailsLayoutManager: GridLayoutManager
 
@@ -138,6 +142,12 @@ class OrderDetailsActivity : AppCompatActivity() {
             }
         }
 
+        goBack = findViewById(R.id.goBack)
+
+        goBack.setOnClickListener {
+            finish()
+        }
+
         orderDetailsRecyclerView.adapter = orderDetailsAdapter
 
         orderUpdateLayout = findViewById(R.id.orderUpdateLayout)
@@ -161,41 +171,54 @@ class OrderDetailsActivity : AppCompatActivity() {
                 resources.getStringArray(R.array.order_status)
             )
         )
-        
+
         orderUpdate.setOnItemClickListener { parent, view, position, id ->
             CoroutineScope(Dispatchers.IO).launch {
-                db.collection("orders").document(orderId!!).update(
-                    mapOf(
-                        "orderStatus" to orderUpdate.text.toString(),
-                        "paymentStatus" to "Paid"
+                try {
+                    val updateText = orderUpdate.text.toString()
+                    val updateMap = mutableMapOf<String, Any>(
+                        "orderStatus" to updateText
                     )
-                ).addOnSuccessListener {
 
-                    var token = ""
-                    var userName = ""
-                    db.collection("orders").document(orderId).get().addOnSuccessListener {
-                        var userId = it.getString("userId")
-                        userName = it.getString("userName")!!
-                        db.collection("users").document(userId!!).get().addOnSuccessListener {
-                            token = it.get("token").toString()
-                        }
+                    if (updateText == "Order Delivered") {
+                        updateMap["deliveryDate"] = SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis())
+                        updateMap["paymentStatus"] = "Paid"
                     }
 
-                    var jsonObject = JSONObject()
-                    var jsonObjectData = JSONObject()
+                    db.collection("orders").document(orderId!!)
+                        .update(updateMap)
+                        .await()
 
-                    jsonObjectData.put("title", "Order Status Updated")
-                    jsonObjectData.put("body", "Hey! $userName your order status has been updated to ${orderUpdate.text.toString()} for order ID: $orderId")
+                    val orderSnapshot = db.collection("orders").document(orderId).get().await()
+                    val userId = orderSnapshot.getString("userId") ?: ""
+                    val userName = orderSnapshot.getString("selectedName") ?: ""
 
-                    jsonObject.put("to", token)
-                    jsonObject.put("data", jsonObjectData)
+                    val userSnapshot = db.collection("users").document(userId).get().await()
+                    val token = userSnapshot.getString("token") ?: ""
 
-                    processNotification(jsonObject)
+                    val notificationData = JSONObject().apply {
+                        put("title", "Order Status Updated")
+                        put("body", "Hey! $userName your order status has been updated to $updateText for order ID: $orderId")
+                    }
 
-                    runOnUiThread {
+                    val notificationObject = JSONObject().apply {
+                        put("to", token)
+                        put("data", notificationData)
+                    }
+
+                    Log.d("TAG", "processNotification: $notificationObject")
+
+                    processNotification(notificationObject)
+
+                    withContext(Dispatchers.Main) {
                         Toast.makeText(this@OrderDetailsActivity, "Order Status Updated", Toast.LENGTH_SHORT).show()
+                        finish()
                     }
-                    finish()
+                } catch (e: Exception) {
+                    Log.e("TAG", "Error updating order status: ${e.message}", e)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@OrderDetailsActivity, "Failed to update order status", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -209,13 +232,13 @@ class OrderDetailsActivity : AppCompatActivity() {
 
                 orderDetailsAdapter!!.setOrderStatus(it.getString("orderStatus")!!)
 
-                detailUserName.text = "Name: "+it.getString("userName")
+                detailUserName.text = "Name: "+it.getString("selectedName")
                 detailUserContact.text = "Contact: "+it.getString("selectedPhone")
                 detailUserEmail.text = "Email: "+it.getString("userEmail")
                 detailUserAddress.text = "Address: "+it.getString("selectedAddres")
 
                 overAllRealPrice.text = "₹"+it.getString("overAllPrice")
-                overAllDiscount.text = "₹"+it.getString("overAllDiscount")
+                overAllDiscount.text = it.getString("overAllDiscount")+ "% Off"
                 overAllDiscountedPrice.text = "₹"+it.getString("overAllDiscountedPrice")
 
                 grandTotal.text = "₹"+it.getString("grandTotal")
@@ -317,14 +340,14 @@ class OrderDetailsActivity : AppCompatActivity() {
                         var jsonObjectData = JSONObject()
 
                         jsonObjectData.put("title", "Order Cancelled")
-                        jsonObjectData.put("body", "Hey! ${auth.currentUser?.displayName} your order has been cancelled with ID: $orderId")
+                        jsonObjectData.put("body", "Hey! your order has been cancelled by you with ID: $orderId")
 
                         jsonObject.put("to", token)
                         jsonObject.put("data", jsonObjectData)
 
                         processNotification(jsonObject)
 
-                        sendNotificationToAdmin("Order Cancelled", "Hey! ${auth.currentUser?.displayName} has cancelled the order with ID: $orderId")
+                        sendNotificationToAdmin("Order Cancelled", "Hey! ${auth.currentUser?.email} has cancelled the order with ID: $orderId")
                     }
                     finish()
                 }
@@ -351,14 +374,14 @@ class OrderDetailsActivity : AppCompatActivity() {
                                 var jsonObjectData = JSONObject()
 
                                 jsonObjectData.put("title", "Review Submitted")
-                                jsonObjectData.put("body", "Hey! ${auth.currentUser?.displayName} your review has been submitted.")
+                                jsonObjectData.put("body", "Hey! ${auth.currentUser?.email} your review has been submitted.")
 
                                 jsonObject.put("to", token)
                                 jsonObject.put("data", jsonObjectData)
 
                                 processNotification(jsonObject)
 
-                                sendNotificationToAdmin("New Review", "Hey! ${auth.currentUser?.displayName} has submitted a review for order ID: $orderId")
+                                sendNotificationToAdmin("New Review", "Hey! ${auth.currentUser?.email} has submitted a review for order ID: $orderId")
 
                                 runOnUiThread {
                                     Toast.makeText(this@OrderDetailsActivity, "Review Submitted", Toast.LENGTH_SHORT).show()

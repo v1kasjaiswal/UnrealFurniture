@@ -1,0 +1,58 @@
+<mxfile host="app.diagrams.net" modified="2024-03-19T04:06:42.564Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="vFL21IIcFf8asP6dEl-E" version="24.0.7" type="device">
+  <diagram name="Page-1" id="IZPJ_Xt8ZYETOM9hkP-Y">
+    <mxGraphModel dx="1199" dy="646" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-1" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Google Firebase&lt;/font&gt;" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="100" y="110" width="350" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-2" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Firestore&lt;/font&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Database&lt;/font&gt;&lt;/div&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="198.75" y="160" width="152.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-3" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Database&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="600" y="110" width="90" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-4" value="" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="70" y="310" width="670" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-5" value="" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;jettyWidth=58;jettyHeight=39;" vertex="1" parent="1">
+          <mxGeometry x="90" y="350" width="610" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-6" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Users&lt;/font&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="370" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-7" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Admin&lt;/font&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="370" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-8" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Products&lt;/font&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="370" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-9" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Orders&lt;/font&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="370" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-10" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Search Products&lt;/font&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="480" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-11" value="&lt;span style=&quot;font-size: 15px;&quot;&gt;Wishlist and MyCart&lt;/span&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="480" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-12" value="&lt;span style=&quot;font-size: 15px;&quot;&gt;Notifications&lt;/span&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="480" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-13" value="&lt;span style=&quot;font-size: 15px;&quot;&gt;Insights and Analytics&lt;/span&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="480" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-14" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Unreal Furniture&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="440" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.005;entryY=0.695;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="lF2a-OOnHxe-m5NcpVIP-1" target="lF2a-OOnHxe-m5NcpVIP-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lF2a-OOnHxe-m5NcpVIP-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="lF2a-OOnHxe-m5NcpVIP-1" target="lF2a-OOnHxe-m5NcpVIP-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
