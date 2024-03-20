@@ -44,6 +44,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.util.UUID
 import java.util.regex.Pattern
 
 class AddProductFragment : Fragment() {
@@ -66,7 +67,6 @@ class AddProductFragment : Fragment() {
 
     private var selected3DModelUri: Uri? = null
     private var selected3DModelFile : File? = null
-    private var selectedFIleContent : String = ""
     private var selectedDimenFileUri: Uri? = null
 
     lateinit var productDescriptionLayout : TextInputLayout
@@ -251,6 +251,18 @@ class AddProductFragment : Fragment() {
         }
     }
 
+    private suspend fun uploadModelAndGetDownloadUrl(reference: StorageReference, file: File): String {
+        return try {
+            val taskSnapshot = reference.putFile(file.toUri()).await()
+            return taskSnapshot.storage.downloadUrl.await().toString()
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(requireContext(), "Failed to upload 3D model", Toast.LENGTH_SHORT).show()
+            }
+            return ""
+        }
+    }
+
     private fun addProductToFirebase() {
         val progressDialog = ProgressDialog(requireContext()).apply {
             setMessage("Uploading...")
@@ -282,7 +294,7 @@ class AddProductFragment : Fragment() {
                     return@launch
                 }
 
-                if (selectedFIleContent.isEmpty()) {
+                if (selected3DModelUri == null || selected3DModelUri.toString().isEmpty() || selected3DModelFile == null){
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), "Please select 3D model file", Toast.LENGTH_SHORT).show()
                     }
@@ -375,15 +387,17 @@ class AddProductFragment : Fragment() {
                 val prodMainImageRef = storageReference.child("productImages/${selectedMainImageUri?.lastPathSegment}")
                 val prodLookImageRef = storageReference.child("productImages/${selectedLookImageUri?.lastPathSegment}")
                 val prodDimenImageRef = storageReference.child("productImages/${selectedDimenImageUri?.lastPathSegment}")
+                val prod3DModelRef = storageReference.child("product3DModels/${selected3DModelFile?.name}")
 
 
                 val prodMainImageDownloadUrl = uploadImageAndGetDownloadUrl(prodMainImageRef, selectedMainImageUri!!)
                 val prodLookImageDownloadUrl = uploadImageAndGetDownloadUrl(prodLookImageRef, selectedLookImageUri!!)
                 val prodDimenImageDownloadUrl = uploadImageAndGetDownloadUrl(prodDimenImageRef, selectedDimenImageUri!!)
+                val prod3DModelDownloadUrl = uploadModelAndGetDownloadUrl(prod3DModelRef, selected3DModelFile!!)
 
                     // Check if all download URLs are obtained successfully
                 if (prodMainImageDownloadUrl.isNotEmpty() && prodLookImageDownloadUrl.isNotEmpty() &&
-                    prodDimenImageDownloadUrl.isNotEmpty() && selectedFIleContent.isNotEmpty()) {
+                    prodDimenImageDownloadUrl.isNotEmpty() && prod3DModelDownloadUrl.isNotEmpty()) {
 
                     var discountedPrice = productPrice.text.toString().toInt() - (productPrice.text.toString().toInt() * productDiscount.text.toString().toInt() / 100)
 
@@ -399,7 +413,7 @@ class AddProductFragment : Fragment() {
                         "prodMainImage" to prodMainImageDownloadUrl,
                         "prodLookImage" to prodLookImageDownloadUrl,
                         "prodDimenImage" to prodDimenImageDownloadUrl,
-                        "prod3DModel" to selectedFIleContent,
+                        "prod3DModel" to prod3DModelDownloadUrl,
                         "prodDimensions" to dimensionsMap,
                         "prodRating" to 0.0,
                         "prodRatingCount" to 0
@@ -522,13 +536,19 @@ class AddProductFragment : Fragment() {
         data?.data?.let { uri ->
             val fileName = getFileNameFromUri(uri).lowercase()
 
-            if (fileName.endsWith(".txt")) {
+            if (fileName.endsWith(".glb")) {
                 selected3DModelUri = uri
                 selected3DModelUri?.let { uri ->
                     try {
                         val inputStream: InputStream = requireContext().contentResolver.openInputStream(uri)!!
-                        val fileContent = inputStream.use { it.bufferedReader().readText() }
-                        selectedFIleContent = fileContent.toString()
+                        val file = File.createTempFile("temp", ".glb")
+                        val outputStream = FileOutputStream(file)
+                        inputStream.use { input ->
+                            outputStream.use { output ->
+                                input.copyTo(output)
+                            }
+                        }
+                        selected3DModelFile = file
                     } catch (e: Exception) {
                         Log.e("Error", e.toString())
                         return
@@ -549,8 +569,8 @@ class AddProductFragment : Fragment() {
             val fileName = getFileNameFromUri(uri).lowercase()
 
             if (fileName.endsWith(".txt")) {
-                selected3DModelUri = uri
-                selected3DModelUri?.let { uri ->
+                var DescriptionFileUri = uri
+                DescriptionFileUri?.let { uri ->
                     try {
                         val inputStream: InputStream = requireContext().contentResolver.openInputStream(uri)!!
                         val fileContent = inputStream.use { it.bufferedReader().readText() }

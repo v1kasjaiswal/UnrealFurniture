@@ -2,6 +2,7 @@ package com.vikasjaiswal.unrealfurniture
 
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -31,6 +32,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.google.ar.core.ArCoreApk
+import com.google.ar.core.Session
+import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException
+import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import org.w3c.dom.Text
@@ -78,6 +83,9 @@ class ProductActivity : AppCompatActivity() {
     private var ratingReviewsAdapter: RatingReviewsRecAdapter? = null
 
     private lateinit var ratingReviewsRecyclerView: RecyclerView
+
+    var mSession: Session? = null
+    private var M_USER_REQUEST_INSTALL = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -177,9 +185,42 @@ class ProductActivity : AppCompatActivity() {
         }
 
         open3DView.setOnClickListener {
-            val intent = Intent(this@ProductActivity, AR3DActivity::class.java)
-            intent.putExtra("ModelUrl", ModelUrl)
-            startActivity(intent)
+
+            if (!CameraPermissionHelper.hasCameraPermission(this)) {
+                CameraPermissionHelper.requestCameraPermission(this)
+                return@setOnClickListener
+            }
+
+            try {
+                if (mSession == null) {
+                    when (ArCoreApk.getInstance()
+                        .requestInstall(this, M_USER_REQUEST_INSTALL)) {
+                        ArCoreApk.InstallStatus.INSTALLED -> {
+                            mSession = Session(this)
+                        }
+                        ArCoreApk.InstallStatus.INSTALL_REQUESTED -> M_USER_REQUEST_INSTALL = false
+                        else -> M_USER_REQUEST_INSTALL = false
+                    }
+                }
+            } catch (e: UnavailableUserDeclinedInstallationException) {
+                Toast.makeText(this, "Please Install AR Core", Toast.LENGTH_LONG).show()
+            } catch (e: UnavailableArcoreNotInstalledException) {
+                Toast.makeText(
+                    this,
+                    "AR Core Not Installed",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            val sceneViewerIntent = Intent(Intent.ACTION_VIEW)
+            sceneViewerIntent.data =
+                Uri.parse("https://arvr.google.com/scene-viewer/1.0").buildUpon()
+                    .appendQueryParameter(
+                        "file",
+                        ModelUrl
+                    ).appendQueryParameter("title", productName.text.toString()).build()
+            sceneViewerIntent.setPackage("com.google.android.googlequicksearchbox")
+            startActivity(sceneViewerIntent)
         }
 
 
@@ -511,6 +552,24 @@ class ProductActivity : AppCompatActivity() {
         super.onPause()
         unregisterReceiver(networkReceiver)
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (!CameraPermissionHelper.hasCameraPermission(this)) {
+            Toast.makeText(
+                this,
+                "Permission Required",
+                Toast.LENGTH_LONG
+            ).show()
+//            if (!CameraPermissionHelper.shouldShowRequestPermissionRationale(this)) {
+//                CameraPermissionHelper.launchPermissionSettings(this)
+//            }
+        }
+    }
 }
 
 
@@ -523,34 +582,4 @@ class ProductActivity : AppCompatActivity() {
 
 
 
-
-//        open3DView.setOnClickListener {
-//            try {
-//                val sceneViewerIntent = Intent(Intent.ACTION_VIEW)
-//                val intentUri = Uri.parse("https://arvr.google.com/scene-viewer/1.0").buildUpon()
-//                    .appendQueryParameter(
-//                        "file",
-//                        "https://firebasestorage.googleapis.com/v0/b/unreal-furniture.appspot.com/o/product3DModels%2Fsofa1.fbx?alt=media&token=c9529c54-144a-4b10-8943-a42ecab4774c"
-//                    )
-//                    .appendQueryParameter("mode", "3d_only")
-//                    .build()
-//
-//                sceneViewerIntent.data = intentUri
-//                sceneViewerIntent.setPackage("com.google.ar.core")
-//
-//                if (sceneViewerIntent.resolveActivity(packageManager) != null) {
-//                    startActivity(sceneViewerIntent)
-//                } else {
-//                    Toast.makeText(
-//                        this@ProductActivity,
-//                        "AR Scene Viewer not installed or supported on this device.",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            } catch (e: Exception) {
-//                Log.d("ProductActivity", "Error: ${e.message}")
-//                Toast.makeText(this@ProductActivity, "Error: ${e.message}", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//        }
 
