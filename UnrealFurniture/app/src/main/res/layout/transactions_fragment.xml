@@ -55,5 +55,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/transactionAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transactionsTabLayout"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/notransaction" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/emptyTransactionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Transactions"
+        android:textSize="20sp"
+        android:layout_marginTop="-150dp"
+        android:fontFamily="@font/satoshibold"
+        app:layout_constraintTop_toBottomOf="@id/transactionAnimation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

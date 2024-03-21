@@ -85,6 +85,8 @@ class ProductActivity : AppCompatActivity() {
 
     private lateinit var ratingReviewsRecyclerView: RecyclerView
 
+    lateinit var deleteProduct : CardView
+
     var mSession: Session? = null
     private var M_USER_REQUEST_INSTALL = true
 
@@ -129,6 +131,8 @@ class ProductActivity : AppCompatActivity() {
         productRatingCount = findViewById(R.id.productRatingCountEdit)
         productStock = findViewById(R.id.inStock)
 
+        deleteProduct = findViewById(R.id.deleteProduct)
+
         productRatingReviewEdit = findViewById(R.id.productRatingReviewsEdit)
 
         editProductDetails = findViewById(R.id.editProductDetails)
@@ -157,6 +161,11 @@ class ProductActivity : AppCompatActivity() {
             buyNow.isEnabled = false
             addToWishList.isEnabled = false
             editProductDetails.visibility = View.VISIBLE
+            deleteProduct.visibility = View.VISIBLE
+        }
+
+        if (auth.currentUser?.email != "unrealadmin@gmail.com"){
+            deleteProduct.visibility = View.GONE
         }
 
         bottomSheetDialog = BottomSheetDialog(this)
@@ -183,6 +192,24 @@ class ProductActivity : AppCompatActivity() {
 
         buyNow.setOnClickListener {
             buyNow()
+        }
+
+        deleteProduct.setOnClickListener {
+            MaterialAlertDialogBuilder(this@ProductActivity)
+                .setTitle("Delete Product")
+                .setMessage("Are you sure you want to delete this product?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    db.collection("products").document(intent.extras?.getString("productId").toString()).delete().addOnSuccessListener {
+                        Toast.makeText(this@ProductActivity, "Product Deleted", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }.addOnFailureListener {
+                        Toast.makeText(this@ProductActivity, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
 //        open3DView.setOnClickListener {

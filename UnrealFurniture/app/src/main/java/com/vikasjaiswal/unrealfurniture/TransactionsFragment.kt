@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.tabs.TabLayout
 
 class TransactionsFragment : Fragment() {
@@ -20,6 +22,9 @@ class TransactionsFragment : Fragment() {
 
     private lateinit var transactionRecyclerView: RecyclerView
 
+    private lateinit var transactionAnimation : LottieAnimationView
+    private lateinit var emptyTransactionTextView: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +34,9 @@ class TransactionsFragment : Fragment() {
 
         TransactionsTabLayout = view.findViewById(R.id.transactionsTabLayout)
 
+        transactionAnimation = view.findViewById(R.id.transactionAnimation)
+        emptyTransactionTextView = view.findViewById(R.id.emptyTransactionTextView)
+
         transactionRecyclerView = view.findViewById(R.id.transactionsRecyclerView)
 
         transactionLayoutManager = GridLayoutManager(context, 1)
@@ -36,7 +44,13 @@ class TransactionsFragment : Fragment() {
         transactionRecyclerView.layoutManager = transactionLayoutManager
 
         transactionAdapter = TransactionRecAdapter{
-            //TODO
+            if (transactionAdapter!!.itemCount == 0) {
+                transactionAnimation.visibility = View.VISIBLE
+                emptyTransactionTextView.visibility = View.VISIBLE
+            } else {
+                transactionAnimation.visibility = View.GONE
+                emptyTransactionTextView.visibility = View.GONE
+            }
         }
 
         transactionRecyclerView.adapter = transactionAdapter
@@ -68,6 +82,14 @@ class TransactionsFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
+
+        if (transactionAdapter!!.itemCount == 0) {
+            transactionAnimation.visibility = View.VISIBLE
+            emptyTransactionTextView.visibility = View.VISIBLE
+        } else {
+            transactionAnimation.visibility = View.GONE
+            emptyTransactionTextView.visibility = View.GONE
+        }
 
         return view
     }
