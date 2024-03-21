@@ -72,7 +72,7 @@
         android:id="@+id/emptyTransactionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Transactions"
+        android:text="No Orders to Show"
         android:textSize="20sp"
         android:layout_marginTop="-150dp"
         android:fontFamily="@font/satoshibold"
