@@ -67,7 +67,6 @@ dependencies {
     implementation("com.faltenreich:skeletonlayout:5.0.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("co.ankurg.expressview:expressview:0.0.3")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
     implementation("io.karn:notify:1.4.0")
     implementation("com.google.ar:core:1.21.0")
 }

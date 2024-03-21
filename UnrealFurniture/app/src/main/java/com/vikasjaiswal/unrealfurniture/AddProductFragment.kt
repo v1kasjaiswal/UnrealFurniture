@@ -29,8 +29,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
@@ -586,12 +584,18 @@ class AddProductFragment : Fragment() {
         }
     }
 
-    private fun readJSONDimenFile(uri: Uri) {
+    private fun readCSVDimenFile(uri: Uri) {
         val inputStream = requireContext().contentResolver.openInputStream(uri)
-        val jsonFile = inputStream?.bufferedReader().use { it?.readText() }
+        val csvFile = inputStream?.bufferedReader().use { it?.readText() }
 
-        if (jsonFile != null) {
-            dimensionsMap = jacksonObjectMapper().readValue(jsonFile)
+        if (csvFile != null) {
+            dimensionsMap = csvFile.split("\n").map {
+                val (key, value) = it.split(",")
+                key to value
+            }.toMap()
+
+            Log.d("Dimensions", dimensionsMap.toString())
+
             Log.d("Dimensions", dimensionsMap.toString())
         } else {
             Log.e("Error", "Failed to read JSON file")
@@ -603,13 +607,13 @@ class AddProductFragment : Fragment() {
     private fun handleDimenFilePickerResult(data: Intent?) {
         data?.data?.let { uri ->
             val fileName = getFileNameFromUri(uri)
-            if (fileName.endsWith(".json")){
+            if (fileName.endsWith(".csv")){
                 selectedDimenFileUri = uri
                 prodDimenFileText.text = fileName
                 prodDimenFileImage.setImageResource(R.drawable.file)
                 deleteDimenFile.visibility = View.VISIBLE
 
-                readJSONDimenFile(uri)
+                readCSVDimenFile(uri)
             } else {
                 Toast.makeText(context, "Invalid file selected", Toast.LENGTH_SHORT).show()
             }

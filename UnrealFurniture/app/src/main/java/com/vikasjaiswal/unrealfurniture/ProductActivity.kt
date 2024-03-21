@@ -34,6 +34,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.google.ar.core.ArCoreApk
 import com.google.ar.core.Session
+import com.google.ar.core.exceptions.FatalException
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException
 import kotlinx.coroutines.tasks.await
@@ -184,8 +185,36 @@ class ProductActivity : AppCompatActivity() {
             buyNow()
         }
 
-        open3DView.setOnClickListener {
+//        open3DView.setOnClickListener {
+//
+//            if (!CameraPermissionHelper.hasCameraPermission(this)) {
+//                CameraPermissionHelper.requestCameraPermission(this)
+//                return@setOnClickListener
+//            }
+//
+//            try {
+//                if (mSession == null) {
+//                    when (ArCoreApk.getInstance()
+//                        .requestInstall(this, M_USER_REQUEST_INSTALL)) {
+//                        ArCoreApk.InstallStatus.INSTALLED -> {
+//                            mSession = Session(this)
+//                        }
+//                        ArCoreApk.InstallStatus.INSTALL_REQUESTED -> M_USER_REQUEST_INSTALL = false
+//                        else -> M_USER_REQUEST_INSTALL = false
+//                    }
+//                }
+//            } catch (e: UnavailableUserDeclinedInstallationException) {
+//                Toast.makeText(this, "Please Install AR Core", Toast.LENGTH_LONG).show()
+//            } catch (e: UnavailableArcoreNotInstalledException) {
+//                Toast.makeText(
+//                    this,
+//                    "AR Core Not Installed",
+//                    Toast.LENGTH_LONG
+//                ).show()
+//            }
 
+
+        open3DView.setOnClickListener {
             if (!CameraPermissionHelper.hasCameraPermission(this)) {
                 CameraPermissionHelper.requestCameraPermission(this)
                 return@setOnClickListener
@@ -193,34 +222,23 @@ class ProductActivity : AppCompatActivity() {
 
             try {
                 if (mSession == null) {
-                    when (ArCoreApk.getInstance()
-                        .requestInstall(this, M_USER_REQUEST_INSTALL)) {
+                    when (ArCoreApk.getInstance().requestInstall(this, M_USER_REQUEST_INSTALL)) {
                         ArCoreApk.InstallStatus.INSTALLED -> {
                             mSession = Session(this)
+                            openSceneViewer()
                         }
                         ArCoreApk.InstallStatus.INSTALL_REQUESTED -> M_USER_REQUEST_INSTALL = false
                         else -> M_USER_REQUEST_INSTALL = false
                     }
                 }
             } catch (e: UnavailableUserDeclinedInstallationException) {
-                Toast.makeText(this, "Please Install AR Core", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "AR Core installation declined", Toast.LENGTH_LONG).show()
             } catch (e: UnavailableArcoreNotInstalledException) {
-                Toast.makeText(
-                    this,
-                    "AR Core Not Installed",
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(this, "AR Core not installed", Toast.LENGTH_LONG).show()
+            } catch (e: FatalException) {
+                Toast.makeText(this, "This device does not support AR Core", Toast.LENGTH_LONG).show()
+                Log.e("ProductActivity", "Fatal AR Core error", e)
             }
-
-            val sceneViewerIntent = Intent(Intent.ACTION_VIEW)
-            sceneViewerIntent.data =
-                Uri.parse("https://arvr.google.com/scene-viewer/1.0").buildUpon()
-                    .appendQueryParameter(
-                        "file",
-                        ModelUrl
-                    ).appendQueryParameter("title", productName.text.toString()).build()
-            sceneViewerIntent.setPackage("com.google.android.googlequicksearchbox")
-            startActivity(sceneViewerIntent)
         }
 
 
@@ -332,6 +350,18 @@ class ProductActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    private fun openSceneViewer(){
+        val sceneViewerIntent = Intent(Intent.ACTION_VIEW)
+        sceneViewerIntent.data =
+            Uri.parse("https://arvr.google.com/scene-viewer/1.0").buildUpon()
+                .appendQueryParameter(
+                    "file",
+                    ModelUrl
+                ).appendQueryParameter("title", productName.text.toString()).build()
+        sceneViewerIntent.setPackage("com.google.android.googlequicksearchbox")
+        startActivity(sceneViewerIntent)
     }
 
     private fun loadProductData(productId: String) {
