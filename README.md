@@ -1,4 +1,5 @@
-# <div align="center">**🛋️Unreal Furniture🛋️**
+<div align="center">
+  <img src="./Assets/name.png">
 </div>
 
 #### <div align="center">**Reimagining Furniture Shopping with AR - Built Natively in Android👀**
