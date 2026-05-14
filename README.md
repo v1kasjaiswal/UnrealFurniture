@@ -169,5 +169,5 @@ If you like this project, please consider giving it a ⭐. It will help me grow 
 ---
 
 <div align="center">
-Made with 💖 by Vikas Jaiswal (ValiantX)
+Made with 💖 by Vikas Jaiswal
 </div>
