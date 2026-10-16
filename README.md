@@ -5,9 +5,13 @@
 #### <div align="center">**Reimagining Furniture Shopping with AR - Built Natively in Android👀**
 </div>
 
-The core idea behind Unreal Furniture👀 is to transform the traditional online furniture shopping experience by allowing customers to visualize😎 how different furnitures would look in their own home spaces by leveraging Augmented Reality (AR) and 3D visualization technology🤖. It is one of the most comprehensive and feature-rich android application📱 that I have developed using Kotlin, XML Layouts, ARCore, and Firebase as a part of my final year project🎓. In addition to AR-based placement and 3D visualization, the app offers advanced features like filtering products by category, price, and availability✅, adding items to wishlist or directly to the cart, real-time order tracking notifications, detailed product reviews, and an admin dashboard for managing stock, insights📊, and delivery statuses. Unreal Furniture holds the vision of revolutionizing the way people shop for furniture🛋️, making it more interactive, personalized, and efficient bringing customers closer to their dream home furnishings💫
+<div align="justify">
+  
+The core idea behind Unreal Furniture is to transform the traditional online furniture shopping experience by allowing customers to visualize how different furnitures would look in their own home spaces by leveraging Augmented Reality (AR) and 3D visualization technology. It is one of the most comprehensive and feature-rich android application that I have developed using Kotlin, XML Layouts, ARCore, and Firebase as a part of my final year project. In addition to AR-based placement and 3D visualization, the app offers advanced features like filtering products by category, price, and availability, adding items to wishlist or directly to the cart, real-time order tracking notifications, detailed product reviews, and an admin dashboard for managing stock, insights, and delivery statuses. Unreal Furniture holds the vision of revolutionizing the way people shop for furniture, making it more interactive, personalized, and efficient bringing customers closer to their dream home furnishings.
 
-PS - As Unreal Furniture! being one of my early deep-dive Android Projects🌱, it may not reflect all best practices⚙️ but it has been a greate learning experience where it taught me a lot about real-world android app development✨ where every feature added and bug fixed is a learning experience😄
+PS - As Unreal Furniture! being one of my early deep-dive Android Projects, it may not reflect all best practices but it has been a greate learning experience where it taught me a lot about real-world android app development where every feature added and bug fixed is a learning experience.
+
+</div>
 
 -----
 
